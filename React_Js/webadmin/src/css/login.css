@@ -1,0 +1,125 @@
+
+/* Form All */
+.body {
+    margin: 0;
+    padding: 0;
+    width: 1536px;
+    display: flex;
+    height:  782px;
+    background: #656570;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Form Login */
+  .boderForm{
+    background: #fbfcfb;
+    width: 716px;
+    height: 615px;
+    margin-top: 50px;
+    border-radius: 2px;
+   
+    padding: 2% 2%;
+
+  }
+
+/* Wrap Dòng 1 */
+  .Logo{
+width: 210px;
+height: 80px;
+  }
+.wrapLogo{
+ 
+    background: #77ffc0;
+    width: 100%;
+    display: inline-flex;
+}
+.wrapLogo-L{
+color: bisque;
+}
+.wrapLogo-R{
+    margin-left: 30px;
+font-size: 30px;
+margin-top: 40px;
+
+}
+.textLogin{
+    padding: 0.8rem 0px 1rem;
+    text-align: center;
+    color: rgb(84, 84, 84);
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+} 
+.login-form{
+width: 100%;
+height: 400px;
+margin: 0;
+padding: 0;
+}
+  .form-group {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+  .textFormlogin{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: rgb(50, 115, 175);
+    margin-bottom: 8px;
+  }
+  .inputFormlogin{
+   width: 100px;
+    font-size: 18px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+
+  }
+  .form-field{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+  
+  
+  
+
+
+
+
+  
+  @media (max-width: 950px){
+    .card-login{
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 600px){
+    .body{
+      flex-direction: column;
+    }
+  
+    .left-login {
+      width: 100%;
+      height: auto;
+    }
+  
+    .right-login {
+      width: 100%;
+      height: auto;
+    }
+  
+    .card-login {
+      width: 90%;
+      
+    }
+  }
+  
+  

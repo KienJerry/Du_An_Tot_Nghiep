@@ -1,4 +1,4 @@
-import "../Styles/login.css"
+import "../css/login.css"
 import * as yup from "yup";
 import { ErrorMessage, Formik, Form, Field } from "formik";
 import Axios from "axios";
@@ -31,27 +31,7 @@ function Login({logado=false}) {
     }).catch(function(error){
       alert('lỗi không có kết nối')
     });
-    // Axios.post("http://192.168.1.6:3001/dangnhap", {
-      
-    // }
-    
-  
-    // ).then((response) => {
-
-    //   const page = response.data;
-    //   console.log(page);
  
-    //   if (page === true) {
-    //     localStorage.setItem('@user', JSON.stringify(response.config.data));
-    //     window.location.reload();
-    //     navigate("/header");
-        
-    //   } else {
-    //     alert(response.data.msg);
-     
-    //   }
-
-    // });
   };
 
    function chuyenTrang() {
@@ -83,20 +63,22 @@ function Login({logado=false}) {
 
   return (
     <div className="body">
-      <div className="left-login">
-        <img src={Img} alt="Pessoas olhando gráficos" className="chart" />
-
+        <div className="boderForm">
+      
+      
+      <div className="wrapLogo">
+        <div className="wrapLogo-L">
+        <img src={Img} alt="Pessoas olhando gráficos" className="Logo" />
+        </div>
+        <div className="wrapLogo-R">
+        <text>sờ lô gần A B C XY Z</text>
+        </div>
       </div>
-
+<div className="textLogin">
+<h1>Đăng Nhập</h1>
+</div>
       <div className="right-login">
-        <div className="card-login">
-          <div className="user-links">
-            <div className="user-link-home">
-              {!logado && <Link to="/">Home</Link>}
-            </div>
-
-          </div>
-          <h1>LOGIN</h1>
+        
           <Formik
             initialValues={{}}
             onSubmit={handleLogin}
@@ -104,10 +86,12 @@ function Login({logado=false}) {
           >
             <Form className="login-form">
               <div className="form-group">
-                <label form="email">User</label>
-
+                <div>
+                <label form="email">Email Đăng Nhập</label>
+                </div>
+                <div>
                 <Field name="email" type='email' className="form-field" placeholder="Email" />
-
+                </div>
                 <ErrorMessage
                   component="span"
                   name="email"
@@ -118,9 +102,12 @@ function Login({logado=false}) {
               {/*Outro campo*/}
 
               <div className="form-group">
-                <label form="email">Password</label>
+                <div>
+                <label form="email">Nhập Mật Khẩu</label>
+                </div>
+                <div>
                 <Field name="password" type='password' className="form-field" placeholder="password" />
-
+                </div>
                 <ErrorMessage
                   component="span"
                   name="password"
@@ -135,7 +122,8 @@ function Login({logado=false}) {
           </Formik>
         </div>
       </div>
-    </div>
+      </div>
+   
   );
 }
 
