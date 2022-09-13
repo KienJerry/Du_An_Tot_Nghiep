@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Chạy Thành Công
+          Dự Án TỐT NGHIỆP
         </a>
       </header>
     </div>
