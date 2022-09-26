@@ -28,9 +28,33 @@ app.get('/', (req, res) => {
     res.send('Hello World Babe!')
   })
 
+// Hiển Thị Danh Sách Dự Án
+app.get('/viewduan', (req, res) => {
+  var sql = "SELECT * FROM `duan` ORDER BY idduan DESC ";
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    // console.log(result);
+    res.send(result)
+  });
+})
+
+//them dự án
+app.post('/addDuan', (req, res) => {
+  var sql = "insert into duan ( tenduan) values('" + req.body.tenduan + "');";
+  console.log(sql)
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    if (result.affectedRows == 1) {
+      res.send("ok")
+    }
+  });
+})
+
+
 //SignUp
 app.post("/dangky", (req, res) => {
-    var sql = "SELECT * FROM account WHERE email= '" + req.body.tentaikhoans + "' ";
+  
+    var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' ";
    con.query(sql, function (err, result, fields) {
      if (err) {
        res.send({ success: false, message: "Database không có kết nối!" });
@@ -39,7 +63,9 @@ app.post("/dangky", (req, res) => {
        res.send({ success: false });
      } else {
        res.send({ success: true });
-       var sql = "INSERT INTO account ( email, pass, ten) values('" + req.body.tentaikhoans + "' ,  MD5('"+req.body.matkhaus +"') ,'"+ req.body.ten +"' );"
+       var sql = "INSERT INTO account ( email, pass, ten) values('" + req.body.email + "' ,  MD5('"+req.body.pass +"') ,'"+ req.body.ten +"' );"
+       console.log(sql);
+       
        con.query(sql, function (err, result, fields) {
          if (err) throw err;
        });
@@ -50,6 +76,7 @@ app.post("/dangky", (req, res) => {
   // SignIn
   app.post("/dangnhap", (req, res) => {
    var sql ="SELECT * FROM account WHERE email= '" +req.body.username +"' AND pass= MD5('" +req.body.password +"')";
+   console.log(sql);
    con.query(sql, function (err, result, fields) {
      if (err) {
        res.send({ success: false, message: "Database không có kết nối!" });
@@ -68,9 +95,9 @@ app.use(function(req, res, next) {
     res.send('404: err');
 });
 
-//server
+//server"
 app.listen(3001, function () {
-    console.log('Example app listening on port 3001! "http://localhost:3001"  ');
+    console.log('Example app listening on port 3001! "http://localhost:3001  ');
 });
 
 

@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+ 
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./Auth/LoginForm"
+import Register from "./Auth/Dangky"
+import Header from "./components/Header"
+import SideBar from "./components/SideBar"
+import Content from "./components/Content"
+ 
+class App extends Component {
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Chạy Thành Công
-        </a>
-      </header>
-    </div>
-  );
+    render() {
+
+        return (
+
+            <div >
+                      <div>
+                <BrowserRouter>
+                    <Routes>
+
+                        <Route path="/" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+
+                    </Routes>
+                </BrowserRouter>
+
+                  
+                </div>
+        
+                <div>
+                    <Header />
+                    <SideBar />
+                    <Content />
+                    </div>
+                {/* <BrowserRouter>
+                    <Routes>
+
+                        {!logado && <Route path="/" element={<Login logado={logado} />} />}
+
+                    </Routes>
+
+                </BrowserRouter> */}
+
+            </div>
+        );
+    }
 }
 
 export default App;
+
+
+
+
