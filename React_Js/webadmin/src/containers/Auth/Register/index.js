@@ -4,7 +4,7 @@ import './index.scss';
 import FormLeft from "../FormLeft/index";
 import FormRight from "../FormRight/index";
 
-function Login() {
+function Register() {
   return (
     <div className="flex-container">
       <div className="flex-item-left">
@@ -17,4 +17,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
