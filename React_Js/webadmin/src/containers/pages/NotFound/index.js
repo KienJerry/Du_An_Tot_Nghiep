@@ -10,7 +10,6 @@ const NotFound = () => (
 			</div>
 			<h2>Khoan đã ! Đường dẫn này không tồn tại</h2>
 			<p>XIN LỖI NHƯNG TRANG BẠN ĐANG TÌM KIẾM KHÔNG TỒN TẠI, ĐÃ BỊ XÓA. TÊN ĐÃ THAY ĐỔI HOẶC TẠM THỜI KHÔNG THỂ SỬ DỤNG</p>
-			{/* <a href="/">Trở Về Trang Chủ</a> */}
 			<Link to="/" >Trở Về Trang Chủ</Link> 
 		</div>
 	</div>
