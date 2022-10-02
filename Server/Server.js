@@ -101,7 +101,52 @@ app.post('/new-login' , function(req, res){
       res.send("sua_thanh_cong");
     }
   });
-})
+});
+//Quên Mật Khẩu 
+app.post("/quen-mat-khau", (req, res) => {
+  var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND lockacc = '" + '0' + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    }
+    if (result.length > 0) {
+      res.send({ success: true });
+
+      var sql = "SELECT * FROM quenmatkhau WHERE email= '" + req.body.email + "' ";
+      con.query(sql, function (err, result, fields) {
+        if (err) {
+          res.send({ success: false, message: "Database không có kết nối!" });
+        }
+        if (result.length > 0) {
+          var sql = "SELECT * FROM quenmatkhau WHERE email= '" + req.body.email + "' AND duyet= '" + '0' + "' ";
+          con.query(sql, function (err, result, fields) {
+            if (result.length > 0) {
+              var sql = "UPDATE quenmatkhau SET thoigian = '"+req.body.dateTime+"' , duyet =('"+ '1' +"') where email = '"+req.body.email+"'";
+              con.query(sql, function(err, result, fields){
+                if(err) throw err;
+              });
+
+            } else {
+              var sql = "UPDATE quenmatkhau SET thoigian = '"+req.body.dateTime+"' where email = '"+req.body.email+"'";
+              con.query(sql, function(err, result, fields){
+                if(err) throw err;
+              });
+            }
+          });
+
+        } else {
+          var sqlite = "INSERT INTO quenmatkhau ( email, duyet, thoigian) values('" + req.body.email + "' ,  '" + '1' + "' ,'" + req.body.dateTime + "'  );"
+          con.query(sqlite, function (err, result, fields) {
+            if (err) throw err;
+          });
+        }
+      });
+
+    } else {
+      res.send({ success: false, message: "Sai tài khoản!" });
+    }
+  });
+});
 
 
 //Phần báo cáo
@@ -154,6 +199,11 @@ app.get('/showtaskmission', function (req, res) {
     res.send(result);
     });
 });
+
+
+
+
+
 // ERR 404
 app.use(function (req, res, next) {
   res.status(404);

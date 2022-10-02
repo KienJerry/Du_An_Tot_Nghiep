@@ -6,13 +6,16 @@ import { Validate_Email, Validate_Password, } from '../../../../components/Valid
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
 import { API_LOGIN } from '../../../../api/index';
-import { DATE, TIME } from '../../../../components/DateTime/DateTime';
 import { SuccessRegister } from '../../../../components/Message/Success';
 import { ErrorLogin } from '../../../../components/Message/Error';
 import { WarningRegister ,WarningCaptcha } from '../../../../components/Message/Warning';
+import { Link } from 'react-router-dom';
+import ForgotPw from '../../ForgotPassword';
 
 function LoginRight() {
+    const [modalForgotPW, setModalForgotPW] = useState(false);
 
+    //Hàm Submit
     const onsubmitSuccess = (values) => {
         if (values.captcha === undefined || values.captcha === null || values.captcha ==="") {
             WarningCaptcha();
@@ -64,10 +67,12 @@ function LoginRight() {
             <Form.Item
                 name="checked"
                 valuePropName="checked"
+                className='check_flex'
             >
-                <Checkbox >
+                <Checkbox className='check_flex_left' >
                     Lưu Tài Khoản
                 </Checkbox>
+                <Link onClick={() => setModalForgotPW(true)} className='check_flex_right'>Quên mật khẩu ?</Link>
             </Form.Item>
 
             <Form.Item
@@ -85,6 +90,7 @@ function LoginRight() {
                     ĐĂNG NHẬP
                 </Button>
             </Form.Item>
+            {modalForgotPW && <ForgotPw setOpenModal={setModalForgotPW} OpenModal={modalForgotPW}></ForgotPw>}
         </Form>
     );
 }
