@@ -1,5 +1,3 @@
-import { Form, Input, Button, Checkbox, Typography, Layout, Tooltip, message, Col, Row } from "antd";
-import ReCAPTCHA from "react-google-recaptcha";
 import './index.scss';
 import FormLeft from "../FormLeft/index";
 import FormRight from "../FormRight/index";

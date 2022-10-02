@@ -5,7 +5,6 @@ import {
     Route
 } from "react-router-dom";
 import { publicRouter } from './Router/link';
-// import {DefaultLayout } from "./components/Layout";
 
 export default function App() {
     return (
@@ -23,21 +22,6 @@ export default function App() {
                         </Route>
                     )
                 })}
-                {/* {publicRouter.map((route , index) => {
-              const Layout = route.layout ===null ? DefaultLayout : Fragment;
-              const Page = route.component
-              return(
-                <Route 
-                  key={index} 
-                  path={route.path} 
-                  element={
-                    <Layout>
-                      <Page/>
-                    </Layout>
-                  }>
-                </Route> 
-              )
-            })} */}
             </Routes>
         </Router>
     );

@@ -72,3 +72,10 @@ export const Validate_Checker =[
     },
 
 ]
+export const Validate_Captcha =[
+    {
+        required: true,
+        type: "boolean",
+        message: 'Captcha không được bỏ trống !'
+    },
+]

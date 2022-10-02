@@ -54,7 +54,7 @@ app.get('/images', function (req, res) {
 //Phần Tài Khoản
 //SignUp
 app.post("/dangky", (req, res) => {
-  var sql = "SELECT * FROM account WHERE email= '" + req.body.tentaikhoans + "' ";
+  var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' ";
   con.query(sql, function (err, result, fields) {
     if (err) {
       res.send({ success: false, message: "Database không có kết nối!" });
@@ -63,7 +63,7 @@ app.post("/dangky", (req, res) => {
       res.send({ success: false });
     } else {
       res.send({ success: true });
-      var sql = "INSERT INTO account ( email, pass, ten) values('" + req.body.tentaikhoans + "' ,  MD5('" + req.body.matkhaus + "') ,'" + req.body.ten + "' );"
+      var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc) values('" + req.body.email + "' ,  MD5('" + req.body.passWord + "') ,'" + req.body.fullName + "' ,'" + req.body.phoneNumber + "' ,'" + req.body.timeRegister + "','" +  '1' + "' );"
       con.query(sql, function (err, result, fields) {
         if (err) throw err;
       });
@@ -72,13 +72,13 @@ app.post("/dangky", (req, res) => {
 });
 // SignIn
 app.post("/dangnhap", (req, res) => {
-  var sql = "SELECT * FROM account WHERE email= '" + req.body.username + "' AND pass= MD5('" + req.body.password + "')";
+  var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND pass= MD5('" + req.body.passWord + "')";
   con.query(sql, function (err, result, fields) {
     if (err) {
       res.send({ success: false, message: "Database không có kết nối!" });
     }
     if (result.length > 0) {
-      res.send({ success: true });;
+      res.send({ success: true });
     } else {
       res.send({ success: false, message: "Sai tài khoản!" });
     }
@@ -92,6 +92,16 @@ app.get('/showaccount', function (req, res) {
     res.send(result);
     });
 });
+//Thời gian đăng nhập
+app.post('/new-login' , function(req, res){
+  var sql = "UPDATE account SET timelogin = '"+req.body.datetime+"' where email = '"+req.body.email+"'";
+  con.query(sql, function(err, result, fields){
+    if(err) throw err;
+    if(result.affectedRows == 1){
+      res.send("sua_thanh_cong");
+    }
+  });
+})
 
 
 //Phần báo cáo

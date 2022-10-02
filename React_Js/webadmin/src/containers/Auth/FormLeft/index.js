@@ -17,14 +17,14 @@ function LoginLeft() {
                 <>
                     <h2>Bạn chưa có tài khoản ?</h2>
                     <Link to="/dang-ky">
-                        <button type="button" class="btn btn-success btn-lg">ĐĂNG KÝ NGAY</button>
+                        <button type="button" className="btn btn-success btn-lg">ĐĂNG KÝ NGAY</button>
                     </Link>
                 </>
                 :
                 <>
                     <h2>Bạn đã có tài khoản ?</h2>
                     <Link to="/dang-nhap">
-                        <button type="button" class="btn btn-success btn-lg">ĐĂNG NHẬP NGAY</button>
+                        <button type="button" className="btn btn-success btn-lg">ĐĂNG NHẬP NGAY</button>
                     </Link>
                 </>
             }
