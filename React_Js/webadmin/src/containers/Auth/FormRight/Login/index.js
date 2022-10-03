@@ -1,20 +1,20 @@
 import './index.scss';
 import { Button, Form, Input, Checkbox } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import 'antd/dist/antd.css';
 import { Validate_Email, Validate_Password, } from '../../../../components/Validate/CheckValidate';
 import { DATE, TIME, } from '../../../../components/DateTime/DateTime';
 import ReCAPTCHA from "react-google-recaptcha";
-import axios from 'axios';
-import { API_LOGIN } from '../../../../api/index';
-import { SuccessRegister } from '../../../../components/Message/Success';
-import { ErrorLogin,ErrorAccountBan, ErrorAccountLOCK } from '../../../../components/Message/Error';
-import { WarningRegister ,WarningCaptcha } from '../../../../components/Message/Warning';
+import {WarningCaptcha } from '../../../../components/Message/Warning';
 import { Link } from 'react-router-dom';
 import ForgotPw from '../../ForgotPassword';
+import {Login} from '../../../../Reducer/InitReducer/Auth/initNew';
+import {success} from '../../../../Reducer/Reducers/Auth';
+import {SetJobLogin} from '../../../../Reducer/Actions/Auth/index';
 
 function LoginRight() {
     const [modalForgotPW, setModalForgotPW] = useState(false);
+    const [state , dispatch] = useReducer(success , Login);
 
     //Hàm Submit
     const onsubmitSuccess = (values) => {
@@ -22,25 +22,8 @@ function LoginRight() {
             WarningCaptcha();
              return false;
         }
-        axios.post(API_LOGIN, {
-            email: values.email,
-            passWord: values.password,
-            dateTime: TIME + "_" + DATE,
-        })
-            .then(response => {
-                if (response.data.success === true) {
-                    SuccessRegister()
-                }else if(response.data.message === "Ban!") {
-                    ErrorAccountBan()
-                }else if(response.data.message === "LOCK!") {
-                    ErrorAccountLOCK()
-                }else {
-                    ErrorLogin()
-                }
-            })
-            .catch(error =>{
-                WarningRegister()
-            });
+        values.dateTime = TIME + "_" + DATE;
+        dispatch(SetJobLogin(values))
     };
 
     return (
@@ -64,7 +47,7 @@ function LoginRight() {
 
             <Form.Item
                 label={<label className='label-form'>Mật Khẩu</label>}
-                name="password"
+                name="passWord"
                 rules={Validate_Password}
             >
                 <Input.Password placeholder="Nhập Mật Khẩu Của Bạn" />

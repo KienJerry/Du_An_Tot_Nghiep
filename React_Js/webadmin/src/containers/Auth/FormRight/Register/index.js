@@ -1,35 +1,19 @@
 import { Validate_Name, Validate_Email, Validate_Phone, Validate_Password, Validate_Re_Password, Validate_Checker } from '../../../../components/Validate/CheckValidate';
 import './index.scss';
 import { Button, Form, Input, Checkbox } from 'antd';
-import React from 'react';
+import React,{useReducer} from 'react';
 import 'antd/dist/antd.css';
-import axios from 'axios';
-import { API_REGISTER } from '../../../../api/index';
 import { DATE, TIME } from '../../../../components/DateTime/DateTime';
-import { SuccessRegister } from '../../../../components/Message/Success';
-import { ErrorRegister } from '../../../../components/Message/Error';
-import { WarningRegister } from '../../../../components/Message/Warning';
+import {Register} from '../../../../Reducer/InitReducer/Auth/initNew';
+import {success} from '../../../../Reducer/Reducers/Auth';
+import {SetJobRegister} from '../../../../Reducer/Actions/Auth/index';
 
 function LoginRight() {
+    const [state , dispatch] = useReducer(success , Register);
 
     const onsubmitSuccess = (values) => {
-        axios.post(API_REGISTER, {
-            fullName: values.username,
-            email: values.email,
-            password: values.repass,
-            phoneNumber: values.phone,
-            timeRegister: TIME + "_" + DATE
-        })
-            .then(response => {
-                if (response.data.success === true) {
-                    SuccessRegister()
-                } else {
-                    ErrorRegister()
-                }
-            })
-            .catch(error =>{
-                WarningRegister()
-            });
+        values.timeRegister = TIME + "_" + DATE;
+        dispatch(SetJobRegister(values))
     };
     return (
         <Form
@@ -43,7 +27,7 @@ function LoginRight() {
         >
             <Form.Item
                 label={<label className='label-form'>Họ & Tên</label>}
-                name="username"
+                name="fullName"
                 rules={Validate_Name}
             >
                 <Input placeholder="Nhập Họ Và Tên Của Bạn" />
@@ -59,7 +43,7 @@ function LoginRight() {
 
             <Form.Item
                 label={<label className='label-form'>Số Điện Thoại</label>}
-                name="phone"
+                name="phoneNumber"
                 rules={Validate_Phone}
             >
                 <Input placeholder="Nhập Số Điện Thoại Của Bạn" />

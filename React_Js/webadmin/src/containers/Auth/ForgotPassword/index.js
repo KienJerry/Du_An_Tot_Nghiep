@@ -1,37 +1,25 @@
-import { Modal, Form, Input ,notification } from 'antd';
-import React, { useState } from 'react';
+import { Modal, Form, Input } from 'antd';
+import React, { useReducer } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import { Validate_Email, } from '../../../components/Validate/CheckValidate';
-import { API_FORGOT_PW } from '../../../api/index';
-import { WarningCaptcha,WarningRegister } from '../../../components/Message/Warning';
-import { SuccessForgotPw } from '../../../components/Message/Success';
-import { ErrorForgotPW } from '../../../components/Message/Error';
-import axios from 'axios';
-import { DATE,TIME } from '../../../components/DateTime/DateTime';
+import { WarningCaptcha, } from '../../../components/Message/Warning';
+import { DATE, TIME } from '../../../components/DateTime/DateTime';
+import { ForgotPassword } from '../../../Reducer/InitReducer/Auth/initNew';
+import { success } from '../../../Reducer/Reducers/Auth';
+import { SetJobForgotPassword } from '../../../Reducer/Actions/Auth/index';
 
 
 const ForgotPw = ({ setOpenModal, OpenModal, }) => {
   const [form] = Form.useForm();
+  const [state, dispatch] = useReducer(success, ForgotPassword);
 
   const onsubmitSuccess = (values) => {
     if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
       WarningCaptcha();
       return false;
     }
-    axios.post(API_FORGOT_PW, {
-      email: values.email,
-      dateTime: TIME + '_' + DATE,
-  })
-      .then(response => {
-          if (response.data.success === true) {
-            SuccessForgotPw();
-          } else {
-            ErrorForgotPW()
-          }
-      })
-      .catch(error =>{
-          WarningRegister()
-      });
+    values.dateTime = TIME + "_" + DATE;
+    dispatch(SetJobForgotPassword(values))
   };
 
   return (
