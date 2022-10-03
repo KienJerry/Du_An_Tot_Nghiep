@@ -42,3 +42,31 @@ export const ErrorForgotPW = () => {
     });
   }, 1000);
 };
+
+export const ErrorAccountBan = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Thất bại ! Tài khoản này đã bị khoá. Vui lòng liên hệ Admin để biết thêm chi tiết',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
+export const ErrorAccountLOCK = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Thất bại ! Tài khoản này chưa được duyệt. Vui lòng liên hệ Admin để duyệt',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};

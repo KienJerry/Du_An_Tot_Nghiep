@@ -3,11 +3,12 @@ import { Button, Form, Input, Checkbox } from 'antd';
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import { Validate_Email, Validate_Password, } from '../../../../components/Validate/CheckValidate';
+import { DATE, TIME, } from '../../../../components/DateTime/DateTime';
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
 import { API_LOGIN } from '../../../../api/index';
 import { SuccessRegister } from '../../../../components/Message/Success';
-import { ErrorLogin } from '../../../../components/Message/Error';
+import { ErrorLogin,ErrorAccountBan, ErrorAccountLOCK } from '../../../../components/Message/Error';
 import { WarningRegister ,WarningCaptcha } from '../../../../components/Message/Warning';
 import { Link } from 'react-router-dom';
 import ForgotPw from '../../ForgotPassword';
@@ -23,12 +24,17 @@ function LoginRight() {
         }
         axios.post(API_LOGIN, {
             email: values.email,
-            password: values.password,
+            passWord: values.password,
+            dateTime: TIME + "_" + DATE,
         })
             .then(response => {
                 if (response.data.success === true) {
                     SuccessRegister()
-                } else {
+                }else if(response.data.message === "Ban!") {
+                    ErrorAccountBan()
+                }else if(response.data.message === "LOCK!") {
+                    ErrorAccountLOCK()
+                }else {
                     ErrorLogin()
                 }
             })

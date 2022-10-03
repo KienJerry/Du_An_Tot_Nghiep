@@ -63,7 +63,7 @@ app.post("/dangky", (req, res) => {
       res.send({ success: false });
     } else {
       res.send({ success: true });
-      var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc) values('" + req.body.email + "' ,  MD5('" + req.body.passWord + "') ,'" + req.body.fullName + "' ,'" + req.body.phoneNumber + "' ,'" + req.body.timeRegister + "','" +  '1' + "' );"
+      var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc) values('" + req.body.email + "' ,  '" + req.body.password + "' ,'" + req.body.fullName + "' ,'" + req.body.phoneNumber + "' ,'" + req.body.timeRegister + "','" + '1' + "' );"
       con.query(sql, function (err, result, fields) {
         if (err) throw err;
       });
@@ -72,15 +72,33 @@ app.post("/dangky", (req, res) => {
 });
 // SignIn
 app.post("/dangnhap", (req, res) => {
-  var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND pass= MD5('" + req.body.passWord + "')";
+  var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND pass= '" + req.body.passWord + "' ";
   con.query(sql, function (err, result, fields) {
     if (err) {
       res.send({ success: false, message: "Database không có kết nối!" });
     }
     if (result.length > 0) {
-      res.send({ success: true });
+      var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND lockacc = '9999' ";
+      con.query(sql, function (err, result, fields) {
+        if (result.length > 0) {
+            res.send({ success: false, message: "Ban!" });
+        } else {
+          var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND lockacc = '1' ";
+          con.query(sql, function (err, result, fields) {
+            if (result.length > 0) {
+                res.send({ success: false, message: "LOCK!" });
+            } else {
+              var sql = "UPDATE account SET timelogin = '"+req.body.dateTime+"' where email = '"+req.body.email+"'";
+              con.query(sql, function(err, result, fields){
+                if(err) throw err;
+                res.send({ success: true });
+              });
+            }
+          });
+        }
+      });
     } else {
-      res.send({ success: false, message: "Sai tài khoản!" });
+      res.send({ success: false, message: "False!" });
     }
   });
 });
@@ -90,14 +108,14 @@ app.get('/showaccount', function (req, res) {
     // console.log(result);
     if (err) throw err;
     res.send(result);
-    });
+  });
 });
 //Thời gian đăng nhập
-app.post('/new-login' , function(req, res){
-  var sql = "UPDATE account SET timelogin = '"+req.body.datetime+"' where email = '"+req.body.email+"'";
-  con.query(sql, function(err, result, fields){
-    if(err) throw err;
-    if(result.affectedRows == 1){
+app.post('/new-login', function (req, res) {
+  var sql = "UPDATE account SET timelogin = '" + req.body.datetime + "' where email = '" + req.body.email + "'";
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    if (result.affectedRows == 1) {
       res.send("sua_thanh_cong");
     }
   });
@@ -121,15 +139,15 @@ app.post("/quen-mat-khau", (req, res) => {
           var sql = "SELECT * FROM quenmatkhau WHERE email= '" + req.body.email + "' AND duyet= '" + '0' + "' ";
           con.query(sql, function (err, result, fields) {
             if (result.length > 0) {
-              var sql = "UPDATE quenmatkhau SET thoigian = '"+req.body.dateTime+"' , duyet =('"+ '1' +"') where email = '"+req.body.email+"'";
-              con.query(sql, function(err, result, fields){
-                if(err) throw err;
+              var sql = "UPDATE quenmatkhau SET thoigian = '" + req.body.dateTime + "' , duyet =('" + '1' + "') where email = '" + req.body.email + "'";
+              con.query(sql, function (err, result, fields) {
+                if (err) throw err;
               });
 
             } else {
-              var sql = "UPDATE quenmatkhau SET thoigian = '"+req.body.dateTime+"' where email = '"+req.body.email+"'";
-              con.query(sql, function(err, result, fields){
-                if(err) throw err;
+              var sql = "UPDATE quenmatkhau SET thoigian = '" + req.body.dateTime + "' where email = '" + req.body.email + "'";
+              con.query(sql, function (err, result, fields) {
+                if (err) throw err;
               });
             }
           });
@@ -156,34 +174,34 @@ app.get('/showwork', function (req, res) {
     // console.log(result);
     if (err) throw err;
     res.send(result);
-    });
+  });
 });
 //gửi báo cáo
 app.post('/addwork', function (req, res) {
-  var sql = "insert into baocao (tenbaocao , nguoigui , nguoinhan , noidung , ghichubaocao , date , ketquabaocao , danhgia) values ('"+req.body.name_word+"' , '"+req.body.sender+"' , '"+req.body.receiver+"' , '"+req.body.text_title+"', '"+req.body.text_note+"', '"+req.body.date+"', '"+req.body.final_result+"', '"+req.body.evaluate+"')";
-      con.query(sql , function(err, result, fields){
-        if(err) throw err;
-        if(result.affectedRows == 1){
-          res.send('ok');
-        }
-      });
+  var sql = "insert into baocao (tenbaocao , nguoigui , nguoinhan , noidung , ghichubaocao , date , ketquabaocao , danhgia) values ('" + req.body.name_word + "' , '" + req.body.sender + "' , '" + req.body.receiver + "' , '" + req.body.text_title + "', '" + req.body.text_note + "', '" + req.body.date + "', '" + req.body.final_result + "', '" + req.body.evaluate + "')";
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    if (result.affectedRows == 1) {
+      res.send('ok');
+    }
+  });
 })
 //Sửa Báo Cáo
-app.post('/editwork/editid', function(req, res){
-  var sql = "UPDATE baocao SET tenbaocao = ('"+req.body.name_word+"'), nguoigui =('"+req.body.sender+"'), nguoinhan =('"+req.body.receiver+"'), noidung =('"+req.body.text_title+"'), ghichubaocao =('"+req.body.text_note+"'), date =('"+req.body.date+"'), ketquabaocao =('"+req.body.final_result+"'), danhgia =('"+req.body.evaluate+"') where id = ("+req.body.id+")";
-  con.query(sql, function(err, result, fields){
-    if(err) throw err;
-    if(result.affectedRows == 1){
+app.post('/editwork/editid', function (req, res) {
+  var sql = "UPDATE baocao SET tenbaocao = ('" + req.body.name_word + "'), nguoigui =('" + req.body.sender + "'), nguoinhan =('" + req.body.receiver + "'), noidung =('" + req.body.text_title + "'), ghichubaocao =('" + req.body.text_note + "'), date =('" + req.body.date + "'), ketquabaocao =('" + req.body.final_result + "'), danhgia =('" + req.body.evaluate + "') where id = (" + req.body.id + ")";
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    if (result.affectedRows == 1) {
       res.send('ok');
     }
   });
 })
 //Xoá Báo cáo 
-app.post('/deleteword', function(req, res){
-  var sql = "delete from baocao where id = ("+req.body.id+")";
-  con.query(sql, function(err, result, fields){
-    if(err) throw err;
-    if(result.affectedRows == 1){
+app.post('/deleteword', function (req, res) {
+  var sql = "delete from baocao where id = (" + req.body.id + ")";
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    if (result.affectedRows == 1) {
       res.send('ok');
     }
   });
@@ -197,7 +215,7 @@ app.get('/showtaskmission', function (req, res) {
     // console.log(result);
     if (err) throw err;
     res.send(result);
-    });
+  });
 });
 
 
