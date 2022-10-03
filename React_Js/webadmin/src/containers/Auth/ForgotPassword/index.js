@@ -5,13 +5,13 @@ import { Validate_Email, } from '../../../components/Validate/CheckValidate';
 import { WarningCaptcha, } from '../../../components/Message/Warning';
 import { DATE, TIME } from '../../../components/DateTime/DateTime';
 import { ForgotPassword } from '../../../Reducer/InitReducer/Auth/initNew';
-import { success } from '../../../Reducer/Reducers/Auth';
+import { Succ_ForgotPw } from '../../../Reducer/Reducers/Auth';
 import { SetJobForgotPassword } from '../../../Reducer/Actions/Auth/index';
 
 
 const ForgotPw = ({ setOpenModal, OpenModal, }) => {
   const [form] = Form.useForm();
-  const [state, dispatch] = useReducer(success, ForgotPassword);
+  const [state, dispatch] = useReducer(Succ_ForgotPw, ForgotPassword);
 
   const onsubmitSuccess = (values) => {
     if (values.captcha === undefined || values.captcha === null || values.captcha === "") {

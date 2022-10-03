@@ -5,11 +5,11 @@ import React,{useReducer} from 'react';
 import 'antd/dist/antd.css';
 import { DATE, TIME } from '../../../../components/DateTime/DateTime';
 import {Register} from '../../../../Reducer/InitReducer/Auth/initNew';
-import {success} from '../../../../Reducer/Reducers/Auth';
+import {Succ_Register} from '../../../../Reducer/Reducers/Auth';
 import {SetJobRegister} from '../../../../Reducer/Actions/Auth/index';
 
 function LoginRight() {
-    const [state , dispatch] = useReducer(success , Register);
+    const [state , dispatch] = useReducer(Succ_Register , Register);
 
     const onsubmitSuccess = (values) => {
         values.timeRegister = TIME + "_" + DATE;

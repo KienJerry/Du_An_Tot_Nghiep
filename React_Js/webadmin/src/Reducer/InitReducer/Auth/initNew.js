@@ -10,3 +10,8 @@ export const ForgotPassword = {
     jobs: {
     }
 }
+
+export const Save_Login = {
+    jobs: {
+    }
+}

@@ -25,6 +25,7 @@
         .check_flex_left {
             flex: 1;
             left: 0px;
+            top:0px;
             position: absolute;
         }
 
@@ -32,6 +33,7 @@
             flex: 1;
             right: 0px;
             position: absolute;
+            top:0px;
         }
     }
 }
