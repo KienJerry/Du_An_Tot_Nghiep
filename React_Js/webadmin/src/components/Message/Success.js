@@ -1,4 +1,5 @@
 import { message, notification } from 'antd';
+import {Login} from '../../Reducer/InitReducer/Auth/initNew'
 
 const key = 'updatable';
 export const SuccessRegister = () => {
@@ -36,4 +37,11 @@ export const SuccessForgotPw = () => {
       duration: 2,
     });
   }, 1000);
+};
+
+export const SuccessLogin = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
 };

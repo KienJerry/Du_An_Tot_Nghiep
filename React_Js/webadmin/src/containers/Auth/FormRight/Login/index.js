@@ -1,6 +1,6 @@
 import './index.scss';
 import { Button, Form, Input, Checkbox } from 'antd';
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer,useEffect } from 'react';
 import 'antd/dist/antd.css';
 import { Validate_Email, Validate_Password, } from '../../../../components/Validate/CheckValidate';
 import { DATE, TIME, } from '../../../../components/DateTime/DateTime';
@@ -11,11 +11,20 @@ import ForgotPw from '../../ForgotPassword';
 import { Login } from '../../../../Reducer/InitReducer/Auth/initNew';
 import { success } from '../../../../Reducer/Reducers/Auth';
 import { SetJobLogin } from '../../../../Reducer/Actions/Auth/index';
+import { useNavigate } from "react-router-dom";
 
 function LoginRight() {
     const [modalForgotPW, setModalForgotPW] = useState(false);
     const [state, dispatch] = useReducer(success, Login);
-    //Hàm Submit
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const Check_Login = localStorage.getItem('Save_Login');
+        const Home = JSON.parse(Check_Login);
+        {Home != null && navigate("/")}
+    }, [state]);
+
+        //Hàm Submit
     const onsubmitSuccess = (values) => {
         if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
             WarningCaptcha();

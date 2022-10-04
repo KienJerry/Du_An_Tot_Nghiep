@@ -1,20 +1,21 @@
-import { SET_JOBS_LOGIN, SET_JOBS_REGISTER, SET_JOBS_FORGOT_PASSWORD, CHECK_FALSE_SAVE_ACCOUNT, CHECK_SUCCESS_SAVE_ACCOUNT } from "../../Constants/listConstants"
+import {SET_JOBS_LOGIN, SET_JOBS_REGISTER, SET_JOBS_FORGOT_PASSWORD, CHECK_FALSE_SAVE_ACCOUNT, CHECK_SUCCESS_SAVE_ACCOUNT,} from "../../Constants/listConstants"
 import axios from 'axios';
 import { API_LOGIN, API_REGISTER, API_FORGOT_PW } from '../../../api/index';
-import { SuccessRegister, SuccessForgotPw } from '../../../components/Message/Success';
+import { SuccessRegister, SuccessForgotPw,SuccessLogin } from '../../../components/Message/Success';
 import { ErrorLogin, ErrorAccountBan, ErrorAccountLOCK, ErrorRegister, ErrorForgotPW } from '../../../components/Message/Error';
 import { WarningRegister } from '../../../components/Message/Warning';
 
-export const SetJobLogin = payload => {
+export const SetJobLogin = (payload) => {
     axios.post(API_LOGIN, payload)
         .then(response => {
             if (response.data.success === true) {
-                TokenLogin(payload)
-                SuccessRegister();
+                // SuccessLogin();
+                TokenLogin(payload);
             } else if (response.data.message === "Ban!") {
                 ErrorAccountBan()
             } else if (response.data.message === "LOCK!") {
                 ErrorAccountLOCK()
+
             } else {
                 ErrorLogin()
             }
@@ -24,7 +25,7 @@ export const SetJobLogin = payload => {
         });
     return {
         type: SET_JOBS_LOGIN,
-        payload
+        payload,
     }
 }
 
