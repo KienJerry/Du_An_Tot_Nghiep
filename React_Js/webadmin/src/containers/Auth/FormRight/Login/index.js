@@ -12,26 +12,46 @@ import { Login } from '../../../../Reducer/InitReducer/Auth/initNew';
 import { success } from '../../../../Reducer/Reducers/Auth';
 import { SetJobLogin } from '../../../../Reducer/Actions/Auth/index';
 import { useNavigate } from "react-router-dom";
+import { API_LOGIN, API_REGISTER, API_FORGOT_PW } from '../../../../api/index';
+import axios from 'axios';
+import { ErrorLogin, ErrorAccountBan, ErrorAccountLOCK, ErrorRegister, ErrorForgotPW } from '../../../../components/Message/Error';
+import { WarningRegister } from '../../../../components/Message/Warning';
 
 function LoginRight() {
     const [modalForgotPW, setModalForgotPW] = useState(false);
     const [state, dispatch] = useReducer(success, Login);
     const navigate = useNavigate();
-
     useEffect(() => {
         const Check_Login = localStorage.getItem('Save_Login');
         const Home = JSON.parse(Check_Login);
+        {state.jobs.email != null && navigate("/")}
         {Home != null && navigate("/")}
     }, [state]);
 
         //Hàm Submit
     const onsubmitSuccess = (values) => {
-        if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
-            WarningCaptcha();
-            return false;
-        }
+        // if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
+        //     WarningCaptcha();
+        //     return false;
+        // }
         values.dateTime = TIME + "_" + DATE;
-        dispatch(SetJobLogin(values))
+        
+        axios.post(API_LOGIN, values)
+        .then(response => {
+            if (response.data.success === true) {
+                dispatch(SetJobLogin(values))
+            } else if (response.data.message === "Ban!") {
+                ErrorAccountBan()
+            } else if (response.data.message === "LOCK!") {
+                ErrorAccountLOCK()
+
+            } else {
+                ErrorLogin()
+            }
+        })
+        .catch(error => {
+            WarningRegister()
+        });
     };
 
     return (

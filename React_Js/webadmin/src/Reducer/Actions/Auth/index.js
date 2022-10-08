@@ -1,31 +1,17 @@
-import {SET_JOBS_LOGIN, SET_JOBS_REGISTER, SET_JOBS_FORGOT_PASSWORD, CHECK_FALSE_SAVE_ACCOUNT, CHECK_SUCCESS_SAVE_ACCOUNT,} from "../../Constants/listConstants"
+import {
+    SET_JOBS_LOGIN, SET_JOBS_REGISTER, SET_JOBS_FORGOT_PASSWORD, CHECK_FALSE_SAVE_ACCOUNT, CHECK_SUCCESS_SAVE_ACCOUNT
+} from "../../Constants/listConstants"
 import axios from 'axios';
-import { API_LOGIN, API_REGISTER, API_FORGOT_PW } from '../../../api/index';
-import { SuccessRegister, SuccessForgotPw,SuccessLogin } from '../../../components/Message/Success';
-import { ErrorLogin, ErrorAccountBan, ErrorAccountLOCK, ErrorRegister, ErrorForgotPW } from '../../../components/Message/Error';
+import { API_REGISTER, API_FORGOT_PW } from '../../../api/index';
+import { SuccessRegister, SuccessForgotPw} from '../../../components/Message/Success';
+import { ErrorRegister, ErrorForgotPW } from '../../../components/Message/Error';
 import { WarningRegister } from '../../../components/Message/Warning';
 
 export const SetJobLogin = (payload) => {
-    axios.post(API_LOGIN, payload)
-        .then(response => {
-            if (response.data.success === true) {
-                // SuccessLogin();
-                TokenLogin(payload);
-            } else if (response.data.message === "Ban!") {
-                ErrorAccountBan()
-            } else if (response.data.message === "LOCK!") {
-                ErrorAccountLOCK()
-
-            } else {
-                ErrorLogin()
-            }
-        })
-        .catch(error => {
-            WarningRegister()
-        });
+    TokenLogin(payload);
     return {
         type: SET_JOBS_LOGIN,
-        payload,
+        payload
     }
 }
 
@@ -68,14 +54,14 @@ export const SetJobForgotPassword = payload => {
 export const TokenLogin = payload => {
     if (payload.checked === true) {
         delete payload.passWord;
-        localStorage.setItem('Save_Login', JSON.stringify(payload));
+        localStorage.setItem('Save_Login', JSON.stringify({checked : 'true' , email : payload.email}));
         return {
             type: CHECK_SUCCESS_SAVE_ACCOUNT,
             payload
         }
     } else {
         delete payload.passWord;
-        localStorage.setItem('Save_Login', JSON.stringify(payload));
+        localStorage.setItem('Save_Login', JSON.stringify({checked : 'false' , email : payload.email}));
         return {
             type: CHECK_FALSE_SAVE_ACCOUNT,
             payload

@@ -1,88 +1,124 @@
 import {
-    DesktopOutlined,
-    FileOutlined,
-    PieChartOutlined,
-    TeamOutlined,
-    UserOutlined,
-  } from '@ant-design/icons';
-  import { Breadcrumb, Layout, Menu } from 'antd';
-  import React, { useState } from 'react';
-  const { Header, Content, Footer, Sider } = Layout;
-  
-  function getItem(label, key, icon, children) {
-    return {
-      key,
-      icon,
-      children,
-      label,
-    };
-  }
-  
-  const items = [
-    getItem('Option 1', '1', <PieChartOutlined />),
-    getItem('Option 2', '2', <DesktopOutlined />),
-    getItem('User', 'sub1', <UserOutlined />, [
-      getItem('Tom', '3'),
-      getItem('Bill', '4'),
-      getItem('Alex', '5'),
-    ]),
-    getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-    getItem('Files', '9', <FileOutlined />),
-  ];
-  
-  const App = () => {
-    const [collapsed, setCollapsed] = useState(false);
-    return (
-      <Layout
+  AppstoreOutlined,
+  BarChartOutlined,
+  CloudOutlined,
+  ShopOutlined,
+  TeamOutlined,
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+} from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
+import React from 'react';
+const { Header, Content, Footer, Sider } = Layout;
+function getItem(label, key, icon, children) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  };
+}
+// const items = [
+//   UserOutlined,
+//   VideoCameraOutlined,
+//   UploadOutlined,
+//   BarChartOutlined,
+//   CloudOutlined,
+//   AppstoreOutlined,
+//   TeamOutlined,
+//   ShopOutlined,
+// ].map((icon, index) => ({
+//   key: String(index + 1),
+//   icon: React.createElement(icon),
+//   label: `nav ${index + 1}`,
+// }));
+const items = [
+  getItem('Option 1', '1', <AppstoreOutlined />),
+  getItem('Option 2', '2', <BarChartOutlined />),
+  getItem('User', 'sub1', <UserOutlined />, [
+    getItem('Tom', '3'),
+    getItem('Bill', '4'),
+    getItem('Alex', '5'),
+  ]),
+  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
+  getItem('Files', '9', <VideoCameraOutlined />),
+];
+
+const App = () => (
+  <Layout hasSider>
+    <Sider
+       
+      style={{
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        bottom: 0,
+        paddingTop: '62px',
+      }}
+      collapsible 
+    >
+      <div className="logo" />
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items} onClick={e => console.log(e)} />
+    </Sider>
+    <Layout
+      className="site-layout"
+    >
+      <Header
+      style={{
+        position: 'fixed',
+        zIndex: 1,
+        width: '100%',
+        paddingLeft:200,
+      }}
+    >
+      <div className="logo" />
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        defaultSelectedKeys={['0']}
+        items={new Array(3).fill(null).map((_, index) => ({
+          key: String(index + 1),
+          label: `nav ${index + 1}`,
+        }))}
+      />
+    </Header>
+      <Content
         style={{
-          minHeight: '100vh',
+          margin: '70px 16px 10px 30vh',
         }}
       >
-        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-          <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-        </Sider>
-        <Layout className="site-layout">
-          <Header
-            className="site-layout-background"
-            style={{
-              padding: 0,
-            }}
-          />
-          <Content
-            style={{
-              margin: '0 16px',
-            }}
-          >
-            <Breadcrumb
-              style={{
-                margin: '16px 0',
-              }}
-            >
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
-            <div
-              className="site-layout-background"
-              style={{
-                padding: 24,
-                minHeight: 360,
-              }}
-            >
-              Bill is a cat.
-            </div>
-          </Content>
-          <Footer
-            style={{
-              textAlign: 'center',
-            }}
-          >
-            Ant Design ©2018 Created by Ant UED
-          </Footer>
-        </Layout>
-      </Layout>
-    );
-  };
-  
-  export default App;
-  
+        <div
+          className="site-layout-background"
+        >
+          <p>long content</p>
+          {
+            // indicates very long content
+            Array.from(
+              {
+                length: 100,
+              },
+              (_, index) => (
+                <React.Fragment key={index}>
+                  {index % 20 === 0 && index ? 'more' : '...'}
+                  <br />
+                </React.Fragment>
+              ),
+            )
+          }
+        </div>
+      </Content>
+      <Footer
+        style={{
+          textAlign: 'center',
+        }}
+      >
+        Ant Design ©2018 Created by Ant UED
+      </Footer>
+    </Layout>
+  </Layout>
+);
+
+export default App;
