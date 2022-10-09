@@ -17,7 +17,7 @@ function LoginLeft() {
                 <>
                     <h2>Bạn chưa có tài khoản ?</h2>
                     <Link to="/dang-ky">
-                        <button type="button" className="btn btn-success btn-lg">ĐĂNG KÝ NGAY</button>
+                        <button type="button" className="btn btn-primary btn-lg">ĐĂNG KÝ NGAY</button>
                     </Link>
                 </>
                 :

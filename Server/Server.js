@@ -81,17 +81,30 @@ app.post("/dangnhap", (req, res) => {
       var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND lockacc = '9999' ";
       con.query(sql, function (err, result, fields) {
         if (result.length > 0) {
-            res.send({ success: false, message: "Ban!" });
+          res.send({ success: false, message: "Ban!" });
         } else {
           var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND lockacc = '1' ";
           con.query(sql, function (err, result, fields) {
             if (result.length > 0) {
-                res.send({ success: false, message: "LOCK!" });
-            } else {
-              var sql = "UPDATE account SET timelogin = '"+req.body.dateTime+"' where email = '"+req.body.email+"'";
-              con.query(sql, function(err, result, fields){
-                if(err) throw err;
-                res.send({ success: true });
+              res.send({ success: false, message: "LOCK!" });
+            }
+            else {
+              var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND phanquyen = '9999' ";
+              con.query(sql, function (err, result, fields) {
+                if (result.length > 0) {
+                  var sql = "UPDATE account SET timelogin = '" + req.body.dateTime + "' where email = '" + req.body.email + "'";
+                  con.query(sql, function (err, result, fields) {
+                    if (err) throw err;
+                    res.send({ success: true , message: "ADMIN!"});
+                  });
+                }
+                else {
+                  var sql = "UPDATE account SET timelogin = '" + req.body.dateTime + "' where email = '" + req.body.email + "'";
+                  con.query(sql, function (err, result, fields) {
+                    if (err) throw err;
+                    res.send({ success: true, message: "USER!" });
+                  });
+                }
               });
             }
           });

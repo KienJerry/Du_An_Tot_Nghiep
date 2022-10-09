@@ -1,6 +1,7 @@
 import { Modal, Form, Input } from 'antd';
 import React, { useReducer } from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Validate_Email, } from '../../../components/Validate/CheckValidate';
 import { WarningCaptcha, } from '../../../components/Message/Warning';
 import { DATE, TIME } from '../../../components/DateTime/DateTime';
@@ -46,9 +47,11 @@ const ForgotPw = ({ setOpenModal, OpenModal, }) => {
             name="captcha"
             valuePropName="checked"
           >
-            <ReCAPTCHA className="ReCAPTCHA"
+            {/* <ReCAPTCHA className="ReCAPTCHA"
               sitekey="6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP"
-            />
+            /> */}
+            <ReCAPTCHA className="ReCAPTCHA"
+            sitekey='6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP'></ReCAPTCHA>
           </Form.Item>
         </Form>
       </Modal>
