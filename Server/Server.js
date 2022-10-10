@@ -5,6 +5,13 @@ var fs = require('fs');
 var cors = require('cors');
 const multer = require('multer');
 
+//Socket.io
+const http = require('http');
+const server = http.createServer(app);
+// const {Server } = require('socket.io');
+
+// const io = new  Server(server);
+
 //đây là cors
 app.use(cors())
 app.use(express.json())
@@ -50,6 +57,27 @@ app.get('/', (req, res) => {
 app.get('/images', function (req, res) {
   res.send('hình ảnh!');
 });
+
+//Phần Realtime
+const socketIo = require("socket.io")(server, {
+  cors: {  // nhớ thêm cái cors này để tránh bị Exception nhé :D  ở đây mình làm nhanh nên cho phép tất cả các trang đều cors được.
+      origin: "*",
+  }
+}); 
+
+socketIo.on("connection", (socket) => { ///Handle khi có connect từ client tới
+  console.log("New client connected" + socket.id); 
+
+  socket.on("sendDataClient", function(data) { // Handle khi có sự kiện tên là sendDataClient từ phía client
+    socketIo.emit("sendDataServer", { data });// phát sự kiện  có tên sendDataServer cùng với dữ liệu tin nhắn từ phía server
+  })
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected"); // Khi client disconnect thì log ra terminal.
+  });
+});
+
+
 
 //Phần Tài Khoản
 //SignUp

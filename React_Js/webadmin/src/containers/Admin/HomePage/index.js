@@ -1,54 +1,11 @@
-import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import React from 'react';
+import { items_admin } from '../../Navigate/Menu/index_menu'
 const { Header, Content, Footer, Sider } = Layout;
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
-// const items = [
-//   UserOutlined,
-//   VideoCameraOutlined,
-//   UploadOutlined,
-//   BarChartOutlined,
-//   CloudOutlined,
-//   AppstoreOutlined,
-//   TeamOutlined,
-//   ShopOutlined,
-// ].map((icon, index) => ({
-//   key: String(index + 1),
-//   icon: React.createElement(icon),
-//   label: `nav ${index + 1}`,
-// }));
-const items = [
-  getItem('Option 1', '1', <AppstoreOutlined />),
-  getItem('Option 2', '2', <BarChartOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <VideoCameraOutlined />),
-];
 
 const App = () => (
   <Layout hasSider>
     <Sider
-       
       style={{
         overflow: 'auto',
         height: '100vh',
@@ -61,7 +18,7 @@ const App = () => (
       collapsible 
     >
       <div className="logo" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items} onClick={e => console.log(e)} />
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items_admin} onClick={e => console.log(e)} />
     </Sider>
     <Layout
       className="site-layout"

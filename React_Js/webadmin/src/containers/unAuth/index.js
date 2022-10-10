@@ -3,10 +3,15 @@ import img from '../../public/background/2.jpg';
 import { useNavigate, Navigate } from "react-router-dom";
 
 function UnAuth() {
+    const Check_Login = localStorage.getItem('Save_Login');
+    const Home = JSON.parse(Check_Login);
+    {
+        Home != null &&
+            setTimeout(() => {
+                window.location.reload();
+            }, 0)
+    }
 
-    setTimeout(() => {
-        window.location.reload();
-      }, 1000)
 
     return (
         <div className="section">

@@ -4,6 +4,7 @@ import Register from "../containers/Auth/Register";
 import Home from '../containers/Home/HomePage';
 import Admin from '../containers/Admin/HomePage/index';
 import unAuth from '../containers/unAuth/index';
+import ListAccount from '../containers/Admin/Account/list_account'
 
 const publicRouter = [
     {
@@ -40,6 +41,10 @@ const AdminRoute = [
     {
         path: "/dang-ky",
         component: Register
+    },
+    {
+        path: "/danh-sach-tai-khoan",
+        component: ListAccount
     },
 ]
 
