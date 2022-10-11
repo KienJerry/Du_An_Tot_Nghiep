@@ -15,10 +15,10 @@ const ForgotPw = ({ setOpenModal, OpenModal, }) => {
   const [state, dispatch] = useReducer(Succ_ForgotPw, ForgotPassword);
 
   const onsubmitSuccess = (values) => {
-    if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
-      WarningCaptcha();
-      return false;
-    }
+    // if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
+    //   WarningCaptcha();
+    //   return false;
+    // }
     values.dateTime = TIME + "_" + DATE;
     dispatch(SetJobForgotPassword(values))
   };
@@ -43,16 +43,13 @@ const ForgotPw = ({ setOpenModal, OpenModal, }) => {
             <Input placeholder="Nhập Email Đăng Nhập Của Bạn" />
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             name="captcha"
             valuePropName="checked"
           >
-            {/* <ReCAPTCHA className="ReCAPTCHA"
-              sitekey="6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP"
-            /> */}
             <ReCAPTCHA className="ReCAPTCHA"
             sitekey='6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP'></ReCAPTCHA>
-          </Form.Item>
+          </Form.Item> */}
         </Form>
       </Modal>
     </>

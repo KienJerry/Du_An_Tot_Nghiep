@@ -43,7 +43,7 @@ const AdminRoute = [
         component: Register
     },
     {
-        path: "/danh-sach-tai-khoan",
+        path: "/danh-sach-nhan-vien",
         component: ListAccount
     },
 ]

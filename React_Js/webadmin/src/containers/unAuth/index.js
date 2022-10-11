@@ -16,7 +16,7 @@ function UnAuth() {
     return (
         <div className="section">
             <div className="img-bg">
-                <img src="https://niemvuilaptrinh.ams3.cdn.digitaloceanspaces.com/tao_trang_dang_nhap/hinh_anh_minh_hoa.jpg" alt="Hình Ảnh Minh Họa"></img>
+                <img src={img} alt="Hình Ảnh Minh Họa"></img>
             </div>
             <div className="noi-dung">
                 <div className="form">

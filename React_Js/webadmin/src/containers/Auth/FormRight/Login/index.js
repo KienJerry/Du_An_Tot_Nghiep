@@ -32,10 +32,10 @@ function LoginRight() {
 
     //Hàm Submit
     const onsubmitSuccess = (values) => {
-        // if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
-        //     WarningCaptcha();
-        //     return false;
-        // }
+        if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
+            WarningCaptcha();
+            return false;
+        }
         values.dateTime = TIME + "_" + DATE;
 
         axios.post(API_LOGIN, values)
