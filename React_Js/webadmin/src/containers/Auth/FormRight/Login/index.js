@@ -1,10 +1,10 @@
 import './index.scss';
 import { Button, Form, Input, Checkbox } from 'antd';
-import React, { useState, useReducer,useEffect } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import 'antd/dist/antd.css';
 import { Validate_Email, Validate_Password, } from '../../../../components/Validate/CheckValidate';
 import { DATE, TIME, } from '../../../../components/DateTime/DateTime';
-import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from 'react-google-recaptcha';
 import { WarningCaptcha } from '../../../../components/Message/Warning';
 import { Link } from 'react-router-dom';
 import ForgotPw from '../../ForgotPassword';
@@ -24,34 +24,40 @@ function LoginRight() {
     useEffect(() => {
         const Check_Login = localStorage.getItem('Save_Login');
         const Home = JSON.parse(Check_Login);
-        {state.jobs.email != null && navigate("/")}
+        {
+            state.jobs.email != null && navigate("/")
+        }
         {Home != null && navigate("/")}
     }, [state]);
 
-        //Hàm Submit
+    //Hàm Submit
     const onsubmitSuccess = (values) => {
-        // if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
-        //     WarningCaptcha();
-        //     return false;
-        // }
+        if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
+            WarningCaptcha();
+            return false;
+        }
         values.dateTime = TIME + "_" + DATE;
-        
-        axios.post(API_LOGIN, values)
-        .then(response => {
-            if (response.data.success === true) {
-                dispatch(SetJobLogin(values))
-            } else if (response.data.message === "Ban!") {
-                ErrorAccountBan()
-            } else if (response.data.message === "LOCK!") {
-                ErrorAccountLOCK()
 
-            } else {
-                ErrorLogin()
-            }
-        })
-        .catch(error => {
-            WarningRegister()
-        });
+        axios.post(API_LOGIN, values)
+            .then(response => {
+                if (response.data.success === true && response.data.message === "USER!") {
+                    values.admin = "false";
+                    dispatch(SetJobLogin(values))
+                } else if (response.data.success === true && response.data.message === "ADMIN!") {
+                    values.admin = "true";
+                    dispatch(SetJobLogin(values))
+                } else if (response.data.message === "Ban!") {
+                    ErrorAccountBan()
+                } else if (response.data.message === "LOCK!") {
+                    ErrorAccountLOCK()
+
+                } else {
+                    ErrorLogin()
+                }
+            })
+            .catch(error => {
+                WarningRegister()
+            });
     };
 
     return (
@@ -98,9 +104,13 @@ function LoginRight() {
                 name="captcha"
                 valuePropName="checked"
             >
-                <ReCAPTCHA className="ReCAPTCHA"
+                {/* <ReCAPTCHA className="ReCAPTCHA"
                     sitekey="6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP"
-                />
+                /> */}
+                <ReCAPTCHA className="ReCAPTCHA"
+                sitekey='6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP'>
+
+                </ReCAPTCHA>
             </Form.Item>
 
             <Form.Item

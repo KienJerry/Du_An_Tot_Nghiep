@@ -1,6 +1,7 @@
 import { Modal, Form, Input } from 'antd';
 import React, { useReducer } from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Validate_Email, } from '../../../components/Validate/CheckValidate';
 import { WarningCaptcha, } from '../../../components/Message/Warning';
 import { DATE, TIME } from '../../../components/DateTime/DateTime';
@@ -14,10 +15,10 @@ const ForgotPw = ({ setOpenModal, OpenModal, }) => {
   const [state, dispatch] = useReducer(Succ_ForgotPw, ForgotPassword);
 
   const onsubmitSuccess = (values) => {
-    if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
-      WarningCaptcha();
-      return false;
-    }
+    // if (values.captcha === undefined || values.captcha === null || values.captcha === "") {
+    //   WarningCaptcha();
+    //   return false;
+    // }
     values.dateTime = TIME + "_" + DATE;
     dispatch(SetJobForgotPassword(values))
   };
@@ -42,14 +43,13 @@ const ForgotPw = ({ setOpenModal, OpenModal, }) => {
             <Input placeholder="Nhập Email Đăng Nhập Của Bạn" />
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             name="captcha"
             valuePropName="checked"
           >
             <ReCAPTCHA className="ReCAPTCHA"
-              sitekey="6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP"
-            />
-          </Form.Item>
+            sitekey='6LdmoUEhAAAAACqtptaVuYqUJ-mV7_vDEk-VKMIP'></ReCAPTCHA>
+          </Form.Item> */}
         </Form>
       </Modal>
     </>

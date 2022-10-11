@@ -36,7 +36,7 @@ export const ErrorForgotPW = () => {
   });
   setTimeout(() => {
     message.error({
-      content: 'Thất bại ! Không có email trùng khớp trên hệ thống',
+      content: 'Thất bại ! Email không trùng khớp trên hệ thống',
       key,
       duration: 2,
     });
