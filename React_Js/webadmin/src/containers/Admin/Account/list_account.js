@@ -11,6 +11,8 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
+import MenuNavigation from '../../pages/Menu/Menu_navigate/index_menu';
+import { items_admin } from '../../../components/Menu/Menu_navigate/index_menu';
 const { Header, Content, Footer, Sider } = Layout;
 
 const host = "http://localhost:3000";
@@ -52,10 +54,12 @@ function App() {
           left: 0,
           top: 0,
           bottom: 0,
+          paddingTop: '62px',
         }}
+        collapsible
       >
         <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={["2"]} items={items_admin} onClick={e => console.log(e)} />
       </Sider>
       <Layout
         className="site-layout"

@@ -1,9 +1,9 @@
 import NotFound from "../containers/pages/NotFound";
 import Login from "../containers/Auth/Login";
 import Register from "../containers/Auth/Register";
-import Home from '../containers/Home/HomePage';
+import Home from '../containers/User/HomePage';
 import Admin from '../containers/Admin/HomePage/index';
-import unAuth from '../containers/unAuth/index';
+import unAuth from '../containers/Auth/unAuth/index';
 import ListAccount from '../containers/Admin/Account/list_account'
 
 const publicRouter = [

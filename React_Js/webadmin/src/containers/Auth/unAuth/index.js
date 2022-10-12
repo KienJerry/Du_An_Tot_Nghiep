@@ -1,5 +1,5 @@
 import './unAuth.scss'
-import img from '../../public/background/2.jpg';
+import img from '../../../public/background/2.jpg';
 import { useNavigate, Navigate } from "react-router-dom";
 
 function UnAuth() {
