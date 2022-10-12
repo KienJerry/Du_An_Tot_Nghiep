@@ -1,14 +1,15 @@
 import { Layout, Menu } from 'antd';
-import React from 'react';
+import React  from 'react';
 import MenuNavigation from '../../pages/Menu/Menu_navigate/index_menu';
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer } = Layout;
 
 export default function HomeAdmin() {
+
 
   return (
 
     <Layout hasSider>
-      <MenuNavigation/>
+      <MenuNavigation />
       <Layout
         className="site-layout"
       >

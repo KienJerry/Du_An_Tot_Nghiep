@@ -1,21 +1,24 @@
 import { Layout, Menu } from 'antd';
-import React, {useEffect, useReducer } from 'react';
-import { items_admin } from '../../../../components/Menu/Menu_navigate/index_menu';
-import {Success_mennu_nav } from '../../../../Reducer/Reducers/MenuNavigate';
-import {Check_Menu_Nav } from '../../../../Reducer/InitReducer/MenuNavi/initMenu';
-import {OnClickMenu } from '../../../../Reducer/Actions/MenuNavigate';
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { items_admin  } from '../../../../components/Menu/Menu_navigate/index_menu';
+import { useLocation,} from 'react-router-dom';
+import './index_menu.scss';
 const {Sider } = Layout;
 
 function MenuNavigation() {
-  const [state, dispatch] = useReducer(Success_mennu_nav, Check_Menu_Nav);
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate(state.job)
-  }, [state])
-  const clickMenuNavigate = (e) => {
-    dispatch(OnClickMenu(e))
+  const selectedKey = useLocation().pathname
+
+  const highlight = () => {
+    switch (selectedKey) {
+      case '/':
+          return ['1']
+      case '/danh-sach-nhan-vien':
+          return ['2']
+      default:
+          return ['1']
   }
+  }
+
   return ( 
     <Sider
         style={{
@@ -30,7 +33,7 @@ function MenuNavigation() {
         collapsible
       >
         <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={state.SelectedKeys} items={items_admin} onClick={e => clickMenuNavigate(e)} />
+        <Menu className='ant-menu' theme="dark" mode="inline" selectedKeys={highlight} defaultSelectedKeys={["2"]} items={items_admin} />
       </Sider>
    );
 }

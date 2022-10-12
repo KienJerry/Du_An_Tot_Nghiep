@@ -1,18 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import socketIOClient from "socket.io-client";
-import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import MenuNavigation from '../../pages/Menu/Menu_navigate/index_menu';
-import { items_admin } from '../../../components/Menu/Menu_navigate/index_menu';
 const { Header, Content, Footer, Sider } = Layout;
 
 const host = "http://localhost:3000";
@@ -28,65 +17,42 @@ function App() {
     socketRef.current = socketIOClient.connect(host)
   }, []);
 
-  const items = [
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
-    BarChartOutlined,
-    CloudOutlined,
-    AppstoreOutlined,
-    TeamOutlined,
-    ShopOutlined,
-  ].map((icon, index) => ({
-    key: String(index + 1),
-    icon: React.createElement(icon),
-    label: `nav ${index + 1}`,
-  }));
 
 
   return (
     <Layout hasSider>
-      <Sider
-        style={{
-          overflow: 'auto',
-          height: '100vh',
-          position: 'fixed',
-          left: 0,
-          top: 0,
-          bottom: 0,
-          paddingTop: '62px',
-        }}
-        collapsible
-      >
-        <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["2"]} items={items_admin} onClick={e => console.log(e)} />
-      </Sider>
+      <MenuNavigation/>
       <Layout
         className="site-layout"
-        style={{
-          marginLeft: 200,
-        }}
       >
         <Header
-          className="site-layout-background"
           style={{
-            padding: 0,
+            position: 'fixed',
+            zIndex: 1,
+            width: '100%',
+            paddingLeft: 200,
           }}
-        />
+        >
+          <div className="logo" />
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={['0']}
+            items={new Array(3).fill(null).map((_, index) => ({
+              key: String(index + 1),
+              label: `nav ${index + 1}`,
+            }))}
+          />
+        </Header>
         <Content
           style={{
-            margin: '24px 16px 0',
-            overflow: 'initial',
+            margin: '70px 16px 10px 30vh',
           }}
         >
           <div
             className="site-layout-background"
-            style={{
-              padding: 24,
-              textAlign: 'center',
-            }}
           >
-            <p>long content</p>
+            <p>ADMIN</p>
             {
               // indicates very long content
               Array.from(

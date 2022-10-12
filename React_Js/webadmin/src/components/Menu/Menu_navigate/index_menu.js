@@ -5,19 +5,24 @@ import {
   FundProjectionScreenOutlined,
   OrderedListOutlined
 } from '@ant-design/icons';
+import {
+  Link,
+} from "react-router-dom";
 
-function getItem(label, key, icon, children) {
+function getItem(label, key, icon, children , checkPath) {
   return {
     key,
     icon,
     children,
     label,
+    checkPath,
   };
 }
+
 export const items_admin = [
-  getItem('Thống Kê', '1', <AreaChartOutlined /> ),
+  getItem(<Link style={{textDecoration: "none" }} to={"/"}>Thống Kê</Link>, '1', <AreaChartOutlined /> , "" , ),
   getItem('Nhân Viên', 'sub0', <UserSwitchOutlined />, [
-    getItem('Danh Sách Nhân Viên', '2'),
+    getItem(<Link style={{textDecoration: "none"}} to={"/danh-sach-nhan-vien"}>Danh Sách Nhân Viên</Link>, '2'),
     getItem('Đăng Ký Mới', '3'),
   ]),
   getItem('Dự Án', 'sub1', <FundProjectionScreenOutlined />, [
@@ -31,4 +36,5 @@ export const items_admin = [
     getItem('Quản Lý Cuộc Họp', '9'),
   ]),
   getItem('Cài Đặt', '10', <SettingOutlined />),
-];
+
+]
