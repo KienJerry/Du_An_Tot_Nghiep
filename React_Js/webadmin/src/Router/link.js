@@ -4,47 +4,62 @@ import Register from "../containers/Auth/Register";
 import Home from '../containers/User/HomePage';
 import Admin from '../containers/Admin/HomePage/index';
 import unAuth from '../containers/Auth/unAuth/index';
-import ListAccount from '../containers/Admin/Account/list_account'
+import ListAccount from '../containers/Admin/Account/list_account';
+import UpdateProfile from "../containers/Admin/DropdownShow/UpdateProfile";
+import ChangePassword from "../containers/Admin/DropdownShow/ChangePassword";
+import {NaviLayout} from '../containers/Admin'
 
 const publicRouter = [
     {
         path: "/",
-        component: Home
+        component: Home,
+        admins : false,
     },
     {
         path: "/*",
-        component: NotFound
+        component: NotFound,
     },
     {
         path: "/dang-nhap",
-        component: Login
+        component: Login,
     },
     {
         path: "/dang-ky",
-        component: Register
+        component: Register,
     },
 ]
 
 const AdminRoute = [
     {
         path: "/",
-        component : Admin
+        component : Admin,
+        admins : true,
     },
     {
         path: "/*",
-        component: NotFound
+        component: NotFound,
     },
     {
         path: "/dang-nhap",
-        component: Login
+        component: Login,
     },
     {
         path: "/dang-ky",
-        component: Register
+        component: Register,
     },
     {
         path: "/danh-sach-nhan-vien",
-        component: ListAccount
+        component: ListAccount,
+    },
+    {
+        path: "/thong-tin-ca-nhan",
+        component: UpdateProfile,
+        // layout : null ,
+    },
+    {
+        path: "/doi-mat-khau",
+        component: ChangePassword,
+        layout : NaviLayout
     },
 ]
 

@@ -20,30 +20,6 @@ function App() {
 
 
   return (
-    <Layout hasSider>
-      <MenuNavigation/>
-      <Layout
-        className="site-layout"
-      >
-        <Header
-          style={{
-            position: 'fixed',
-            zIndex: 1,
-            width: '100%',
-            paddingLeft: 200,
-          }}
-        >
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['0']}
-            items={new Array(3).fill(null).map((_, index) => ({
-              key: String(index + 1),
-              label: `nav ${index + 1}`,
-            }))}
-          />
-        </Header>
         <Content
           style={{
             margin: '70px 16px 10px 30vh',
@@ -69,15 +45,6 @@ function App() {
             }
           </div>
         </Content>
-        <Footer
-          style={{
-            textAlign: 'center',
-          }}
-        >
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
-      </Layout>
-    </Layout>
   );
 }
 

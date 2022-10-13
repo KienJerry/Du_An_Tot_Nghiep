@@ -9,13 +9,12 @@ import {
   Link,
 } from "react-router-dom";
 
-function getItem(label, key, icon, children , checkPath) {
+function getItem(label, key, icon, children ) {
   return {
     key,
     icon,
     children,
     label,
-    checkPath,
   };
 }
 
@@ -38,3 +37,15 @@ export const items_admin = [
   getItem('Cài Đặt', '10', <SettingOutlined />),
 
 ]
+
+export const highlight = () => {
+  const selectedKey = window.location.pathname;
+  switch (selectedKey) {
+    case '/':
+        return ['1']
+    case '/danh-sach-nhan-vien':
+        return ['2']
+    default:
+        return ['1']
+}
+}
