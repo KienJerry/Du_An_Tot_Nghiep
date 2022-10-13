@@ -33,7 +33,7 @@ function MenuNavigation() {
         collapsible
       >
         <div className="logo" />
-        <Menu className='ant-menu' theme="dark" mode="inline" selectedKeys={highlight} defaultSelectedKeys={["2"]} items={items_admin} />
+        <Menu className='ant-menu' theme="dark" mode="inline" selectedKeys={highlight()} defaultSelectedKeys={["2"]} items={items_admin} />
       </Sider>
    );
 }
