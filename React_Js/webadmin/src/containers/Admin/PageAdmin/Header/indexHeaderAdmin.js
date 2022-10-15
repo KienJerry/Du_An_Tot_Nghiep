@@ -1,38 +1,19 @@
-import { Layout, Menu, Avatar, Image, Dropdown, message , Space  } from 'antd';
-import { UserOutlined , DownOutlined  } from '@ant-design/icons';
-import React from 'react';
+import { Layout, Avatar, Image, Dropdown , Space } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { menu } from '../../../../components/Menu/Menu_Navbar/index_menu';
+import fetchProducts from '../../../../Reducer/Fetch_API/getAccount';
+import { getAccountMe } from '../../../../Reducer/Reducers/Auth/getAccountMe';
+import { initAccountMe } from '../../../../Reducer/InitReducer/Auth/getAccountMe';
+import React, { useEffect, useReducer } from 'react';
+import './style_headerAdmin.scss'
 const { Header } = Layout;
 
 function IndexAdmin() {
-    const onClick = ({ key }) => {
-        message.info(`Click on item ${key}`);
-      };
-    const handleMenuClick = (e) => {
-        message.info('Click on menu item.');
-        console.log('click', e);
-    };
-    const menu = (
-        <Menu
-            onClick={handleMenuClick}
-            items={[
-                {
-                    label: 'Thông Tin Cá Nhân',
-                    key: '1',
-                    icon: <UserOutlined />,
-                },
-                {
-                    label: 'Đổi Mật Khẩu',
-                    key: '2',
-                    icon: <UserOutlined />,
-                },
-                {
-                    label: 'Đăng Xuất',
-                    key: '3',
-                    icon: <UserOutlined />,
-                },
-            ]}
-        />
-    );
+    const [state, dispatch] = useReducer(getAccountMe, initAccountMe);
+    const account = state.account;
+    useEffect(() => {
+        fetchProducts(dispatch)
+    }, []);
     return (
         <Header
             style={{
@@ -43,7 +24,7 @@ function IndexAdmin() {
             }}
         >
             <div className="logo" />
-            <Menu
+            {/* <Menu
                 theme="dark"
                 mode="horizontal"
                 defaultSelectedKeys={['0']}
@@ -51,7 +32,7 @@ function IndexAdmin() {
                     key: String(index + 1),
                     label: `nav ${index + 1}`,
                 }))}
-            ></Menu>
+            ></Menu> */}
             <div style={{
                 position: "fixed",
                 right: 50,
@@ -60,6 +41,7 @@ function IndexAdmin() {
                 <Avatar
                     src={
                         <Image
+                            size={64}
                             src="https://joeschmoe.io/api/v1/random"
                             style={{
                                 width: "100%",
@@ -69,13 +51,20 @@ function IndexAdmin() {
                         />
                     }
                 />
-            <Dropdown overlay={menu}>
-                <a onClick={e => e.preventDefault()} style={{marginLeft:'10px'}}>
-                    <Space>
-                        <DownOutlined />
-                    </Space>
-                </a>
-            </Dropdown>
+                <Dropdown overlay={menu}>
+                    <a style={{ marginLeft: '10px', textDecoration: "none" }}>
+                        {account && account.map((value, index) => {
+                            return (
+                                <span key={index} className="name_in_avt">
+                                    <span style={{ color: 'yellow' }}>{value.ten} (ADMIN)</span>
+                                </span>
+                            )
+                        })}
+                        <Space className="icon_img">
+                            <DownOutlined />
+                        </Space>
+                    </a>
+                </Dropdown>
             </div>
         </Header>
     );

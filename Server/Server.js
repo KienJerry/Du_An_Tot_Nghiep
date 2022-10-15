@@ -61,14 +61,14 @@ app.get('/images', function (req, res) {
 //Phần Realtime
 const socketIo = require("socket.io")(server, {
   cors: {  // nhớ thêm cái cors này để tránh bị Exception nhé :D  ở đây mình làm nhanh nên cho phép tất cả các trang đều cors được.
-      origin: "*",
+    origin: "*",
   }
-}); 
+});
 
 socketIo.on("connection", (socket) => { ///Handle khi có connect từ client tới
-  console.log("New client connected" + socket.id); 
+  console.log("New client connected" + socket.id);
 
-  socket.on("sendDataClient", function(data) { // Handle khi có sự kiện tên là sendDataClient từ phía client
+  socket.on("sendDataClient", function (data) { // Handle khi có sự kiện tên là sendDataClient từ phía client
     socketIo.emit("sendDataServer", { data });// phát sự kiện  có tên sendDataServer cùng với dữ liệu tin nhắn từ phía server
   })
 
@@ -123,7 +123,7 @@ app.post("/dangnhap", (req, res) => {
                   var sql = "UPDATE account SET timelogin = '" + req.body.dateTime + "' where email = '" + req.body.email + "'";
                   con.query(sql, function (err, result, fields) {
                     if (err) throw err;
-                    res.send({ success: true , message: "ADMIN!"});
+                    res.send({ success: true, message: "ADMIN!" });
                   });
                 }
                 else {
@@ -150,6 +150,20 @@ app.get('/showaccount', function (req, res) {
     if (err) throw err;
     res.send(result);
   });
+});
+//thông tin tài khoản cá nhân
+app.post('/getaccountme', function (req, res) {
+  var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
+    }
+
+  })
 });
 //Thời gian đăng nhập
 app.post('/new-login', function (req, res) {

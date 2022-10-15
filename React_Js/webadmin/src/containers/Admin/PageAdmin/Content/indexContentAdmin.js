@@ -3,12 +3,7 @@ import React from 'react';
 const { Content } = Layout;
 
 function IndexContentAdmin() {
-    return ( 
-        <Content
-          style={{
-            margin: '70px 16px 10px 30vh',
-          }}
-        >
+    return (
           <div
             className="site-layout-background"
           >
@@ -27,7 +22,6 @@ function IndexContentAdmin() {
               )
             }
           </div>
-        </Content>
      );
 }
 

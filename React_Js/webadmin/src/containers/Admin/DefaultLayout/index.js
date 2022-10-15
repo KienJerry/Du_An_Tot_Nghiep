@@ -8,13 +8,21 @@ export default function DefaultLayout({ children }) {
     return (
         <Layout hasSider>
             <MenuNavigation />
-            <Layout style={{ height: '100vh' }}>
+            <Layout>
                 <Header />
-                <Content style={{ margin: '70px 16px 10px 30vh' }}>
-                    {children}
-                </Content>
-                <Footer />
+                <div
+                style={{
+                    padding:'0 0 0 10px',
+                    height: "100vh",
+                    width: "100%",
+                    overflowY: "auto",
+                }}>
+                    <Content style={{ margin: '70px 16px 10px 0px' }}>
+                        {children}
+                    </Content>
+                    <Footer />
+                </div>
             </Layout>
-        </Layout>
+        </Layout >
     );
 }
