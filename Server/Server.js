@@ -91,7 +91,7 @@ app.post("/dangky", (req, res) => {
       res.send({ success: false });
     } else {
       res.send({ success: true });
-      var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc) values('" + req.body.email + "' ,  '" + req.body.password + "' ,'" + req.body.fullName + "' ,'" + req.body.phoneNumber + "' ,'" + req.body.timeRegister + "','" + '1' + "' );"
+      var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc , gioitinh) values('" + req.body.email + "' ,  '" + req.body.password + "' ,'" + req.body.fullName + "' ,'" + req.body.phoneNumber + "' ,'" + req.body.timeRegister + "','" + '1' + "','" + '0' + "'  );"
       con.query(sql, function (err, result, fields) {
         if (err) throw err;
       });
