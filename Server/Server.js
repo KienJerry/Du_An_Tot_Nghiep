@@ -4,6 +4,7 @@ var mysql = require('mysql');
 var fs = require('fs');
 var cors = require('cors');
 const multer = require('multer');
+const bodyParser= require('body-parser')
 
 //Socket.io
 const http = require('http');
@@ -17,8 +18,12 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+//CREATE EXPRESS APP
+app.use(bodyParser.urlencoded({extended: true}))
+
 // express
 app.use(express.static('public'));
+app.use(express.json({limit:'50mb'}));
 
 //kết nối csdl
 var con = mysql.createConnection({
@@ -41,9 +46,10 @@ const storage = multer.diskStorage({
     const myArray = file.originalname.split(".");
     let imgname = new Date().getTime().toString() + "." + myArray[myArray.length - 1];  // Đặt lại tên image thành date + time + .(đuôi ảnh)
     callBack(null, `${imgname}`)
-    // callBack(null, imgname+`${file.originalname}`)
   }
 })
+
+// SET STORAGE
 let upload = multer({ storage: storage })
 
 // Hiện thị hình ảnh mục image
@@ -220,6 +226,17 @@ app.post("/quen-mat-khau", (req, res) => {
     }
   });
 });
+
+//Update avatar thông tin cá nhân 
+app.post('/getaccountme/edituploadfile', upload.single('file'), (req, res, next) => {
+  const file = req.file
+  if (!file) {
+    const error = new Error('Please upload a file')
+    error.httpStatusCode = 400
+    return next(error)
+  }
+  res.send(file)
+})
 
 
 //Phần báo cáo

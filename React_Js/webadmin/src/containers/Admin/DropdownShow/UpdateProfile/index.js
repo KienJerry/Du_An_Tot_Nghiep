@@ -1,33 +1,27 @@
 import { Breadcrumb, Row, Col, Button, Form, Input, DatePicker, Select, Upload, Modal } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import './style_update_profile.scss';
-import { initAccountMe } from '../../../../Reducer/InitReducer/Auth/getAccountMe';
-import { getAccountMe } from '../../../../Reducer/Reducers/Auth/getAccountMe';
+import { initAccountMe, updateProfileAvatar } from '../../../../Reducer/InitReducer/Auth/getAccountMe';
+import { getAccountMe, setProductAccountAvatar } from '../../../../Reducer/Reducers/Auth/getAccountMe';
 import fetchProducts from '../../../../Reducer/Fetch_API/getAccount';
-import {Validate_Name , Validate_Phone, Validate_Gender , Validate_Address, Validate_Date} from '../../../../components/Validate/CheckValidate';
+import { setAvatarAccount } from '../../../../Reducer/Fetch_API/setImgAvatar';
+import { Validate_Name, Validate_Phone, Validate_Gender, Validate_Address, Validate_Date } from '../../../../components/Validate/CheckValidate';
 import React, { useReducer, useEffect, useState } from 'react';
+import { getBase64, beforeUpload } from '../../../../components/Base/Base64';
+import { API_SET_AVATAR_ACCOUNT } from '../../../../api/index';
 import moment from 'moment';
 const { Option } = Select;
 
-const getBase64 = (file) =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
-    });
-
 export default function UpdateProfile() {
     const [state, dispatch] = useReducer(getAccountMe, initAccountMe);
+    const [stateImg, dispatchImg] = useReducer(setProductAccountAvatar, updateProfileAvatar);
+    const [openModal, setOpenModal] = useState(false);
     const [fileList, setFileList] = useState([
-        // {
-        //     uid: '-1',
-        //     name: 'image.png',
-        //     status: 'done',
-        //     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        // },
+        {
+            name: 'image.png',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        },
     ]);
-    const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
     const account = state.account;
@@ -37,20 +31,28 @@ export default function UpdateProfile() {
 
     const onFinish = (values) => {
         console.log('Success:', values);
+        console.log('img', fileList);
     };
 
     const onChange = ({ fileList: newFileList }) => {
+        // setAvatarAccount(dispatchImg , newFileList);
+        {
+            newFileList == "" || newFileList == [] || newFileList == null || newFileList == undefined ?
+                console.log('rỗng') : console.log('có hình ảnh')
+        }
         setFileList(newFileList);
     };
+
+    //Xem trước hình ảnh
     const onPreview = async (file) => {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
         }
         setPreviewImage(file.url || file.preview);
-        setPreviewOpen(true);
+        setOpenModal(true);
         setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
     };
-    const handleCancel = () => setPreviewOpen(false);
+
     return (
         <div >
             <Breadcrumb className='label-breadcrumb'>
@@ -76,25 +78,17 @@ export default function UpdateProfile() {
                                     >
                                         <ImgCrop rotate>
                                             <Upload
-                                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                                action={API_SET_AVATAR_ACCOUNT}
                                                 listType="picture-card"
                                                 fileList={fileList}
                                                 onPreview={onPreview}
+                                                beforeUpload={beforeUpload}
                                                 onChange={onChange}
                                             >
                                                 {fileList.length < 1 && '+ Upload'}
                                             </Upload>
                                         </ImgCrop>
                                     </Form.Item>
-                                    <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-                                        <img
-                                            alt="example"
-                                            style={{
-                                                width: '100%',
-                                            }}
-                                            src={previewImage}
-                                        />
-                                    </Modal>
                                 </Col>
                             </Row>
                             <Row className='form-col'>
@@ -181,6 +175,15 @@ export default function UpdateProfile() {
                     )
                 })}
             </div>
+            <Modal open={openModal} title={previewTitle} footer={null} onCancel={() => setOpenModal(false)}>
+                <img
+                    alt="avatar"
+                    style={{
+                        width: '100%',
+                    }}
+                    src={previewImage}
+                />
+            </Modal>
         </div>
     );
 }
