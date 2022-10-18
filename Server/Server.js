@@ -4,7 +4,7 @@ var mysql = require('mysql');
 var fs = require('fs');
 var cors = require('cors');
 const multer = require('multer');
-const bodyParser= require('body-parser')
+const bodyParser = require('body-parser')
 
 //Socket.io
 const http = require('http');
@@ -19,11 +19,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 //CREATE EXPRESS APP
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // express
 app.use(express.static('public'));
-app.use(express.json({limit:'50mb'}));
+app.use(express.json({ limit: '50mb' }));
 
 //kết nối csdl
 var con = mysql.createConnection({
@@ -229,7 +229,18 @@ app.post("/quen-mat-khau", (req, res) => {
 
 //Update avatar thông tin cá nhân 
 app.post('/getaccountme/edituploadfile', upload.single('file'), (req, res, next) => {
-  const file = req.file
+  const file = req.file;
+  const form = req.body;
+    var imgsrc = 'http://localhost:3001/images/' + file.filename;
+    var sql = "UPDATE account SET image = ('"+file.filename+"'), ten = ('"+ form.ten +"'), sdt = ('"+ form.sdt +"'), date = ('"+ form.date +"'), gioitinh=('"+ form.gioitinh +"'), diachi = ('"+ form.diachi +"') where email = ('"+form.email+"')";
+    con.query(sql, [imgsrc] , function(err, result, fields){
+      if(err) throw err;
+      res.send(file);
+    })
+})
+//Del avatar thông tin cá nhân 
+app.post('/getaccountme/deleteuploadfile', upload.single('file'), (req, res, next) => {
+  const file = req.file;
   if (!file) {
     const error = new Error('Please upload a file')
     error.httpStatusCode = 400

@@ -8,7 +8,7 @@ import { setAvatarAccount } from '../../../../Reducer/Fetch_API/setImgAvatar';
 import { Validate_Name, Validate_Phone, Validate_Gender, Validate_Address, Validate_Date } from '../../../../components/Validate/CheckValidate';
 import React, { useReducer, useEffect, useState } from 'react';
 import { getBase64, beforeUpload } from '../../../../components/Base/Base64';
-import { API_SET_AVATAR_ACCOUNT } from '../../../../api/index';
+import { API_SET_DEL_AVATAR_ACCOUNT } from '../../../../api/index';
 import moment from 'moment';
 const { Option } = Select;
 
@@ -17,10 +17,10 @@ export default function UpdateProfile() {
     const [stateImg, dispatchImg] = useReducer(setProductAccountAvatar, updateProfileAvatar);
     const [openModal, setOpenModal] = useState(false);
     const [fileList, setFileList] = useState([
-        {
-            name: 'image.png',
-            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        },
+        // {
+        //     name: 'image.png',
+        //     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        // },
     ]);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
@@ -30,16 +30,21 @@ export default function UpdateProfile() {
     }, []);
 
     const onFinish = (values) => {
-        console.log('Success:', values);
-        console.log('img', fileList);
+        const file = fileList[0].originFileObj || fileList[0]
+        const formData = new FormData();
+        const formBirth = values.date._d.toLocaleDateString();
+        formData.append('file', file);
+        formData.append('diachi', values.address);
+        formData.append('email', values.email);
+        formData.append('gioitinh', values.gender);
+        formData.append('ten', values.fullname);
+        formData.append('date', formBirth);
+        formData.append('sdt', values.phoneNumber);
+        setAvatarAccount(dispatchImg, formData);
+        fetchProducts(dispatch);
     };
 
     const onChange = ({ fileList: newFileList }) => {
-        // setAvatarAccount(dispatchImg , newFileList);
-        {
-            newFileList == "" || newFileList == [] || newFileList == null || newFileList == undefined ?
-                console.log('rỗng') : console.log('có hình ảnh')
-        }
         setFileList(newFileList);
     };
 
@@ -78,7 +83,7 @@ export default function UpdateProfile() {
                                     >
                                         <ImgCrop rotate>
                                             <Upload
-                                                action={API_SET_AVATAR_ACCOUNT}
+                                                // action={API_SET_DEL_AVATAR_ACCOUNT}
                                                 listType="picture-card"
                                                 fileList={fileList}
                                                 onPreview={onPreview}

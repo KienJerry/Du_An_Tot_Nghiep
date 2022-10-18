@@ -1,6 +1,7 @@
 import { Layout, Avatar, Image, Dropdown , Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { menu } from '../../../../components/Menu/Menu_Navbar/index_menu';
+import { API_GET_URL_IMAGE } from '../../../../api/index';
 import fetchProducts from '../../../../Reducer/Fetch_API/getAccount';
 import { getAccountMe } from '../../../../Reducer/Reducers/Auth/getAccountMe';
 import { initAccountMe } from '../../../../Reducer/InitReducer/Auth/getAccountMe';
@@ -37,12 +38,14 @@ function IndexAdmin() {
                 position: "fixed",
                 right: 50,
                 top: 0,
-            }}>
-                <Avatar
+            }}>{account && account.map((value, index) => {
+                return (
+                    <Avatar
+                    key={index}
                     src={
                         <Image
                             size={64}
-                            src="https://joeschmoe.io/api/v1/random"
+                            src={!value == "" ? API_GET_URL_IMAGE +value.image : "https://joeschmoe.io/api/v1/random"}
                             style={{
                                 width: "100%",
                                 color: '#f56a00',
@@ -51,6 +54,8 @@ function IndexAdmin() {
                         />
                     }
                 />
+                )
+            })}
                 <Dropdown overlay={menu}>
                     <a style={{ marginLeft: '10px', textDecoration: "none" }}>
                         {account && account.map((value, index) => {
