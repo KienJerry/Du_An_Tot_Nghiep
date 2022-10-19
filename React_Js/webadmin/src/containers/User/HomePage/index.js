@@ -102,7 +102,7 @@ export default function HOME() {
             defaultSelectedKeys={['0']}
             items={new Array(3).fill(null).map((_, index) => ({
               key: String(index + 1),
-              label: `nav ${index + 1}`,
+              label: `menu-item ${index + 1}`,
             }))}
           />
         </Header>

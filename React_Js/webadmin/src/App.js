@@ -19,7 +19,6 @@ export default function App() {
                 <Router>
                     <Routes>
                         {a.map((route, index) => {
-                            console.log(route)
                             let Layout ;
                             {route.layout === null ? Layout = Fragment : route.layout ? Layout = route.layout : Layout = DefaultLayout }
                             const Page = route.component;

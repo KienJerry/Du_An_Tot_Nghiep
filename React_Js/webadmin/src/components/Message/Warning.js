@@ -28,3 +28,17 @@ export const WarningCaptcha = () => {
     });
   }, 1000);
 };
+
+export const WarningFALSE = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.warning({
+      content: 'Thất Bại !',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};

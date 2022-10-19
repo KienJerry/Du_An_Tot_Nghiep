@@ -4,7 +4,7 @@ import React, { useReducer } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Validate_Email, } from '../../../components/Validate/CheckValidate';
 import { WarningCaptcha, } from '../../../components/Message/Warning';
-import { DATE, TIME } from '../../../components/DateTime/DateTime';
+import { DATE_TIME } from '../../../components/DateTime/DateTime';
 import { ForgotPassword } from '../../../Reducer/InitReducer/Auth/initNew';
 import { Succ_ForgotPw } from '../../../Reducer/Reducers/Auth';
 import { SetJobForgotPassword } from '../../../Reducer/Actions/Auth/index';
@@ -19,7 +19,7 @@ const ForgotPw = ({ setOpenModal, OpenModal, }) => {
     //   WarningCaptcha();
     //   return false;
     // }
-    values.dateTime = TIME + "_" + DATE;
+    values.dateTime = DATE_TIME;
     dispatch(SetJobForgotPassword(values))
   };
 

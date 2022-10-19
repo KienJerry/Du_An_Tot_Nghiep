@@ -59,7 +59,7 @@ const AdminRoute = [
     {
         path: "/doi-mat-khau",
         component: ChangePassword,
-        layout : NaviLayout
+        // layout : NaviLayout
     },
 ]
 

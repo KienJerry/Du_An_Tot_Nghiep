@@ -7,8 +7,8 @@ export default function NaviLayout({ children }) {
     return (
         <Layout hasSider>
             <MenuNavigation />
-            <Layout style={{ height: '100vh' }}>
-                <Content style={{ margin: '0px 16px 10px 30vh' }}>
+            <Layout >
+                <Content style={{ margin: '0px 16px 10px 30vh'}}>
                     {children}
                 </Content>
                 <Footer />

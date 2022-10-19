@@ -4,6 +4,7 @@ var mysql = require('mysql');
 var fs = require('fs');
 var cors = require('cors');
 const multer = require('multer');
+const bodyParser = require('body-parser')
 
 //Socket.io
 const http = require('http');
@@ -17,8 +18,12 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+//CREATE EXPRESS APP
+app.use(bodyParser.urlencoded({ extended: true }))
+
 // express
 app.use(express.static('public'));
+app.use(express.json({ limit: '50mb' }));
 
 //kết nối csdl
 var con = mysql.createConnection({
@@ -41,9 +46,10 @@ const storage = multer.diskStorage({
     const myArray = file.originalname.split(".");
     let imgname = new Date().getTime().toString() + "." + myArray[myArray.length - 1];  // Đặt lại tên image thành date + time + .(đuôi ảnh)
     callBack(null, `${imgname}`)
-    // callBack(null, imgname+`${file.originalname}`)
   }
 })
+
+// SET STORAGE
 let upload = multer({ storage: storage })
 
 // Hiện thị hình ảnh mục image
@@ -61,14 +67,14 @@ app.get('/images', function (req, res) {
 //Phần Realtime
 const socketIo = require("socket.io")(server, {
   cors: {  // nhớ thêm cái cors này để tránh bị Exception nhé :D  ở đây mình làm nhanh nên cho phép tất cả các trang đều cors được.
-      origin: "*",
+    origin: "*",
   }
-}); 
+});
 
 socketIo.on("connection", (socket) => { ///Handle khi có connect từ client tới
-  console.log("New client connected" + socket.id); 
+  console.log("New client connected" + socket.id);
 
-  socket.on("sendDataClient", function(data) { // Handle khi có sự kiện tên là sendDataClient từ phía client
+  socket.on("sendDataClient", function (data) { // Handle khi có sự kiện tên là sendDataClient từ phía client
     socketIo.emit("sendDataServer", { data });// phát sự kiện  có tên sendDataServer cùng với dữ liệu tin nhắn từ phía server
   })
 
@@ -91,7 +97,7 @@ app.post("/dangky", (req, res) => {
       res.send({ success: false });
     } else {
       res.send({ success: true });
-      var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc) values('" + req.body.email + "' ,  '" + req.body.password + "' ,'" + req.body.fullName + "' ,'" + req.body.phoneNumber + "' ,'" + req.body.timeRegister + "','" + '1' + "' );"
+      var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc , gioitinh) values('" + req.body.email + "' ,  '" + req.body.password + "' ,'" + req.body.fullName + "' ,'" + req.body.phoneNumber + "' ,'" + req.body.timeRegister + "','" + '1' + "','" + '0' + "'  );"
       con.query(sql, function (err, result, fields) {
         if (err) throw err;
       });
@@ -123,7 +129,7 @@ app.post("/dangnhap", (req, res) => {
                   var sql = "UPDATE account SET timelogin = '" + req.body.dateTime + "' where email = '" + req.body.email + "'";
                   con.query(sql, function (err, result, fields) {
                     if (err) throw err;
-                    res.send({ success: true , message: "ADMIN!"});
+                    res.send({ success: true, message: "ADMIN!" });
                   });
                 }
                 else {
@@ -150,6 +156,20 @@ app.get('/showaccount', function (req, res) {
     if (err) throw err;
     res.send(result);
   });
+});
+//thông tin tài khoản cá nhân
+app.post('/getaccountme', function (req, res) {
+  var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
+    }
+
+  })
 });
 //Thời gian đăng nhập
 app.post('/new-login', function (req, res) {
@@ -206,6 +226,28 @@ app.post("/quen-mat-khau", (req, res) => {
     }
   });
 });
+
+//Update avatar thông tin cá nhân 
+app.post('/getaccountme/edituploadfile', upload.single('file'), (req, res, next) => {
+  const file = req.file;
+  const form = req.body;
+    var imgsrc = 'http://localhost:3001/images/' + file.filename;
+    var sql = "UPDATE account SET image = ('"+file.filename+"'), ten = ('"+ form.ten +"'), sdt = ('"+ form.sdt +"'), date = ('"+ form.date +"'), gioitinh=('"+ form.gioitinh +"'), diachi = ('"+ form.diachi +"') where email = ('"+form.email+"')";
+    con.query(sql, [imgsrc] , function(err, result, fields){
+      if(err) throw err;
+      res.send(file);
+    })
+})
+//Del avatar thông tin cá nhân 
+app.post('/getaccountme/deleteuploadfile', upload.single('file'), (req, res, next) => {
+  const file = req.file;
+  if (!file) {
+    const error = new Error('Please upload a file')
+    error.httpStatusCode = 400
+    return next(error)
+  }
+  res.send(file)
+})
 
 
 //Phần báo cáo
