@@ -1,8 +1,10 @@
 import { FETCH_ACCOUNT_ME_SUCCESS, FETCH_ACCOUNT_ME_ERROR, SET_AVATAR_ACCOUNT, ERR_AVATAR_ACCOUNT } from '../../Constants/listConstants';
-import { initAccountMe } from '../../InitReducer/Auth/getAccountMe';
+import { SuccessRegister } from '../../../components/Message/Success';
 import {WarningRegister} from '../../../components/Message/Warning';
+import {ErrorFALSE} from '../../../components/Message/Error';
+import header from '../../../containers/Admin/PageAdmin/Header/indexHeaderAdmin'
 
-export const getAccountMe = (state = initAccountMe, action) => {
+export const getAccountMe = (state , action) => {
     switch(action.type) {
         case FETCH_ACCOUNT_ME_SUCCESS:
             return {
@@ -17,15 +19,16 @@ export const getAccountMe = (state = initAccountMe, action) => {
     }
 }
 
-export const setProductAccountAvatar = (state = initAccountMe, action) => {
+export const setProductAccountAvatar = (state , action) => {
     switch(action.type) {
         case SET_AVATAR_ACCOUNT:
+            SuccessRegister();
             return {
                 ...state,
-                account: [action.payload[0]]
+                account: [action.payload]
             }
         case ERR_AVATAR_ACCOUNT:
-            WarningRegister();
+            ErrorFALSE();
             return [...state]
         default: 
         return [...state];

@@ -13,7 +13,13 @@ function IndexAdmin() {
     const [state, dispatch] = useReducer(getAccountMe, initAccountMe);
     const account = state.account;
     useEffect(() => {
-        fetchProducts(dispatch)
+        fetchProducts(dispatch);
+        const timer = window.setInterval(() => {
+            fetchProducts(dispatch);
+          }, 10000);
+          return () => {
+            window.clearInterval(timer);
+          };
     }, []);
     return (
         <Header
@@ -39,13 +45,14 @@ function IndexAdmin() {
                 right: 50,
                 top: 0,
             }}>{account && account.map((value, index) => {
+                const imgs = 'https://joeschmoe.io/api/v1/random'
                 return (
                     <Avatar
                     key={index}
                     src={
                         <Image
                             size={64}
-                            src={!value == "" ? API_GET_URL_IMAGE +value.image : "https://joeschmoe.io/api/v1/random"}
+                            src={!value.image == "" ||!value.image == '' || !value.image == null || !value.image == undefined ? API_GET_URL_IMAGE +value.image : imgs}
                             style={{
                                 width: "100%",
                                 color: '#f56a00',

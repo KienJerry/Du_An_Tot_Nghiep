@@ -19,6 +19,6 @@ export const beforeUpload = (file) => {
         message.error('Bạn chỉ có thể tải hình ảnh dưới 2MB!');
         return false;
     }
-    return false;
-    // return isJpgOrPng && isLt2M;
+    // return false;
+    return isJpgOrPng && isLt2M;
 };

@@ -70,3 +70,17 @@ export const ErrorAccountLOCK = () => {
     });
   }, 1000);
 };
+
+export const ErrorFALSE = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Thất bại !',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
