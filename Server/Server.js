@@ -231,12 +231,29 @@ app.post("/quen-mat-khau", (req, res) => {
 app.post('/getaccountme/edituploadfile', upload.single('file'), (req, res, next) => {
   const file = req.file;
   const form = req.body;
+  if (file == "" || file == undefined) {
+    if (form.file == "" || form.file == "undefined" || form.file == null || form.file == undefined) {
+      var sql = "UPDATE account SET ten = ('" + form.ten + "'), sdt = ('" + form.sdt + "'), date = ('" + form.date + "'), gioitinh=('" + form.gioitinh + "'), diachi = ('" + form.diachi + "') where email = ('" + form.email + "')";
+      con.query(sql, [imgsrc], function (err, result, fields) {
+        if (err) throw err;
+        res.send(file);
+      })
+    } else {
+      var imgsrc = 'http://localhost:3001/images/' + form.file;
+      var sql = "UPDATE account SET image = ('" + form.file + "'), ten = ('" + form.ten + "'), sdt = ('" + form.sdt + "'), date = ('" + form.date + "'), gioitinh=('" + form.gioitinh + "'), diachi = ('" + form.diachi + "') where email = ('" + form.email + "')";
+      con.query(sql, [imgsrc], function (err, result, fields) {
+        if (err) throw err;
+        res.send(file);
+      })
+    }
+  } else {
     var imgsrc = 'http://localhost:3001/images/' + file.filename;
-    var sql = "UPDATE account SET image = ('"+file.filename+"'), ten = ('"+ form.ten +"'), sdt = ('"+ form.sdt +"'), date = ('"+ form.date +"'), gioitinh=('"+ form.gioitinh +"'), diachi = ('"+ form.diachi +"') where email = ('"+form.email+"')";
-    con.query(sql, [imgsrc] , function(err, result, fields){
-      if(err) throw err;
+    var sql = "UPDATE account SET image = ('" + file.filename + "'), ten = ('" + form.ten + "'), sdt = ('" + form.sdt + "'), date = ('" + form.date + "'), gioitinh=('" + form.gioitinh + "'), diachi = ('" + form.diachi + "') where email = ('" + form.email + "')";
+    con.query(sql, [imgsrc], function (err, result, fields) {
+      if (err) throw err;
       res.send(file);
     })
+  }
 })
 //Del avatar thông tin cá nhân 
 app.post('/getaccountme/deleteuploadfile', upload.single('file'), (req, res, next) => {
@@ -247,6 +264,10 @@ app.post('/getaccountme/deleteuploadfile', upload.single('file'), (req, res, nex
     return next(error)
   }
   res.send(file)
+})
+//Đổi Mật Khẩu
+app.post("/doi-mat-khau", (req, res) => {
+ console.log('abc');
 })
 
 

@@ -1,5 +1,5 @@
 import { Menu } from 'antd';
-import { UserOutlined   } from '@ant-design/icons';
+import { UserOutlined, UserSwitchOutlined, LogoutOutlined  } from '@ant-design/icons';
 import {
     Link,
   } from "react-router-dom";
@@ -21,12 +21,12 @@ export const menu = (
             {
                 label: <Link style={{textDecoration: "none" }} to={"/doi-mat-khau"}>Đổi mật khẩu</Link>,
                 key: '2',
-                icon: <UserOutlined />,
+                icon: <UserSwitchOutlined />,
             },
             {
                 label: 'Đăng Xuất',
                 key: '3',
-                icon: <UserOutlined />,
+                icon: <LogoutOutlined />,
             },
         ]}
     />

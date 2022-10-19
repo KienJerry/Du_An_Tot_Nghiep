@@ -14,12 +14,12 @@ function IndexAdmin() {
     const account = state.account;
     useEffect(() => {
         fetchProducts(dispatch);
-        const timer = window.setInterval(() => {
-            fetchProducts(dispatch);
-          }, 10000);
-          return () => {
-            window.clearInterval(timer);
-          };
+        // const timer = window.setInterval(() => {
+        //     fetchProducts(dispatch);
+        //   }, 10000);
+        //   return () => {
+        //     window.clearInterval(timer);
+        //   };
     }, []);
     return (
         <Header

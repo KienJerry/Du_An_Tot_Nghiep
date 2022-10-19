@@ -1,30 +1,67 @@
-import React, { useState, useEffect} from "react";
-// import { useForm } from "react-hook-form";
-import axios from "axios";
-const api ='http://localhost:3001/';
+import React, {useReducer} from "react";
+import { Breadcrumb, Button, Form, Input} from 'antd';
+import {setPasswordInit} from '../../../../Reducer/InitReducer/Auth/setPassword';
+import { setPasswordRedux} from '../../../../Reducer/Reducers/Auth/setPassword';
+import {setPassword} from '../../../../Reducer/Fetch_API/setPassword';
+import { Validate_Password, Validate_Re_Password_Change } from '../../../../components/Validate/CheckValidate';
+import './ChangePwStyle.scss'
 function ChangePassword() {
-    const [selectedFile, setSelectedFile] = useState();
-    const submitEmployeeRecord = async (e) =>{ 
-        const formData = new FormData(); 
-
-        formData.append('file', selectedFile);
-  
-        console.log(selectedFile);
-          axios.post(api +'getaccountme/edituploadfile',  formData )
-          .then(res =>{
-              if(res.data ==='ok'){
-                alert("thêm thành công")
-                console.log(res);
-                return false;
-            }
-          })   
-      }
+    const [state, dispatch] = useReducer(setPasswordRedux, setPasswordInit);
+    const onFinish = (values) => {
+        setPassword(dispatch, values);
+    };
     return (
         <div >
-            <form onSubmit={submitEmployeeRecord}>
-            <input type="file" name="file" className="form-control mb-4" onChange={(e) => setSelectedFile(e.target.files[0])}/>
-            </form>
-            <input className='button5' type="submit" value={"Thêm"} onClick={submitEmployeeRecord}></input>
+            <Breadcrumb className='label-breadcrumb'>
+                <Breadcrumb.Item>Đổi Mật Khẩu</Breadcrumb.Item>
+            </Breadcrumb>
+            <div className="conten_changePass">
+                <Form
+                    name="basic"
+                    layout="vertical"
+                    wrapperCol={{
+                        span: 16,
+                    }}
+                    initialValues={{
+                        remember: true,
+                    }}
+                    onFinish={onFinish}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        label="Mật Khẩu Cũ"
+                        name="passwordOld"
+                        rules={Validate_Password}
+                    >
+                        <Input.Password placeholder="Nhập Mật Khẩu Cũ" />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Mật Khẩu Mới"
+                        name="passwordNew"
+                        rules={Validate_Password}
+                    >
+                        <Input.Password placeholder="Nhập Mật Khẩu Mới" />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Nhập Lại Mật Khẩu Mới"
+                        name="rePasswordNew"
+                        rules={Validate_Re_Password_Change}
+                    >
+                        <Input.Password placeholder="Nhập Lại Mật Khẩu Mới" />
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Button type="button" htmlType="submit" className="btn btn-primary">
+                            ĐỔI MẬT KHẨU
+                        </Button>
+                        <Button type="button" className="btn btn-warning">
+                            QUÊN MẬT KHẨU
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </div>
         </div>
     );
 }
