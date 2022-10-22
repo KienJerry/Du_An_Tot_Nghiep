@@ -57,6 +57,20 @@ export const ErrorAccountBan = () => {
   }, 1000);
 };
 
+export const ErrorAccountPassFalse = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Thất bại ! Mật khẩu không chính xác',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
 export const ErrorAccountLOCK = () => {
   message.loading({
     content: 'Loading...',

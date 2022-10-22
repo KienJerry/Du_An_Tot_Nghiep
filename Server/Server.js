@@ -267,7 +267,23 @@ app.post('/getaccountme/deleteuploadfile', upload.single('file'), (req, res, nex
 })
 //Đổi Mật Khẩu
 app.post("/doi-mat-khau", (req, res) => {
- console.log('abc');
+  var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND pass= '" + req.body.passwordOld + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    }
+    if (result.length > 0) {
+      var sql = "UPDATE account SET pass = '" + req.body.rePasswordNew + "' where email = '" + req.body.email + "'";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        if (result.affectedRows == 1) {
+          res.send({ success: true, message: "Sua_Thanh_Cong!" });
+        }
+      });
+    } else {
+      res.send({ success: false, message: "False!Pass_Sai" });
+    }
+  });
 })
 
 
