@@ -22,7 +22,7 @@ export const items_admin = [
   getItem(<Link style={{textDecoration: "none" }} to={"/"}>Thống Kê</Link>, '1', <AreaChartOutlined /> , "" , ),
   getItem('Nhân Viên', 'sub0', <UserSwitchOutlined />, [
     getItem(<Link style={{textDecoration: "none"}} to={"/danh-sach-nhan-vien"}>Danh Sách Nhân Viên</Link>, '2'),
-    getItem('Đăng Ký Mới', '3'),
+    getItem(<Link style={{textDecoration: "none"}} to={"/dang-ky-moi"}>Đăng Ký Mới</Link>, '3'),
   ]),
   getItem('Dự Án', 'sub1', <FundProjectionScreenOutlined />, [
     getItem('Danh Sách Dự Án', '4'),
@@ -45,6 +45,8 @@ export const highlight = () => {
         return ['1']
     case '/danh-sach-nhan-vien':
         return ['2']
+    case '/dang-ky-moi':
+        return ['3']
     default:
         return ['1']
 }
