@@ -6,7 +6,9 @@ export const getListStaffs = (state , action) => {
         case GET_LIST_ACCOUNT_STAFF:
             return {
                 ...state,
-                data: action.payload
+                all: action.payload,
+                total : action.payload.length,
+                show : action.payload.slice(0, 5),
             }
         case GET_LIST_ACCOUNT_STAFF_ERR:
             WarningRegister();

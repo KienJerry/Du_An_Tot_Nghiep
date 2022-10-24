@@ -1,1 +1,5 @@
-export const List = []
+export const List = {
+    show: [],
+    all: [],
+    total: 0,
+}
