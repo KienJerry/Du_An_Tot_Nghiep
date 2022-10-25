@@ -1,61 +1,70 @@
 import NotFound from "../containers/pages/NotFound";
 import Login from "../containers/Auth/Login";
 import Register from "../containers/Auth/Register";
-import Home from '../containers/Home/HomePage';
+import Home from '../containers/User/HomePage';
 import Admin from '../containers/Admin/HomePage/index';
-import unAuth from '../containers/unAuth/index';
-import ListAccount from '../containers/Admin/Account/list_account'
-import ListDuAn from'../containers/Admin/PagesAll/DanhSachDuAn/List_DuAn'
-import ListHdDuAn from'../containers/Admin/PagesAll/HoatDongDuAn/List_HdDuAn'
+import unAuth from '../containers/Auth/unAuth/index';
+import ListAccount from '../containers/Admin/Account/fullListAccount/list_account';
+import UpdateProfile from "../containers/Admin/DropdownShow/UpdateProfile";
+import ChangePassword from "../containers/Admin/DropdownShow/ChangePassword";
+import UserNew from '../containers/Admin/Account/UserNew/userNew';
+import {NaviLayout} from '../containers/Admin';
 
 const publicRouter = [
     {
         path: "/",
-        component: Home
+        component: Home,
+        admins : false,
     },
     {
         path: "/*",
-        component: NotFound
+        component: NotFound,
     },
     {
         path: "/dang-nhap",
-        component: Login
+        component: Login,
     },
     {
         path: "/dang-ky",
-        component: Register
+        component: Register,
     },
-
 ]
 
 const AdminRoute = [
     {
         path: "/",
-        component : Admin
+        component : Admin,
+        admins : true,
     },
     {
         path: "/*",
-        component: NotFound
+        component: NotFound,
     },
     {
         path: "/dang-nhap",
-        component: Login
+        component: Login,
     },
     {
         path: "/dang-ky",
-        component: Register
+        component: Register,
     },
     {
         path: "/danh-sach-nhan-vien",
-        component: ListAccount
+        component: ListAccount,
     },
     {
-        path: "/danh-sach-du-an",
-        component: ListDuAn
+        path: "/Dang-ky-moi",
+        component: UserNew,
     },
     {
-        path: "/danh-sach-hoat-dong-du-an",
-        component: ListHdDuAn
+        path: "/thong-tin-ca-nhan",
+        component: UpdateProfile,
+        // layout : null ,
+    },
+    {
+        path: "/doi-mat-khau",
+        component: ChangePassword,
+        // layout : NaviLayout
     },
 ]
 

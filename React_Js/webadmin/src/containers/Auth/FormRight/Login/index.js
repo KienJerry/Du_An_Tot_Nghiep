@@ -3,7 +3,7 @@ import { Button, Form, Input, Checkbox } from 'antd';
 import React, { useState, useReducer, useEffect } from 'react';
 import 'antd/dist/antd.css';
 import { Validate_Email, Validate_Password, } from '../../../../components/Validate/CheckValidate';
-import { DATE, TIME, } from '../../../../components/DateTime/DateTime';
+import { DATE_TIME } from '../../../../components/DateTime/DateTime';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { WarningCaptcha } from '../../../../components/Message/Warning';
 import { Link } from 'react-router-dom';
@@ -36,7 +36,7 @@ function LoginRight() {
             WarningCaptcha();
             return false;
         }
-        values.dateTime = TIME + "_" + DATE;
+        values.dateTime = DATE_TIME;
 
         axios.post(API_LOGIN, values)
             .then(response => {

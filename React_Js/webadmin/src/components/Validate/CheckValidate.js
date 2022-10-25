@@ -1,4 +1,4 @@
-const numbers = /^[0][0-9]{9,12}$/g;
+const numbers = /^(09|03|05|07|08|84)[0-9]{8,10}$/g;
 const passwordRegex = /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/;
 const FormatName = /^[a-z A-Z ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{8,}$/i;
 
@@ -64,6 +64,21 @@ export const Validate_Re_Password =[
       }),
 ]
 
+export const Validate_Re_Password_Change =[
+    {
+        required: true,
+        message: 'Nhập lại mật khẩu không được bỏ trống !'
+    },
+    ({ getFieldValue }) => ({
+        validator(rule, value) {
+          if (!value || getFieldValue('passwordNew') === value) {
+            return Promise.resolve();
+          }
+          return Promise.reject('Nhập lại mật khẩu không chính xác !');
+        },
+      }),
+]
+
 export const Validate_Checker =[
     {
         required: true,
@@ -77,5 +92,26 @@ export const Validate_Captcha =[
         required: true,
         type: "boolean",
         message: 'Captcha không được bỏ trống !'
+    },
+]
+
+export const Validate_Gender =[
+    {
+        required: true,
+        message: 'Giới tính không được bỏ trống !'
+    },
+]
+
+export const Validate_Address =[
+    {
+        required: true,
+        message: 'Địa chỉ không được bỏ trống !'
+    },
+]
+
+export const Validate_Date =[
+    {
+        required: true,
+        message: 'Ngày sinh không được bỏ trống !'
     },
 ]

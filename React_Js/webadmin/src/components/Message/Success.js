@@ -16,6 +16,20 @@ export const SuccessRegister = () => {
   }, 1000);
 };
 
+export const SuccessSetpass = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Đổi mật khẩu thành công !',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
 export const SuccessForgotPw = () => {
   message.loading({
     content: 'Loading...',

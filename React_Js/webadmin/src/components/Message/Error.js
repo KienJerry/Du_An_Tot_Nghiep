@@ -57,6 +57,20 @@ export const ErrorAccountBan = () => {
   }, 1000);
 };
 
+export const ErrorAccountPassFalse = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Thất bại ! Mật khẩu không chính xác',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
 export const ErrorAccountLOCK = () => {
   message.loading({
     content: 'Loading...',
@@ -65,6 +79,20 @@ export const ErrorAccountLOCK = () => {
   setTimeout(() => {
     message.error({
       content: 'Thất bại ! Tài khoản này chưa được duyệt. Vui lòng liên hệ Admin để duyệt',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
+export const ErrorFALSE = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Thất bại !',
       key,
       duration: 2,
     });
