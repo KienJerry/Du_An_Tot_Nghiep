@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect, useState } from "react";
 import { SendOutlined, MoreOutlined, } from "@ant-design/icons";
 import { suffix, itemRender } from '../../../../components/Pagination/pagination';
+import { List_staff } from '../../../../components/Array_List/arrList'
 import { List } from '../../../../Reducer/InitReducer/Staff/ListStaff';
 import { getListStaffs } from '../../../../Reducer/Reducers/Staff/listStaff';
 import { getStaff } from '../../../../Reducer/Fetch_API/getlistStaff';
@@ -16,6 +17,7 @@ function App() {
     all: [],
     total: 0,
   });
+
   useEffect(() => {
     getStaff(dispatch);
   }, [])
@@ -23,7 +25,7 @@ function App() {
     { state.all && setPag(state) }
   }, [state])
 
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) => getStaff(dispatch , value);
 
   const pagenumberPagination = (page, pageSize) => {
     const start = (page - 1) * pageSize;
@@ -56,20 +58,11 @@ function App() {
         <table className="table table-data2">
           <thead>
             <tr>
-              <th>
-                <label className="au-checkbox">
-                  <input type="checkbox" />
-                  <span className="au-checkmark"></span>
-                </label>
-              </th>
-              <th>Tên nhân viên</th>
-              <th>Ảnh nhân viên</th>
-              <th>Email</th>
-              <th>Số điện thoại</th>
-              <th>Năm sinh</th>
-              <th>Giới tính</th>
-              <th>Chức Vụ</th>
-              <th></th>
+              {List_staff.map((index, value) => {
+                return (
+                  <th key={value}>{index.name}</th>
+                )
+              })}
             </tr>
           </thead>
           {pag.show && pag.show.map((value, index) => {

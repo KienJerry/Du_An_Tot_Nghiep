@@ -285,6 +285,19 @@ app.post("/doi-mat-khau", (req, res) => {
     }
   });
 })
+//Search nhân viên 
+app.post('/search-staff', function (req, res) {
+  var sql = "SELECT * FROM account WHERE email LIKE '" + req.body.name + `%` + "' or ten LIKE '" + req.body.name + `%` + "' or gioitinh LIKE '" + req.body.name + `%` + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    }else{
+      res.send({ success: false, message: "False!" });
+    }
+  })
+});
 
 
 //Phần báo cáo

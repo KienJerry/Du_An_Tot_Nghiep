@@ -32,10 +32,23 @@
     display: flex;
     justify-content: end; 
     padding: 0 30px 10px 0;
+    @media only screen and (max-width: 600px){
+        display: block;
+    }
     .type-input{
         padding-right: 20px;
     }
     .btn-success{
         margin-right: 20px;
+        @media only screen and (max-width: 600px){
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+    }
+    .btn-warning{
+        @media only screen and (max-width: 600px){
+            margin-top: 20px;
+            margin-right: 20px;
+        }
     }
 }
