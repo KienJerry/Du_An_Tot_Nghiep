@@ -5,6 +5,7 @@ import {
   FundProjectionScreenOutlined,
   OrderedListOutlined
 } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 function getItem(label, key, icon, children) {
   return {
@@ -21,8 +22,8 @@ export const items_admin = [
     getItem('Đăng Ký Mới', '3'),
   ]),
   getItem('Dự Án', 'sub1', <FundProjectionScreenOutlined />, [
-    getItem('Danh Sách Dự Án', '4'),
-    getItem('Hoạt Động Dự Án', '5'),
+    getItem(<Link to={"/danh-sach-du-an"}>Danh Sách Dự Án</Link>,'4'),
+    getItem(<Link to={"/danh-sach-hoat-dong-du-an"}>Hoạt Động Dự Án</Link>, '5'),
   ]),
   getItem('Quản Lý', 'sub2', <OrderedListOutlined />, [
     getItem('Quản Lý Chấm Công', '6'), 

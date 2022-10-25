@@ -21,7 +21,7 @@ function getItem(label, key, icon, children) {
     label,
   };
 }
-// const items = [
+ 
 //   UserOutlined,
 //   VideoCameraOutlined,
 //   UploadOutlined,
@@ -57,7 +57,7 @@ const items = [
   getItem('Files', '9', <VideoCameraOutlined />),
 ];
 
-export default function HOME() {
+export default function DanhSachDuAn() {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout hasSider>

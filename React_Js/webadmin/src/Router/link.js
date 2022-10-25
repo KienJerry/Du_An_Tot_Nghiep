@@ -5,6 +5,8 @@ import Home from '../containers/Home/HomePage';
 import Admin from '../containers/Admin/HomePage/index';
 import unAuth from '../containers/unAuth/index';
 import ListAccount from '../containers/Admin/Account/list_account'
+import ListDuAn from'../containers/Admin/PagesAll/DanhSachDuAn/List_DuAn'
+import ListHdDuAn from'../containers/Admin/PagesAll/HoatDongDuAn/List_HdDuAn'
 
 const publicRouter = [
     {
@@ -23,6 +25,7 @@ const publicRouter = [
         path: "/dang-ky",
         component: Register
     },
+
 ]
 
 const AdminRoute = [
@@ -45,6 +48,14 @@ const AdminRoute = [
     {
         path: "/danh-sach-nhan-vien",
         component: ListAccount
+    },
+    {
+        path: "/danh-sach-du-an",
+        component: ListDuAn
+    },
+    {
+        path: "/danh-sach-hoat-dong-du-an",
+        component: ListHdDuAn
     },
 ]
 

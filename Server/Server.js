@@ -25,7 +25,7 @@ var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: 'du_an_tot_nghiep',
+  database: 'du_an_tot_nghiep1',
 });
 con.connect(function (err) {
   if (err) throw err;
@@ -258,8 +258,92 @@ app.get('/showtaskmission', function (req, res) {
     res.send(result);
   });
 });
+//thêm C.Việc
+app.post('/addmission', (req, res) => {
+  var sql = "insert into congviec ( tencongviec,nhanvien,vaitro,hoatdong,thoigianhoanthanh,ghichu) values('" + req.body.tencongviec + "','" + req.body.nhanvien + "','" + req.body.vaitro + "','" + req.body.hoatdong + "','" + req.body.thoigianhoanthanh + "','" + req.body.ghichu + "');";
+  console.log(sql)
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    if (result.affectedRows == 1) {
+      res.send("ok")
+    }
+  });
+})
+// Xóa C.Việc
+app.post('/deleteMission', (req, res) => {
+  var idXoaa = req.body.id;
+  console.log(idXoaa);
+  var sql = "DELETE FROM congviec WHERE id =" + idXoaa + "";
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    if (result === "ok" || result.affectedRows === 1) {
+      // var fs = require("fs");
+      // var filePath = "./Images/"+tenhinhanh+"";
+      // fs.unlink(filePath, deleteFileCallback);
+      // function deleteFileCallback(error) {
+      //   if (error) {
+      //     console.log("Error in dleting file");
+      //     console.log(error.message);
+      //   } else {
+      //     console.log("Deleted Successfully...");
+      //   }
+      // }
+      res.send("ok");
+    }
+  });
+})
 
 
+
+
+// //lay dự án update
+// app.get("/layeditsanpham/:id", function (req, res) {
+//   var page = req.params.id;
+
+//   var sql = "SELECT * FROM duan WHERE id = " + page;
+//   con.query(sql, function (err, result, fields) {
+//     if (err) throw err;
+//     // console.log(result);
+
+//     res.send(result);
+//   });
+// });
+
+// // Sửa dự án
+// app.post('/updateDuan', (req, res) => {
+//   const idduan = req.body.idduan;
+//   const tenduan = req.body.tenduan;
+//   const tennhanvien = req.body.tennhanvien;
+//   const ghichu = req.body.ghichu;
+
+
+//   if (trong === 1 ) {
+//     var sql = "UPDATE duan SET tenduan='" + tenduan + "',tennhanvien='" + tennhanvien + "',ghichu='" + ghichu + "' WHERE idduan = " + idduan + "";
+  
+//    console.log(sql);
+//     con.query(sql, function (err, result, fields) {
+//       if (err) throw err;
+//           if (error) {
+//             console.log("Error in dleting file");
+//             console.log(error.message);
+//           } else {
+//             console.log("Deleted Successfully...");
+//             res.send("ok");
+//           }
+    
+//     });
+//   } else if (trong === 0) {
+//     var sql = "UPDATE duan SET tenduan='" + tenduan + "',tennhanvien='" + tennhanvien + "',ghichu='" + ghichu + "' WHERE idduan = " + idduan + "";
+//     con.query(sql, function (err, result, fields) {
+//       if (err) throw err;
+//       if (result === "ok") {
+//         res.send("ok");
+//       }
+//       res.send("ok");
+//     });
+//   }
+
+// })
 
 
 
