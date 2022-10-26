@@ -59,3 +59,17 @@ export const SuccessLogin = () => {
     key,
   });
 };
+
+export const SuccessRegisterStaff = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Tạo Tài Khoản Thành Công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};

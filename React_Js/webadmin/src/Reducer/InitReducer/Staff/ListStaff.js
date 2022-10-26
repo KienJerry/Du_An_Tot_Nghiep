@@ -3,3 +3,5 @@ export const List = {
     all: [],
     total: 0,
 }
+
+export const AddAcountUser = {}

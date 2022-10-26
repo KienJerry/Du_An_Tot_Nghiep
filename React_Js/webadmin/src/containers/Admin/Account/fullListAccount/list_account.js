@@ -6,11 +6,13 @@ import { List } from '../../../../Reducer/InitReducer/Staff/ListStaff';
 import { getListStaffs } from '../../../../Reducer/Reducers/Staff/listStaff';
 import { getStaff } from '../../../../Reducer/Fetch_API/getlistStaff';
 import { Image, Empty, Breadcrumb, Pagination, Input, Space } from 'antd';
+import AddAccountUser from "./Add_account_user/addAccountUser";
 import { API_GET_URL_IMAGE } from '../../../../api/index';
 import './list_account.scss';
 
 const { Search } = Input;
 function App() {
+  const [modalAdd , setModalAdd] = useState(false)
   const [state, dispatch] = useReducer(getListStaffs, List);
   const [pag, setPag] = useState({
     show: [],
@@ -51,7 +53,7 @@ function App() {
             />
           </Space>
         </div>
-        <button type="button" class="btn btn-success"> <i class="bi bi-plus"></i>Thêm nhân viên</button>
+        <button type="button" class="btn btn-success" onClick={() => setModalAdd(true)}> <i class="bi bi-plus"></i>Thêm nhân viên</button>
         <button type="button" class="btn btn-warning" onClick={() => window.location.reload()}><i class="bi bi-arrow-clockwise"></i>Làm mới trang</button>
       </div>
       <div className="table-responsive table-responsive-data2" >
@@ -123,6 +125,7 @@ function App() {
           />
         </div>
       </div>
+      {modalAdd && <AddAccountUser setModalAdd={setModalAdd} modalAdd={modalAdd} />}
     </>
   );
 }

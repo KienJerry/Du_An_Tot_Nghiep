@@ -10,3 +10,4 @@ export const API_GET_URL_IMAGE = api + 'images/';
 export const API_SET_PASSWORD = api + 'doi-mat-khau';
 export const API_GET_LIST_ACCOUNT = api + 'showaccount';
 export const API_SET_SEARCH_STAFF = api + 'search-staff';
+export const API_SET_ACCOUNT_STAFF = api + 'dangkyStaff';

@@ -298,6 +298,25 @@ app.post('/search-staff', function (req, res) {
     }
   })
 });
+//Add User New Admin 
+app.post("/dangkyStaff", (req, res) => {
+  const body = req.body;
+  var sql = "SELECT * FROM account WHERE email= '" + body.emailstaff + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    }
+    if (result.length > 0) {
+      res.send({ success: false, message:'Da_Co_tai_Khoan' });
+    } else {
+      res.send({ success: true });
+      var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc , gioitinh) values('" + body.emailstaff + "' ,  '" + body.passwordstaff + "' ,'" + body.namestaff + "' ,'" + body.phonestaff + "' ,'" + body.timeRegister + "','" + '0' + "','" + body.genderstaff + "'  );"
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+      });
+    }
+  });
+});
 
 
 //Phần báo cáo
