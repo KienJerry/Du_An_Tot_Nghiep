@@ -7,12 +7,15 @@ import { getListStaffs } from '../../../../Reducer/Reducers/Staff/listStaff';
 import { getStaff } from '../../../../Reducer/Fetch_API/getlistStaff';
 import { Image, Empty, Breadcrumb, Pagination, Input, Space } from 'antd';
 import AddAccountUser from "./Add_account_user/addAccountUser";
+import SeenAccountStaff from "./SeenAccountStaff/SeenAccountStaff";
 import { API_GET_URL_IMAGE } from '../../../../api/index';
 import './list_account.scss';
 
 const { Search } = Input;
 function App() {
-  const [modalAdd , setModalAdd] = useState(false)
+  const [modalAdd , setModalAdd] = useState(false);
+  const [seenModal , setSeenModal] = useState(false);
+  const [list , setList] = useState({});
   const [state, dispatch] = useReducer(getListStaffs, List);
   const [pag, setPag] = useState({
     show: [],
@@ -33,6 +36,11 @@ function App() {
     const start = (page - 1) * pageSize;
     const end = page * pageSize;
     state.all && setPag({ show: pag.all.slice(start, end), all: state.all, total: state.total });
+  }
+
+  const onChangeSeen = (value) => {
+    setList(value)
+    setSeenModal(true)
   }
 
   return (
@@ -95,7 +103,7 @@ function App() {
                   <td >Đang cập nhật</td>
                   <td>
                     <div className="table-data-feature">
-                      <button className="item" data-toggle="tooltip" data-placement="top" title="Xem chi tiết">
+                      <button className="item" data-toggle="tooltip" data-placement="top" title="Xem chi tiết" onClick={() => onChangeSeen(value)}>
                         <SendOutlined style={{ color: 'blue' }} />
                       </button>
                       <button className="item" data-toggle="tooltip" data-placement="top" title="Menu">
@@ -126,6 +134,7 @@ function App() {
         </div>
       </div>
       {modalAdd && <AddAccountUser setModalAdd={setModalAdd} modalAdd={modalAdd} />}
+      {seenModal && <SeenAccountStaff setSeenModal={setSeenModal} seenModal={seenModal} list={list}/>}
     </>
   );
 }
