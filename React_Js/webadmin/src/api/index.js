@@ -7,6 +7,7 @@ export const API_GET_ACCOUNT = api + 'getaccountme';
 export const API_SET_AVATAR_ACCOUNT = api + getAccountMe + 'edituploadfile';
 export const API_SET_DEL_AVATAR_ACCOUNT = api + getAccountMe + 'deleteuploadfile';
 export const API_GET_URL_IMAGE = api + 'images/';
+export const API_GET_URL_IMAGE_USER_OUTLINE = api + 'images/user.png';
 export const API_SET_PASSWORD = api + 'doi-mat-khau';
 export const API_GET_LIST_ACCOUNT = api + 'showaccount';
 export const API_SET_SEARCH_STAFF = api + 'search-staff';

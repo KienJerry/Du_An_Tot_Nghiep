@@ -40,13 +40,24 @@ export const setAccountUserStaff = (dispatch, values) => {
         .then(response => {
             {
                 response.data.success === false ?
-                dispatch(setAccountFalse(response.data.success))
-                :
-                dispatch(setAccountSuccess(response.data))
+                    dispatch(setAccountFalse(response.data.success))
+                    :
+                    dispatch(setAccountSuccess(response.data))
             }
             return response.data;
         })
         .catch(error => {
             dispatch(setAccountError(error))
         });
+}
+
+export const BanAccUserStaff = async() => {
+    await axios.get(API_GET_LIST_ACCOUNT)
+    .then(response => {
+        console.log(response.data);
+        return response.data;
+    })
+    .catch(error => {
+        console.log(error);
+    });
 }

@@ -5,17 +5,17 @@ import { List_staff } from '../../../../components/Array_List/arrList'
 import { List } from '../../../../Reducer/InitReducer/Staff/ListStaff';
 import { getListStaffs } from '../../../../Reducer/Reducers/Staff/listStaff';
 import { getStaff } from '../../../../Reducer/Fetch_API/getlistStaff';
-import { Image, Empty, Breadcrumb, Pagination, Input, Space } from 'antd';
+import { Image, Empty, Breadcrumb, Pagination, Input, Space, Dropdown, } from 'antd';
 import AddAccountUser from "./Add_account_user/addAccountUser";
 import SeenAccountStaff from "./SeenAccountStaff/SeenAccountStaff";
 import { API_GET_URL_IMAGE } from '../../../../api/index';
 import './list_account.scss';
-
+import { menu } from '../../../../components/Menu/index_Menu';
 const { Search } = Input;
 function App() {
-  const [modalAdd , setModalAdd] = useState(false);
-  const [seenModal , setSeenModal] = useState(false);
-  const [list , setList] = useState({});
+  const [modalAdd, setModalAdd] = useState(false);
+  const [seenModal, setSeenModal] = useState(false);
+  const [list, setList] = useState({});
   const [state, dispatch] = useReducer(getListStaffs, List);
   const [pag, setPag] = useState({
     show: [],
@@ -30,7 +30,7 @@ function App() {
     { state.all && setPag(state) }
   }, [state])
 
-  const onSearch = (value) => getStaff(dispatch , value);
+  const onSearch = (value) => getStaff(dispatch, value);
 
   const pagenumberPagination = (page, pageSize) => {
     const start = (page - 1) * pageSize;
@@ -61,8 +61,8 @@ function App() {
             />
           </Space>
         </div>
-        <button type="button" class="btn btn-success" onClick={() => setModalAdd(true)}> <i class="bi bi-plus"></i>Thêm nhân viên</button>
-        <button type="button" class="btn btn-warning" onClick={() => window.location.reload()}><i class="bi bi-arrow-clockwise"></i>Làm mới trang</button>
+        <button type="button" className="btn btn-success" onClick={() => setModalAdd(true)}> <i className="bi bi-plus"></i>Thêm nhân viên</button>
+        <button type="button" className="btn btn-warning" onClick={() => window.location.reload()}><i className="bi bi-arrow-clockwise"></i>Làm mới trang</button>
       </div>
       <div className="table-responsive table-responsive-data2" >
         <table className="table table-data2">
@@ -106,9 +106,11 @@ function App() {
                       <button className="item" data-toggle="tooltip" data-placement="top" title="Xem chi tiết" onClick={() => onChangeSeen(value)}>
                         <SendOutlined style={{ color: 'blue' }} />
                       </button>
-                      <button className="item" data-toggle="tooltip" data-placement="top" title="Menu">
-                        <MoreOutlined />
-                      </button>
+                      <Dropdown overlay={menu} trigger={['click']} arrow={{ pointAtCenter: true,}}>
+                        <button className="item" data-toggle="tooltip" data-placement="top" title="Menu">
+                          <MoreOutlined />
+                        </button>
+                      </Dropdown>
                     </div>
                   </td>
                 </tr>
@@ -134,7 +136,7 @@ function App() {
         </div>
       </div>
       {modalAdd && <AddAccountUser setModalAdd={setModalAdd} modalAdd={modalAdd} />}
-      {seenModal && <SeenAccountStaff setSeenModal={setSeenModal} seenModal={seenModal} list={list}/>}
+      {seenModal && <SeenAccountStaff setSeenModal={setSeenModal} seenModal={seenModal} list={list} />}
     </>
   );
 }

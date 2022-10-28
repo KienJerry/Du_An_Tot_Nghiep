@@ -61,8 +61,8 @@ function App() {
   }
 
   return (
-    <div class="box-chat">
-      <div class="box-chat_message">
+    <div className="box-chat">
+      <div className="box-chat_message">
         abc
       {renderMess}
       <div style={{ float:"left", clear: "both" }}
@@ -70,7 +70,7 @@ function App() {
         </div>
       </div>
 
-      <div class="send-box">
+      <div className="send-box">
           <textarea 
             value={message}  
             onKeyDown={onEnterPress}
