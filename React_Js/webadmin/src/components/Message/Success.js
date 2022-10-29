@@ -73,3 +73,17 @@ export const SuccessRegisterStaff = () => {
     });
   }, 1000);
 };
+
+export const SuccessNewAccountCancel = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Huỷ yêu cầu thành công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};

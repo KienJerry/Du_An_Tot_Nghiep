@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 
 //Socket.io
 const http = require('http');
+const { log } = require('console');
 const server = http.createServer(app);
 // const {Server } = require('socket.io');
 
@@ -293,7 +294,7 @@ app.post('/search-staff', function (req, res) {
       res.send({ success: false, message: "Database không có kết nối!" });
     } if (result.length > 0) {
       res.send(result);
-    }else{
+    } else {
       res.send({ success: false, message: "False!" });
     }
   })
@@ -307,7 +308,7 @@ app.post("/dangkyStaff", (req, res) => {
       res.send({ success: false, message: "Database không có kết nối!" });
     }
     if (result.length > 0) {
-      res.send({ success: false, message:'Da_Co_tai_Khoan' });
+      res.send({ success: false, message: 'Da_Co_tai_Khoan' });
     } else {
       res.send({ success: true });
       var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc , gioitinh) values('" + body.emailstaff + "' ,  '" + body.passwordstaff + "' ,'" + body.namestaff + "' ,'" + body.phonestaff + "' ,'" + body.timeRegister + "','" + '0' + "','" + body.genderstaff + "'  );"
@@ -316,6 +317,78 @@ app.post("/dangkyStaff", (req, res) => {
       });
     }
   });
+});
+//Ban account 
+app.post("/ban-account", (req, res) => {
+  const body = req.body;
+  console.log(body)
+  // var sql = "SELECT * FROM account WHERE email= '" + body.emailstaff + "' ";
+  // con.query(sql, function (err, result, fields) {
+  //   if (err) {
+  //     res.send({ success: false, message: "Database không có kết nối!" });
+  //   }
+  //   if (result.length > 0) {
+  //     res.send({ success: false, message:'Da_Co_tai_Khoan' });
+  //   } else {
+  //     res.send({ success: true });
+  //     var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc , gioitinh) values('" + body.emailstaff + "' ,  '" + body.passwordstaff + "' ,'" + body.namestaff + "' ,'" + body.phonestaff + "' ,'" + body.timeRegister + "','" + '0' + "','" + body.genderstaff + "'  );"
+  //     con.query(sql, function (err, result, fields) {
+  //       if (err) throw err;
+  //     });
+  //   }
+  // });
+});
+
+//Newaccount
+app.post('/new-account-staff', function (req, res) {
+  var sql = "SELECT * FROM account WHERE lockacc LIKE '" + '1' + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
+    }
+  })
+});
+// Chấp thuận tài khoản
+app.post('/new-account-agr', function (req, res) {
+  var sql = "SELECT * FROM account WHERE email LIKE '" + req.body.email + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      var sql = "UPDATE account SET lockacc = '" + '0' + "' where email = '" + req.body.email + "'";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        if (result.affectedRows == 1) {
+          res.send({ success: true, message: "Thanh_Cong!" });
+        }
+      });
+    } else {
+      res.send({ success: false, message: "Khong_tim_thay_tai_khoan!" });
+    }
+  })
+});
+// Huỷ tài khoản
+app.post('/new-account-cancel', function (req, res) {
+  var sql = "SELECT * FROM account WHERE email LIKE '" + req.body.email + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      var sql = "delete from account where email = '" + req.body.email + "' ";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        if (result.affectedRows == 1) {
+          res.send({ success: true, message: "Thanh_Cong!" });
+        }
+      });
+    } else {
+      res.send({ success: false, message: "Khong_ton_tai_tai_khoan!" });
+    }
+  })
 });
 
 

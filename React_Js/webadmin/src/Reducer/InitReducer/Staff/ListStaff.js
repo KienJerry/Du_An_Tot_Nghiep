@@ -5,3 +5,5 @@ export const List = {
 }
 
 export const AddAcountUser = {}
+export const getAccountNew = {}
+export const setAccountNewAgree = {}

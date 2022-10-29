@@ -1,4 +1,4 @@
-import { Modal, Form, Input, Avatar, Row, Col,} from 'antd';
+import { Modal, Form, Input, Avatar, Row, Col, } from 'antd';
 import { API_GET_URL_IMAGE, API_GET_URL_IMAGE_USER_OUTLINE } from '../../../../../api/index'
 import React from 'react';
 import './SeenAccountStaff.scss';
@@ -31,28 +31,15 @@ export default function SeenAccountStaff({ setSeenModal, seenModal, list }) {
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Row className='form-col-seen-user'>
-                        <Col lg={11} md={24} sm={24} xs={24}>
-                            <Form.Item
-                                name="imgstaff"
-                            >
-                                <Avatar
-                                    style={{ width: '105px', height: '105px' }}
-                                    shape="square"
-                                    src={!list.image == "" || !list.image == '' || !list.image == null || !list.image == undefined ? API_GET_URL_IMAGE + list.image : API_GET_URL_IMAGE_USER_OUTLINE}
-                                />
-                            </Form.Item>
-                        </Col>
-                        <Col lg={11} md={24} sm={24} xs={24}>
-                            <Form.Item
-                                label="Trạng thái tài khoản"
-                                name="accountstaff"
-                                initialValue={list.lockacc === 0 ? "Bình thường" : list.lockacc === 1 ? "Chưa duyệt" : "Tài khoản bị khoá"}
-                            >
-                                <Input placeholder="Tình trạng tài khoản nhân viên" disabled />
-                            </Form.Item>
-                        </Col>
-                    </Row>
+                    <Form.Item
+                        name="imgstaff"
+                    >
+                        <Avatar
+                            style={{ width: '105px', height: '105px' }}
+                            shape="square"
+                            src={!list.image == "" || !list.image == '' || !list.image == null || !list.image == undefined ? API_GET_URL_IMAGE + list.image : API_GET_URL_IMAGE_USER_OUTLINE}
+                        />
+                    </Form.Item>
                     <Row className='form-col-seen-user'>
                         <Col lg={11} md={24} sm={24} xs={24}>
                             <Form.Item
@@ -125,11 +112,11 @@ export default function SeenAccountStaff({ setSeenModal, seenModal, list }) {
                         </Col>
                         <Col lg={11} md={24} sm={24} xs={24}>
                             <Form.Item
-                                label="Chức vụ nhân viên"
-                                name="positionstaff"
-                                initialValue={list.chucvu || "Nhân viên"}
+                                label="Trạng thái tài khoản"
+                                name="accountstaff"
+                                initialValue={list.lockacc === 0 ? "Bình thường" : list.lockacc === 1 ? "Chưa duyệt" : "Tài khoản bị khoá"}
                             >
-                                <Input placeholder="Chức vụ nhân viên" disabled />
+                                <Input placeholder="Tình trạng tài khoản nhân viên" disabled />
                             </Form.Item>
                         </Col>
                     </Row>

@@ -1,16 +1,16 @@
 import React, { useReducer, useEffect, useState } from "react";
-import { SendOutlined, MoreOutlined, } from "@ant-design/icons";
+import { SendOutlined, MoreOutlined, ApartmentOutlined, LockOutlined, UserSwitchOutlined, UnlockOutlined} from "@ant-design/icons";
 import { suffix, itemRender } from '../../../../components/Pagination/pagination';
 import { List_staff } from '../../../../components/Array_List/arrList'
 import { List } from '../../../../Reducer/InitReducer/Staff/ListStaff';
 import { getListStaffs } from '../../../../Reducer/Reducers/Staff/listStaff';
 import { getStaff } from '../../../../Reducer/Fetch_API/getlistStaff';
-import { Image, Empty, Breadcrumb, Pagination, Input, Space, Dropdown, } from 'antd';
+import { Image, Empty, Breadcrumb, Pagination, Input, Space, Dropdown, Menu } from 'antd';
 import AddAccountUser from "./Add_account_user/addAccountUser";
 import SeenAccountStaff from "./SeenAccountStaff/SeenAccountStaff";
 import { API_GET_URL_IMAGE } from '../../../../api/index';
 import './list_account.scss';
-import { menu } from '../../../../components/Menu/index_Menu';
+import { handleMenuClick } from '../../../../components/Menu/index_Menu';
 const { Search } = Input;
 function App() {
   const [modalAdd, setModalAdd] = useState(false);
@@ -46,7 +46,7 @@ function App() {
   return (
     <>
       <Breadcrumb className='label-breadcrumb'>
-        <Breadcrumb.Item>DANH SÁCH NHÂN VIÊN</Breadcrumb.Item>
+        <Breadcrumb.Item>DANH SÁCH NHÂN VIÊN ({state.all.length} Nhân viên)</Breadcrumb.Item>
       </Breadcrumb>
       <div className="div-right">
         <div className="type-input">
@@ -68,9 +68,9 @@ function App() {
         <table className="table table-data2">
           <thead>
             <tr>
-              {List_staff.map((index, value) => {
+              {List_staff.map((value, index) => {
                 return (
-                  <th key={value}>{index.name}</th>
+                  <th key={index}>{value.name}</th>
                 )
               })}
             </tr>
@@ -100,13 +100,42 @@ function App() {
                   <td>
                     <span className="status--process">{value.gioitinh && value.gioitinh === "1" ? <p style={{ color: 'blue' }}>Nam</p> : value.gioitinh === "2" ? <p style={{ color: '#fd00c6' }}>Nữ</p> : "Khác"}</span>
                   </td>
-                  <td >Đang cập nhật</td>
+                  <td >{value.chucvu === "Giám đốc" ? <span className="giam-doc">Giám đốc</span> : <span>Nhân viên</span>}</td>
                   <td>
                     <div className="table-data-feature">
                       <button className="item" data-toggle="tooltip" data-placement="top" title="Xem chi tiết" onClick={() => onChangeSeen(value)}>
                         <SendOutlined style={{ color: 'blue' }} />
                       </button>
-                      <Dropdown overlay={menu} trigger={['click']} arrow={{ pointAtCenter: true,}}>
+                      <Dropdown overlay={
+                        <Menu
+                          onClick={(e) => handleMenuClick({e , value})}
+                          items={[
+                            {
+                              label: 'Tài khoản',
+                              key: '1',
+                              icon: <UserSwitchOutlined />,
+                              children: [
+                                {
+                                  key: '2',
+                                  label: 'Khoá tài khoản',
+                                  icon: <LockOutlined />,
+                                  danger: true,
+                                },
+                                {
+                                  key: '3',
+                                  label: 'Mở khoá tài khoản',
+                                  icon: <UnlockOutlined />,
+                                },
+                              ],
+                            },
+                            {
+                              label: 'Phân quyền',
+                              key: '4',
+                              icon: <ApartmentOutlined />,
+                            },
+                          ]}
+                        />
+                      } trigger={['click']} arrow={{ pointAtCenter: true, }}>
                         <button className="item" data-toggle="tooltip" data-placement="top" title="Menu">
                           <MoreOutlined />
                         </button>
