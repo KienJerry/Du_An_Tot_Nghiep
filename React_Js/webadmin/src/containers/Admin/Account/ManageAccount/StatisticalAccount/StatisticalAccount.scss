@@ -1,0 +1,10 @@
+.Bg-manageAccountStatistical {
+    height: 500px;
+    overflow: auto;
+    padding: 0 16px;
+    border: 1px solid rgba(140, 140, 140, 0.35);
+
+    .statistical_manage_account {
+        color: red;
+    }
+}

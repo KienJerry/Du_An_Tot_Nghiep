@@ -8,6 +8,7 @@ import ListAccount from '../containers/Admin/Account/fullListAccount/list_accoun
 import UpdateProfile from "../containers/Admin/DropdownShow/UpdateProfile";
 import ChangePassword from "../containers/Admin/DropdownShow/ChangePassword";
 import UserNew from '../containers/Admin/Account/UserNew/userNew';
+import ManageAccount from "../containers/Admin/Account/ManageAccount/ManageAccount";
 import {NaviLayout} from '../containers/Admin';
 
 const publicRouter = [
@@ -65,6 +66,10 @@ const AdminRoute = [
         path: "/doi-mat-khau",
         component: ChangePassword,
         // layout : NaviLayout
+    },
+    {
+        path: "/quan-ly-tai-khoan",
+        component: ManageAccount,
     },
 ]
 
