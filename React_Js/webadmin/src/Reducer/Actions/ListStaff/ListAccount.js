@@ -1,6 +1,6 @@
 import { GET_LIST_ACCOUNT_STAFF, GET_LIST_ACCOUNT_STAFF_ERR, SET_ACCOUNT_STAFF_USER_SUCCESS, SET_ACCOUNT_STAFF_USER_FALSE, SET_ACCOUNT_STAFF_USER_ERROR,
     GET_NEW_ACCOUNT_STAFF_USER_SUCC, GET_NEW_ACCOUNT_STAFF_USER_FALSE, GET_NEW_ACCOUNT_STAFF_USER_ERROR, SET_NEW_ACCOUNT_STAFF_USER_SUCCESS , SET_NEW_ACCOUNT_STAFF_USER_ERROR,
-    SET_NEW_ACCOUNT_STAFF_USER_CANCEL} from "../../Constants/listConstants";
+    SET_NEW_ACCOUNT_STAFF_USER_CANCEL, SET_BAN_ACCOUNT_SUCCESS, SET_BAN_ACCOUNT_ERROR, SET_DEF_BAN_ACCOUNT_SUCCESS, SET_POSITION_ACCOUNT_SUCCESS} from "../../Constants/listConstants";
 
 export const getListAccountSuc = (payload) => {
     return {
@@ -71,6 +71,33 @@ export const setAccountNewStaffCancel = (payload) => {
 export const setAccountNewStaffErr = (payload) => {
     return {
         type: SET_NEW_ACCOUNT_STAFF_USER_ERROR,
+        payload: payload
+    }
+}
+
+export const setAccountBanSuc = (payload) => {
+    return {
+        type: SET_BAN_ACCOUNT_SUCCESS,
+        payload: payload
+    }
+}
+
+export const setAccountBanErr = (payload) => {
+    return {
+        type: SET_BAN_ACCOUNT_ERROR,
+        payload: payload
+    }
+}
+
+export const setAccountDefaulbanSuc = (payload) => {
+    return {
+        type: SET_DEF_BAN_ACCOUNT_SUCCESS,
+        payload: payload
+    }
+}
+export const setPositionAccountSuc = (payload) => {
+    return {
+        type: SET_POSITION_ACCOUNT_SUCCESS,
         payload: payload
     }
 }

@@ -1,11 +1,11 @@
 import {
     GET_LIST_ACCOUNT_STAFF, GET_LIST_ACCOUNT_STAFF_ERR, SET_ACCOUNT_STAFF_USER_SUCCESS, SET_ACCOUNT_STAFF_USER_FALSE, SET_ACCOUNT_STAFF_USER_ERROR,
     GET_NEW_ACCOUNT_STAFF_USER_SUCC, GET_NEW_ACCOUNT_STAFF_USER_FALSE, GET_NEW_ACCOUNT_STAFF_USER_ERROR, SET_NEW_ACCOUNT_STAFF_USER_SUCCESS, SET_NEW_ACCOUNT_STAFF_USER_ERROR,
-    SET_NEW_ACCOUNT_STAFF_USER_CANCEL
+    SET_NEW_ACCOUNT_STAFF_USER_CANCEL, SET_BAN_ACCOUNT_SUCCESS, SET_BAN_ACCOUNT_ERROR, SET_DEF_BAN_ACCOUNT_SUCCESS, SET_POSITION_ACCOUNT_SUCCESS
 } from '../../Constants/listConstants';
 import { WarningRegister } from '../../../components/Message/Warning';
 import { ErrorRegister, ErrorFALSE } from '../../../components/Message/Error';
-import { SuccessRegisterStaff, SuccessRegister, SuccessNewAccountCancel } from '../../../components/Message/Success';
+import { SuccessRegisterStaff, SuccessRegister, SuccessNewAccountCancel, SuccessSetUnLockAccount, SuccessSetLockAccount, SuccessPositionAccount } from '../../../components/Message/Success';
 
 export const getListStaffs = (state, action) => {
     switch (action.type) {
@@ -91,6 +91,36 @@ export const setListDataAccountNewAgr = (state, action) => {
             return {
                 ...state,
                 all: {}
+            }
+        default:
+            return { ...state };
+    }
+}
+
+export const setBanAccountStaff = (state, action) => {
+    switch (action.type) {
+        case SET_BAN_ACCOUNT_SUCCESS:
+            SuccessSetLockAccount();
+            return {
+                ...state,
+                all: action.payload,
+            }
+        case SET_DEF_BAN_ACCOUNT_SUCCESS:
+            SuccessSetUnLockAccount();
+            return {
+                ...state,
+                all: action.payload,
+            }
+        case SET_POSITION_ACCOUNT_SUCCESS:
+            SuccessPositionAccount();
+            return {
+                ...state,
+                all: action.payload,
+            }
+        case SET_BAN_ACCOUNT_ERROR:
+            WarningRegister();
+            return {
+                ...state,
             }
         default:
             return { ...state };

@@ -321,22 +321,62 @@ app.post("/dangkyStaff", (req, res) => {
 //Ban account 
 app.post("/ban-account", (req, res) => {
   const body = req.body;
-  console.log(body)
-  // var sql = "SELECT * FROM account WHERE email= '" + body.emailstaff + "' ";
-  // con.query(sql, function (err, result, fields) {
-  //   if (err) {
-  //     res.send({ success: false, message: "Database không có kết nối!" });
-  //   }
-  //   if (result.length > 0) {
-  //     res.send({ success: false, message:'Da_Co_tai_Khoan' });
-  //   } else {
-  //     res.send({ success: true });
-  //     var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc , gioitinh) values('" + body.emailstaff + "' ,  '" + body.passwordstaff + "' ,'" + body.namestaff + "' ,'" + body.phonestaff + "' ,'" + body.timeRegister + "','" + '0' + "','" + body.genderstaff + "'  );"
-  //     con.query(sql, function (err, result, fields) {
-  //       if (err) throw err;
-  //     });
-  //   }
-  // });
+  var sql = "SELECT * FROM account WHERE email= '" + body.email + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      var sql = "UPDATE account SET lockacc = '" + '9999' + "' where email = '" + body.email + "'";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        if (result.affectedRows == 1) {
+          res.send({ success: true, message: "Thanh_Cong!" });
+        }
+      });
+    } else {
+      res.send({ success: false, message: "Khong_tim_thay_tai_khoan!" });
+    }
+  })
+});
+//UnBan account
+app.post("/un-ban-account", (req, res) => {
+  const body = req.body;
+  var sql = "SELECT * FROM account WHERE email= '" + body.email + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      var sql = "UPDATE account SET lockacc = '" + '0' + "' where email = '" + body.email + "'";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        if (result.affectedRows == 1) {
+          res.send({ success: true, message: "Thanh_Cong!" });
+        }
+      });
+    } else {
+      res.send({ success: false, message: "Khong_tim_thay_tai_khoan!" });
+    }
+  })
+});
+//UnBan account
+app.post("/update-quyen-account", (req, res) => {
+  const body = req.body;
+  var sql = "SELECT * FROM account WHERE email= '" + body.email + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      var sql = "UPDATE account SET chucvu = '" + body.keychucvu + "' where email = '" + body.email + "'";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        if (result.affectedRows == 1) {
+          res.send({ success: true, message: "Thanh_Cong!" });
+        }
+      });
+    } else {
+      res.send({ success: false, message: "Khong_tim_thay_tai_khoan!" });
+    }
+  })
 });
 
 //Newaccount
