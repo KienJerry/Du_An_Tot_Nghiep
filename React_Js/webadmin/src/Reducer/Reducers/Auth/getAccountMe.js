@@ -1,4 +1,4 @@
-import { FETCH_ACCOUNT_ME_SUCCESS, FETCH_ACCOUNT_ME_ERROR, SET_AVATAR_ACCOUNT, ERR_AVATAR_ACCOUNT } from '../../Constants/listConstants';
+import { FETCH_ACCOUNT_ME_SUCCESS, FETCH_ACCOUNT_ME_ERROR, SET_AVATAR_ACCOUNT, ERR_AVATAR_ACCOUNT, GET_AVATAR_ACCOUNT_SUCC , GET_AVATAR_ACCOUNT_ERR } from '../../Constants/listConstants';
 import { SuccessRegister } from '../../../components/Message/Success';
 import {WarningRegister} from '../../../components/Message/Warning';
 import {ErrorFALSE} from '../../../components/Message/Error';
@@ -29,6 +29,21 @@ export const setProductAccountAvatar = (state , action) => {
             }
         case ERR_AVATAR_ACCOUNT:
             ErrorFALSE();
+            return [...state]
+        default: 
+        return [...state];
+    }
+}
+
+export const getAccountAvatar = (state , action) => {
+    // console.log([action.payload]);
+    switch(action.type) {
+        case GET_AVATAR_ACCOUNT_SUCC:
+            return {
+                ...state,
+                account: [action.payload]
+            }
+        case GET_AVATAR_ACCOUNT_ERR:
             return [...state]
         default: 
         return [...state];

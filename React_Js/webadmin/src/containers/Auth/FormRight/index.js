@@ -11,7 +11,7 @@ function LoginRight() {
         <div className="Background-full-right">
             <div className='content-list'>
                 {location.pathname === "/dang-nhap" ?
-                    <h2>Đăng Nhập Tài Khoản Ứng Viên</h2>
+                    <h2>Đăng Nhập Tài Khoản Nhân Viên</h2>
                     :
                     <h2>Đăng Ký Tài Khoản Ứng Viên</h2>
                 }

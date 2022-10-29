@@ -64,6 +64,21 @@ export const Validate_Re_Password =[
       }),
 ]
 
+export const Validate_Re_Password_Change =[
+    {
+        required: true,
+        message: 'Nhập lại mật khẩu không được bỏ trống !'
+    },
+    ({ getFieldValue }) => ({
+        validator(rule, value) {
+          if (!value || getFieldValue('passwordNew') === value) {
+            return Promise.resolve();
+          }
+          return Promise.reject('Nhập lại mật khẩu không chính xác !');
+        },
+      }),
+]
+
 export const Validate_Checker =[
     {
         required: true,

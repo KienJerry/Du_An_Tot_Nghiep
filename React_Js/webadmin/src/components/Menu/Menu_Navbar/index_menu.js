@@ -1,32 +1,31 @@
 import { Menu } from 'antd';
-import { UserOutlined   } from '@ant-design/icons';
-import {
-    Link,
-  } from "react-router-dom";
+import { UserOutlined, UserSwitchOutlined, LogoutOutlined } from '@ant-design/icons';
+import { Link } from "react-router-dom";
+import React from 'react';
 
-const handleMenuClick = (e) => {
+const HandleMenuClick = (e) => {
     const key = e.key;
-    {key === "3" && alert("Đăng xuất")}
+    { key === "3" && localStorage.removeItem("Save_Login") }
 };
 
 export const menu = (
     <Menu
-        onClick={handleMenuClick}
+        onClick={HandleMenuClick}
         items={[
             {
-                label: <Link style={{textDecoration: "none" }} to={"/thong-tin-ca-nhan"}>Thông Tin Cá Nhân</Link>,
+                label: <Link style={{ textDecoration: "none" }} to={"/thong-tin-ca-nhan"}>Thông Tin Cá Nhân</Link>,
                 key: '1',
                 icon: <UserOutlined />,
             },
             {
-                label: <Link style={{textDecoration: "none" }} to={"/doi-mat-khau"}>Đổi mật khẩu</Link>,
+                label: <Link style={{ textDecoration: "none" }} to={"/doi-mat-khau"}>Đổi Mật Khẩu</Link>,
                 key: '2',
-                icon: <UserOutlined />,
+                icon: <UserSwitchOutlined />,
             },
             {
-                label: 'Đăng Xuất',
+                label:<a style={{ textDecoration: "none" }} href="/">Đăng Xuất</a>,
                 key: '3',
-                icon: <UserOutlined />,
+                icon: <LogoutOutlined />,
             },
         ]}
     />

@@ -4,10 +4,11 @@ import Register from "../containers/Auth/Register";
 import Home from '../containers/User/HomePage';
 import Admin from '../containers/Admin/HomePage/index';
 import unAuth from '../containers/Auth/unAuth/index';
-import ListAccount from '../containers/Admin/Account/list_account';
+import ListAccount from '../containers/Admin/Account/fullListAccount/list_account';
 import UpdateProfile from "../containers/Admin/DropdownShow/UpdateProfile";
 import ChangePassword from "../containers/Admin/DropdownShow/ChangePassword";
-import {NaviLayout} from '../containers/Admin'
+import UserNew from '../containers/Admin/Account/UserNew/userNew';
+import {NaviLayout} from '../containers/Admin';
 
 const publicRouter = [
     {
@@ -50,6 +51,10 @@ const AdminRoute = [
     {
         path: "/danh-sach-nhan-vien",
         component: ListAccount,
+    },
+    {
+        path: "/Dang-ky-moi",
+        component: UserNew,
     },
     {
         path: "/thong-tin-ca-nhan",

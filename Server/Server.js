@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 
 //Socket.io
 const http = require('http');
+const { log } = require('console');
 const server = http.createServer(app);
 // const {Server } = require('socket.io');
 
@@ -231,12 +232,29 @@ app.post("/quen-mat-khau", (req, res) => {
 app.post('/getaccountme/edituploadfile', upload.single('file'), (req, res, next) => {
   const file = req.file;
   const form = req.body;
+  if (file == "" || file == undefined) {
+    if (form.file == "" || form.file == "undefined" || form.file == null || form.file == undefined) {
+      var sql = "UPDATE account SET ten = ('" + form.ten + "'), sdt = ('" + form.sdt + "'), date = ('" + form.date + "'), gioitinh=('" + form.gioitinh + "'), diachi = ('" + form.diachi + "') where email = ('" + form.email + "')";
+      con.query(sql, [imgsrc], function (err, result, fields) {
+        if (err) throw err;
+        res.send(file);
+      })
+    } else {
+      var imgsrc = 'http://localhost:3001/images/' + form.file;
+      var sql = "UPDATE account SET image = ('" + form.file + "'), ten = ('" + form.ten + "'), sdt = ('" + form.sdt + "'), date = ('" + form.date + "'), gioitinh=('" + form.gioitinh + "'), diachi = ('" + form.diachi + "') where email = ('" + form.email + "')";
+      con.query(sql, [imgsrc], function (err, result, fields) {
+        if (err) throw err;
+        res.send(file);
+      })
+    }
+  } else {
     var imgsrc = 'http://localhost:3001/images/' + file.filename;
-    var sql = "UPDATE account SET image = ('"+file.filename+"'), ten = ('"+ form.ten +"'), sdt = ('"+ form.sdt +"'), date = ('"+ form.date +"'), gioitinh=('"+ form.gioitinh +"'), diachi = ('"+ form.diachi +"') where email = ('"+form.email+"')";
-    con.query(sql, [imgsrc] , function(err, result, fields){
-      if(err) throw err;
+    var sql = "UPDATE account SET image = ('" + file.filename + "'), ten = ('" + form.ten + "'), sdt = ('" + form.sdt + "'), date = ('" + form.date + "'), gioitinh=('" + form.gioitinh + "'), diachi = ('" + form.diachi + "') where email = ('" + form.email + "')";
+    con.query(sql, [imgsrc], function (err, result, fields) {
+      if (err) throw err;
       res.send(file);
     })
+  }
 })
 //Del avatar thông tin cá nhân 
 app.post('/getaccountme/deleteuploadfile', upload.single('file'), (req, res, next) => {
@@ -248,6 +266,130 @@ app.post('/getaccountme/deleteuploadfile', upload.single('file'), (req, res, nex
   }
   res.send(file)
 })
+//Đổi Mật Khẩu
+app.post("/doi-mat-khau", (req, res) => {
+  var sql = "SELECT * FROM account WHERE email= '" + req.body.email + "' AND pass= '" + req.body.passwordOld + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    }
+    if (result.length > 0) {
+      var sql = "UPDATE account SET pass = '" + req.body.rePasswordNew + "' where email = '" + req.body.email + "'";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        if (result.affectedRows == 1) {
+          res.send({ success: true, message: "Sua_Thanh_Cong!" });
+        }
+      });
+    } else {
+      res.send({ success: false, message: "False!Pass_Sai" });
+    }
+  });
+})
+//Search nhân viên 
+app.post('/search-staff', function (req, res) {
+  var sql = "SELECT * FROM account WHERE email LIKE '" + req.body.name + `%` + "' or ten LIKE '" + req.body.name + `%` + "' or gioitinh LIKE '" + req.body.name + `%` + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
+    }
+  })
+});
+//Add User New Admin 
+app.post("/dangkyStaff", (req, res) => {
+  const body = req.body;
+  var sql = "SELECT * FROM account WHERE email= '" + body.emailstaff + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    }
+    if (result.length > 0) {
+      res.send({ success: false, message: 'Da_Co_tai_Khoan' });
+    } else {
+      res.send({ success: true });
+      var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc , gioitinh) values('" + body.emailstaff + "' ,  '" + body.passwordstaff + "' ,'" + body.namestaff + "' ,'" + body.phonestaff + "' ,'" + body.timeRegister + "','" + '0' + "','" + body.genderstaff + "'  );"
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+      });
+    }
+  });
+});
+//Ban account 
+app.post("/ban-account", (req, res) => {
+  const body = req.body;
+  console.log(body)
+  // var sql = "SELECT * FROM account WHERE email= '" + body.emailstaff + "' ";
+  // con.query(sql, function (err, result, fields) {
+  //   if (err) {
+  //     res.send({ success: false, message: "Database không có kết nối!" });
+  //   }
+  //   if (result.length > 0) {
+  //     res.send({ success: false, message:'Da_Co_tai_Khoan' });
+  //   } else {
+  //     res.send({ success: true });
+  //     var sql = "INSERT INTO account ( email, pass, ten, sdt , timelogin , lockacc , gioitinh) values('" + body.emailstaff + "' ,  '" + body.passwordstaff + "' ,'" + body.namestaff + "' ,'" + body.phonestaff + "' ,'" + body.timeRegister + "','" + '0' + "','" + body.genderstaff + "'  );"
+  //     con.query(sql, function (err, result, fields) {
+  //       if (err) throw err;
+  //     });
+  //   }
+  // });
+});
+
+//Newaccount
+app.post('/new-account-staff', function (req, res) {
+  var sql = "SELECT * FROM account WHERE lockacc LIKE '" + '1' + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
+    }
+  })
+});
+// Chấp thuận tài khoản
+app.post('/new-account-agr', function (req, res) {
+  var sql = "SELECT * FROM account WHERE email LIKE '" + req.body.email + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      var sql = "UPDATE account SET lockacc = '" + '0' + "' where email = '" + req.body.email + "'";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        if (result.affectedRows == 1) {
+          res.send({ success: true, message: "Thanh_Cong!" });
+        }
+      });
+    } else {
+      res.send({ success: false, message: "Khong_tim_thay_tai_khoan!" });
+    }
+  })
+});
+// Huỷ tài khoản
+app.post('/new-account-cancel', function (req, res) {
+  var sql = "SELECT * FROM account WHERE email LIKE '" + req.body.email + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      var sql = "delete from account where email = '" + req.body.email + "' ";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        if (result.affectedRows == 1) {
+          res.send({ success: true, message: "Thanh_Cong!" });
+        }
+      });
+    } else {
+      res.send({ success: false, message: "Khong_ton_tai_tai_khoan!" });
+    }
+  })
+});
 
 
 //Phần báo cáo

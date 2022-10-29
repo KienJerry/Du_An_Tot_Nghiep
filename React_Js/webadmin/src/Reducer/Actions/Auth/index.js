@@ -52,6 +52,28 @@ export const SetJobForgotPassword = payload => {
     }
 }
 
+export const SetJobForgotPasswords = payload => {
+    const Check_Login = localStorage.getItem('Save_Login');
+    const Home = JSON.parse(Check_Login);
+    axios.post(API_FORGOT_PW, {
+        dateTime : payload ,
+        email : Home.email
+    })
+        .then(response => {
+            if (response.data.success === true) {
+                SuccessForgotPw();
+            } else {
+                ErrorForgotPW()
+            }
+        })
+        .catch(error => {
+            WarningRegister()
+        });
+    return {
+        type: SET_JOBS_FORGOT_PASSWORD,
+    }
+}
+
 export const TokenLogin = payload => {
     if (payload.checked === true) {
         delete payload.passWord;
