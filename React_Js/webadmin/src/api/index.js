@@ -19,3 +19,5 @@ export const API_SET_ACCOUNT_NEW_AGR = api + 'new-account-agr';
 export const API_SET_ACCOUNT_NEW_CANCEL = api + 'new-account-cancel';
 export const API_SET_POSITION_ACCOUNT_USER = api + 'update-quyen-account';
 export const API_GET_LIST_ACCOUNT_BAN = api + 'getlistaccountbanorduyet';
+export const API_GET_LIST_ACCOUNT_POSITION = api + 'getlistaccountchucvu';
+export const API_HET_LIST_ACCOUNT_USER_FORGOT_PASS = api + 'getListAccountUserForgotPw';

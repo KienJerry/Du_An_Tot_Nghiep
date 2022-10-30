@@ -443,7 +443,46 @@ app.get('/getlistaccountbanorduyet', function (req, res) {
     }
   })
 });
+//lấy danh sách tài khoản theo chức vụ
+app.post('/getlistaccountchucvu', function (req, res) {
+  if (req.body.position == 'Nhân viên') {
+    var sql = "SELECT * FROM account WHERE chucvu LIKE '" + req.body.position + "' or chucvu LIKE '" + "" + "' ";
+    con.query(sql, function (err, result, fields) {
+      if (err) {
+        res.send({ success: false, message: "Database không có kết nối!" });
+      } if (result.length > 0) {
+        res.send(result);
+      } else {
+        res.send({ success: false, message: "False!" });
+      }
+    })
+  } else {
+    var sql = "SELECT * FROM account WHERE chucvu LIKE '" + req.body.position + "' ";
+    con.query(sql, function (err, result, fields) {
+      if (err) {
+        res.send({ success: false, message: "Database không có kết nối!" });
+      } if (result.length > 0) {
+        res.send(result);
+      } else {
+        res.send({ success: false, message: "False!" });
+      }
+    })
+  }
+});
 
+//lấy danh sách tài khoản quên mật khẩu
+app.get('/getListAccountUserForgotPw', function (req, res) {
+  var sql = "SELECT * FROM quenmatkhau WHERE duyet LIKE '" + '1' + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
+    }
+  })
+});
 
 //Phần báo cáo
 //Show báo cáo

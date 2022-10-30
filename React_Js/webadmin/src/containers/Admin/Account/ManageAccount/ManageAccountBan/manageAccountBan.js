@@ -49,7 +49,7 @@ export default function ManageAccountBan() {
                                         okText="Mở khoá"
                                         cancelText="huỷ"
                                     >
-                                        <Button className='ban_manage_account'>Bị Khoá</Button>
+                                        <Button className='ban_manage_account'>Bị khoá</Button>
                                     </Popconfirm>}
                             </List.Item>
                         )}

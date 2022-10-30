@@ -15,3 +15,4 @@ export const getListAccountBan = {
 export const setUnAccount = {
     all: [],
 }
+export const getlistForgotPw = {}
