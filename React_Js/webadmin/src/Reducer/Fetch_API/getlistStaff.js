@@ -1,12 +1,13 @@
 import axios from "axios";
 import {
     API_GET_LIST_ACCOUNT, API_SET_SEARCH_STAFF, API_SET_ACCOUNT_STAFF, API_GET_ACCOUNT_NEW, API_SET_ACCOUNT_NEW_AGR,
-    API_SET_ACCOUNT_NEW_CANCEL, API_BAN_ACCOUNT, API_UN_BAN_ACCOUNT, API_SET_POSITION_ACCOUNT_USER
+    API_SET_ACCOUNT_NEW_CANCEL, API_BAN_ACCOUNT, API_UN_BAN_ACCOUNT, API_SET_POSITION_ACCOUNT_USER, API_GET_LIST_ACCOUNT_BAN
 } from '../../api/index';
 import {
     getListAccountSuc, getListAccountErr, setAccountError, setAccountFalse, setAccountSuccess, getAccountNewStaffFalse,
     getAccountNewStaffSucc, getAccountNewStaffErr, setAccountNewStaffSucc, setAccountNewStaffErr, setAccountNewStaffCancel,
-    setAccountBanErr, setAccountBanSuc, setAccountDefaulbanSuc, setPositionAccountSuc
+    setAccountBanErr, setAccountBanSuc, setAccountDefaulbanSuc, setPositionAccountSuc, getListAccountBanError, getListAccountBanFalse,
+    getListAccountBanSuccess, setUnAccountUser, setUnAccountUsererr
 } from '../Actions/ListStaff/ListAccount';
 
 export const getStaff = (dispatch, value) => {
@@ -162,4 +163,34 @@ export const setAccountUserStaffNewAgr = ({ dispatchAgr, key, item }) => {
                     dispatchAgr(setAccountNewStaffErr(error))
                 })
     }
+}
+
+export const getListAccountbanAPI = (dispatch) => {
+    axios.get(API_GET_LIST_ACCOUNT_BAN)
+        .then(response => {
+            {
+                response.data.success === false ?
+                    dispatch(getListAccountBanFalse(response.data.success))
+                    :
+                    dispatch(getListAccountBanSuccess(response.data))
+            }
+            return response.data;
+        })
+        .catch(error => {
+            dispatch(getListAccountBanError(error))
+        })
+}
+
+export const setUnBanAccountUser = ({ dispatchUnSer, item }) => {
+
+    axios.post(API_SET_ACCOUNT_NEW_AGR, item)
+        .then(response => {
+            {
+                dispatchUnSer(setUnAccountUser(response.data))
+            }
+            return response.data;
+        })
+        .catch(error => {
+            dispatchUnSer(setUnAccountUsererr(error))
+        })
 }

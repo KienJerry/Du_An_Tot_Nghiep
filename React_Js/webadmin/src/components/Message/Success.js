@@ -127,3 +127,17 @@ export const SuccessPositionAccount = () => {
     });
   }, 1000);
 };
+
+export const SuccessUpdateAccount = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Cập nhật thành công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};

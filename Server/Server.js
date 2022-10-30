@@ -358,7 +358,7 @@ app.post("/un-ban-account", (req, res) => {
     }
   })
 });
-//UnBan account
+//Update account
 app.post("/update-quyen-account", (req, res) => {
   const body = req.body;
   var sql = "SELECT * FROM account WHERE email= '" + body.email + "' ";
@@ -427,6 +427,19 @@ app.post('/new-account-cancel', function (req, res) {
       });
     } else {
       res.send({ success: false, message: "Khong_ton_tai_tai_khoan!" });
+    }
+  })
+});
+//lấy danh sách tài khoản bị cấm or chưa duyệt
+app.get('/getlistaccountbanorduyet', function (req, res) {
+  var sql = "SELECT * FROM account WHERE lockacc LIKE '" + '1' + "' or lockacc LIKE '" + '9999' + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
     }
   })
 });

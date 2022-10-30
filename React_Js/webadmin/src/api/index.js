@@ -18,3 +18,4 @@ export const API_GET_ACCOUNT_NEW = api + 'new-account-staff';
 export const API_SET_ACCOUNT_NEW_AGR = api + 'new-account-agr';
 export const API_SET_ACCOUNT_NEW_CANCEL = api + 'new-account-cancel';
 export const API_SET_POSITION_ACCOUNT_USER = api + 'update-quyen-account';
+export const API_GET_LIST_ACCOUNT_BAN = api + 'getlistaccountbanorduyet';

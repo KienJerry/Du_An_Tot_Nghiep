@@ -14,6 +14,11 @@ const ManageAccount = () => {
                     <StatisticalAccount />
                 </Col>
             </Row>
+            <Row className='Home-ManageAccount'>
+                <Col span={24}>
+                    Tài khoản bị quên mật khẩu
+                </Col>
+            </Row>
         </>
     )
 }
