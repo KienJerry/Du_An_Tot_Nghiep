@@ -15,6 +15,7 @@ import {
   Link,
 } from "react-router-dom";
 import React, { useState } from 'react';
+import DanhSachDuAn from './DanhSachDuAn';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -52,7 +53,7 @@ const items = [
   
 ];
 
-export default function DanhSachDuAn() {
+export default function List_DuAn() {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout hasSider>
@@ -106,25 +107,7 @@ export default function DanhSachDuAn() {
             margin: '70px 16px 10px 30vh',
           }}
         >
-          <div
-            className="site-layout-background"
-          >
-            <p>long content</p>
-            {
-              // indicates very long content
-              Array.from(
-                {
-                  length: 100,
-                },
-                (_, index) => (
-                  <React.Fragment key={index}>
-                    {index % 20 === 0 && index ? 'more' : '...'}
-                    <br />
-                  </React.Fragment>
-                ),
-              )
-            }
-          </div>
+        <DanhSachDuAn/>
         </Content>
         <Footer
           style={{

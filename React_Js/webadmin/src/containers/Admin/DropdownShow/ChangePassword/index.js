@@ -8,6 +8,10 @@ import { Succ_ForgotPw } from '../../../../Reducer/Reducers/Auth';
 import { SetJobForgotPasswords } from '../../../../Reducer/Actions/Auth/index';
 import { DATE_TIME } from '../../../../components/DateTime/DateTime';
 import { Validate_Password, Validate_Re_Password_Change } from '../../../../components/Validate/CheckValidate';
+
+
+
+
 import './ChangePwStyle.scss'
 function ChangePassword() {
     const [state, dispatch] = useReducer(setPasswordRedux, setPasswordInit);
