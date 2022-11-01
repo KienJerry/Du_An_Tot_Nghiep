@@ -8,7 +8,8 @@ import ListAccount from '../containers/Admin/Account/fullListAccount/list_accoun
 import UpdateProfile from "../containers/Admin/DropdownShow/UpdateProfile";
 import ChangePassword from "../containers/Admin/DropdownShow/ChangePassword";
 import UserNew from '../containers/Admin/Account/UserNew/userNew';
-import {NaviLayout} from '../containers/Admin';
+import DanhSachCongViec from '../containers/Admin/PagesAll/BangChamCong/List_DuAn'
+
 
 const publicRouter = [
     {
@@ -27,6 +28,11 @@ const publicRouter = [
     {
         path: "/dang-ky",
         component: Register,
+    },
+    {
+        path: "/Danh-sach-cong-viec",
+        component: DanhSachCongViec,
+        // layout : NaviLayout
     },
 ]
 
@@ -66,6 +72,7 @@ const AdminRoute = [
         component: ChangePassword,
         // layout : NaviLayout
     },
+   
 ]
 
 const AuthRoute = [
@@ -85,6 +92,7 @@ const AuthRoute = [
         path: "/dang-ky",
         component: Register
     },
+    
 ]
 
 export {

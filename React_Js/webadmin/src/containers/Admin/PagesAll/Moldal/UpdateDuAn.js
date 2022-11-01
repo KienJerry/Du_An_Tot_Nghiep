@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import '../Moldal/Modal.css'
 import { post } from '../post'
 import axios from "axios";
-
+import iconUpdate from "../icons/pen.png";
 // Sửa 
 function UpdateDuAn() {
 
@@ -16,7 +16,7 @@ function UpdateDuAn() {
         setPop(false)
     }
 
-    const api = 'http://' + post + '/viewduan';
+    const api = 'http://' + post + '/viewbangchamcong';
     let history = useNavigate();
     const { idduan } = useParams();
 
@@ -93,7 +93,7 @@ function UpdateDuAn() {
     return (
         <div className="body1">
             <div >
-                <button className="btn-Update" onClick={handleClickOpen}>Sửa</button>
+                <button className="btn-Update" onClick={handleClickOpen}><img src={iconUpdate} /></button>
             </div>
             <div>
                 {

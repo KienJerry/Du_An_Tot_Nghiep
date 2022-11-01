@@ -328,18 +328,18 @@ app.post('/deleteword', function (req, res) {
 })
 
 
-//Phần Công việc & Chấm Công
+//Phần Bang Chấm Công
 //Show C.việc
-app.get('/showtaskmission', function (req, res) {
-  con.query("SELECT * FROM `congviec` order by id desc", function (err, result, fields) {
+app.get('/showbangchamcong', function (req, res) {
+  con.query("SELECT * FROM `bangchamcong` order by id desc", function (err, result, fields) {
     // console.log(result);
     if (err) throw err;
     res.send(result);
   });
 });
 //thêm C.Việc
-app.post('/addmission', (req, res) => {
-  var sql = "insert into congviec ( tencongviec,nhanvien,vaitro,hoatdong,thoigianhoanthanh,ghichu) values('" + req.body.tencongviec + "','" + req.body.nhanvien + "','" + req.body.vaitro + "','" + req.body.hoatdong + "','" + req.body.thoigianhoanthanh + "','" + req.body.ghichu + "');";
+app.post('/addbangchamcong', (req, res) => {
+  var sql = "insert into bangchamcong ( ngay,nhanvien,congviec,vaitro,hoatdong,nhiemvu,gio,tuxa,duyet,ghichu,lydo) values('" + req.body.ngay + "','" + req.body.nhanvien + "','" + req.body.congviec + "','" + req.body.vaitro + "','" + req.body.hoatdong + "','" + req.body.nhiemvu + "','" + req.body.gio + "','" + req.body.tuxa + "','" + req.body.duyet + "','" + req.body.ghichu + "','" + req.body.lydo + "');";
   console.log(sql)
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
@@ -349,10 +349,10 @@ app.post('/addmission', (req, res) => {
   });
 })
 // Xóa C.Việc
-app.post('/deleteMission', (req, res) => {
+app.post('/deletebangchamcong', (req, res) => {
   var idXoaa = req.body.id;
   console.log(idXoaa);
-  var sql = "DELETE FROM congviec WHERE id =" + idXoaa + "";
+  var sql = "DELETE FROM bangchamcong WHERE id =" + idXoaa + "";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     if (result === "ok" || result.affectedRows === 1) {
