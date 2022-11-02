@@ -21,6 +21,7 @@ export default function fetchProducts(dispatch) {
 export const getAvatarAccount = (getDispatchImg) => {
     const Check_Login = localStorage.getItem('Save_Login');
     const Home = JSON.parse(Check_Login);
+    console.log(Home);
     axios.post(API_GET_ACCOUNT, {
         email: Home.email,
     })

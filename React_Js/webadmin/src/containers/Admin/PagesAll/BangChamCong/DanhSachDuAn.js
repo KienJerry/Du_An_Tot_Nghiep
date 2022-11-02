@@ -137,6 +137,7 @@ function DanhSachDuAn() {
             <th>Thứ 6</th>
             <th>Thứ 7</th>
             <th>Chủ Nhật</th>
+            <th>Chủ Nhật</th>
         
  
         </tr>
