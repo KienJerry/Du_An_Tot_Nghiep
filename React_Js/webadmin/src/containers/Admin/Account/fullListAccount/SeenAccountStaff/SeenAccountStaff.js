@@ -9,7 +9,7 @@ export default function SeenAccountStaff({ setSeenModal, seenModal, list }) {
     const datetime = datelogin + " lúc " + timelogin;
     return (
         <>
-            <Modal title={`Nhân viên : ${list.ten}`} open={seenModal} width={1000} onOk={() => setSeenModal(false)} onCancel={() => setSeenModal(false)}>
+            <Modal title={`Nhân viên : ${list.ten}`} open={seenModal} width={1000} footer={null} onCancel={() => setSeenModal(false)}>
                 <Form layout="vertical">
                     <Row className='form-col-seen-user'>
                         <Col lg={11} md={24} sm={24} xs={24}>
