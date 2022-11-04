@@ -7,3 +7,12 @@ export const List = {
 export const AddAcountUser = {}
 export const getAccountNew = {}
 export const setAccountNewAgree = {}
+export const setbanAcountInnit = {}
+export const getListAccountBan = {
+    all: [],
+    length: 0,
+}
+export const setUnAccount = {
+    all: [],
+}
+export const getlistForgotPw = {}

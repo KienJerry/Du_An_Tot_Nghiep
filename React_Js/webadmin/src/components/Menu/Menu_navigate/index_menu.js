@@ -23,18 +23,19 @@ export const items_admin = [
   getItem('Nhân Viên', 'sub0', <UserSwitchOutlined />, [
     getItem(<Link style={{textDecoration: "none"}} to={"/danh-sach-nhan-vien"}>Danh Sách Nhân Viên</Link>, '2'),
     getItem(<Link style={{textDecoration: "none"}} to={"/dang-ky-moi"}>Đăng Ký Mới</Link>, '3'),
+    getItem(<Link style={{textDecoration: "none"}} to={"/quan-ly-tai-khoan"}>Quản Lý Tài Khoản</Link>, '4'),
   ]),
   getItem('Dự Án', 'sub1', <FundProjectionScreenOutlined />, [
-    getItem('Danh Sách Dự Án', '4'),
-    getItem('Hoạt Động Dự Án', '5'),
+    getItem('Danh Sách Dự Án', '5'),
+    getItem('Hoạt Động Dự Án', '6'),
   ]),
   getItem('Quản Lý', 'sub2', <OrderedListOutlined />, [
-    getItem('Quản Lý Chấm Công', '6'), 
-    getItem('Quản Lý Nhân Viên', '7'),
-    getItem('Quản Lý Thời Gian', '8'),
-    getItem('Quản Lý Cuộc Họp', '9'),
+    getItem('Quản Lý Chấm Công', '7'), 
+    getItem('Quản Lý Nhân Viên', '8'),
+    getItem('Quản Lý Thời Gian', '9'),
+    getItem('Quản Lý Cuộc Họp', '10'),
   ]),
-  getItem('Cài Đặt', '10', <SettingOutlined />),
+  getItem('Cài Đặt', '11', <SettingOutlined />),
 
 ]
 
@@ -47,6 +48,8 @@ export const highlight = () => {
         return ['2']
     case '/dang-ky-moi':
         return ['3']
+    case '/quan-ly-tai-khoan':
+        return ['4']
     default:
         return ['1']
 }

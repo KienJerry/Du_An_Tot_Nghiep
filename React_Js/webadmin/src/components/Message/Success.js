@@ -87,3 +87,57 @@ export const SuccessNewAccountCancel = () => {
     });
   }, 1000);
 };
+
+export const SuccessSetUnLockAccount = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Đã mở khoá tài khoản!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+export const SuccessSetLockAccount = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Đã khoá tài khoản!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+export const SuccessPositionAccount = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Đổi quyền thành công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
+export const SuccessUpdateAccount = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Cập nhật thành công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};

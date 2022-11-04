@@ -13,13 +13,15 @@ function LoginRight() {
                 {location.pathname === "/dang-nhap" ?
                     <h2>Đăng Nhập Tài Khoản Nhân Viên</h2>
                     :
-                    <h2>Đăng Ký Tài Khoản Ứng Viên</h2>
+                    <>
+                        <h2>Đăng Ký Tài Khoản Nhân Viên</h2>
+                        <p style={{ color: "black" }}>Nhiều nhân viên tiềm năng đang làm việc tại Quốc Hưng</p>
+                    </>
                 }
-                <p>Nhiều ứng viên tiềm năng đang làm việc tại Quốc Hưng</p>
                 {location.pathname === "/dang-nhap" ?
-                    <Login/>
+                    <Login />
                     :
-                    <Register/>
+                    <Register />
                 }
             </div>
         </div>

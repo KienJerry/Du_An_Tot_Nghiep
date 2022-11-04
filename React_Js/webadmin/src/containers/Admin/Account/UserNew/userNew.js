@@ -34,7 +34,7 @@ const UserNew = () => {
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
                 avatar={<Avatar src={API_GET_URL_IMAGE_USER_OUTLINE} />}
-                title={<p href="https://ant.design">{item.ten}</p>}
+                title={<p>{item.ten}</p>}
                 description={`${item.sdt}`}
               />
               <div>{item.email}</div>

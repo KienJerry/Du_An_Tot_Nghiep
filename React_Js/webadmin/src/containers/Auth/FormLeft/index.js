@@ -8,7 +8,9 @@ function LoginLeft() {
     return (
         <div className="Background-full-left">
             <div className="icon-logo">
-                <img src={logo} ></img >
+                <a href='/'>
+                    <img src={logo} ></img >
+                </a>
             </div>
             <div className="background-image">
                 <img src={image} ></img >
