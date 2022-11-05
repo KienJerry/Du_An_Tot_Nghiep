@@ -34,8 +34,9 @@ export const items_admin = [
     getItem('Quản Lý Nhân Viên', '8'),
     getItem('Quản Lý Thời Gian', '9'),
     getItem('Quản Lý Cuộc Họp', '10'),
+    getItem(<Link style={{ textDecoration: "none" }} to={"/quan-ly-loai-du-an"}>Quản Lý Loại Dự Án</Link>, '11'),
   ]),
-  getItem('Cài Đặt', '11', <SettingOutlined />),
+  getItem('Cài Đặt', '12', <SettingOutlined />),
 
 ]
 
@@ -52,6 +53,10 @@ export const highlight = () => {
       return ['4']
     case '/danh-sach-du-an':
       return ['5']
+    case '/danh-sach-du-an/them-du-an':
+      return ['5']
+    case '/quan-ly-loai-du-an':
+      return ['11']
     default:
       return ['1']
   }

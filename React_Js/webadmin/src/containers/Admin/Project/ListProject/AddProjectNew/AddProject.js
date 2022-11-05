@@ -1,13 +1,15 @@
 import { Button } from 'antd';
-// import './listProject.scss';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { Link } from "react-router-dom";
 
 function AddProJect() {
     return (
         <>
-            <Button type="primary" icon={<PlusCircleOutlined />}>
-                Thêm Dự Án
-            </Button>;
+            <Link to="/danh-sach-du-an/them-du-an">
+                <Button type="primary" icon={<PlusCircleOutlined />}>
+                    Thêm Dự Án
+                </Button>;
+            </Link>
         </>
     );
 }

@@ -11,6 +11,7 @@ import {
     getListAccountBanSuccess, setUnAccountUser, setUnAccountUsererr, getListAccountUserForgotPw, getListAccountUserForgotPwErr, setAccountPasswordFalse,
     setAccountPasswordSucc,
 } from '../Actions/ListStaff/ListAccount';
+// import * as types from '../actionTypes';
 
 export const getStaff = (dispatch, value) => {
     if (value == "" || value == undefined || value == null) {

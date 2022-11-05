@@ -10,6 +10,8 @@ import ChangePassword from "../containers/Admin/DropdownShow/ChangePassword";
 import UserNew from '../containers/Admin/Account/UserNew/userNew';
 import ManageAccount from "../containers/Admin/Account/ManageAccount/ManageAccount";
 import ListProject from "../containers/Admin/Project/ListProject/listProject";
+import FormAddProject from "../containers/Admin/Project/ListProject/AddProjectNew/FormAddProject";
+import ManageTypeProject from '../containers/Admin/PageManage/ManageTypeProject/ManageTypeProject';
 import {NaviLayout} from '../containers/Admin';
 
 const publicRouter = [
@@ -41,6 +43,9 @@ const AdminRoute = [
     {
         path: "/*",
         component: NotFound,
+        // layout : NaviLayout,
+        layout : null ,
+
     },
     {
         path: "/dang-nhap",
@@ -61,12 +66,10 @@ const AdminRoute = [
     {
         path: "/thong-tin-ca-nhan",
         component: UpdateProfile,
-        // layout : null ,
     },
     {
         path: "/doi-mat-khau",
         component: ChangePassword,
-        // layout : NaviLayout
     },
     {
         path: "/quan-ly-tai-khoan",
@@ -75,6 +78,14 @@ const AdminRoute = [
     {
         path: "/danh-sach-du-an",
         component: ListProject,
+    },
+    {
+        path: "/danh-sach-du-an/them-du-an",
+        component: FormAddProject,
+    },
+    {
+        path: "/quan-ly-loai-du-an",
+        component: ManageTypeProject,
     },
 ]
 
