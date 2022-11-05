@@ -214,10 +214,10 @@ h6 {
     line-height: normal;
 }
 
-p,
-a,
-li,
-button,
+.the_p,
+.the_a,
+// li,
+.the_button,
 ul {
     margin: 0;
     padding: 0;
@@ -225,16 +225,16 @@ ul {
     text-decoration: none;
 }
 
-a:hover {
+.the_a:hover {
     text-decoration: none;
 }
 
-img {
+.the_img {
     width: 100%;
     height: auto;
 }
 
-button {
+.the_button {
     border: 0;
     background-color: transparent;
 }

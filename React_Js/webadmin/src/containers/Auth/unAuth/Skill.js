@@ -32,22 +32,22 @@ export const Skills = () => {
                 <div className="col-12">
                     <div className="skill-bx wow zoomIn">
                         <h2 style={{color: "white"}}>KỸ NĂNG - TRÌNH ĐỘ</h2>
-                        <p>Với hơn 15 năm kinh nghiệm hoạt động trong Lĩnh Vực<br></br> Chúng tôi đáp ứng với mọi yêu cầu của khách hàng.</p>
+                        <p className="the_p"> Với hơn 15 năm kinh nghiệm hoạt động trong Lĩnh Vực<br></br> Chúng tôi đáp ứng với mọi yêu cầu của khách hàng.</p>
                         <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
                             <div className="item">
-                                <img src={meter1} alt="Image" />
+                                <img className="the_img" src={meter1} alt="Image" />
                                 <h5 style={{color:'white'}}>Nhân viên có trình độ</h5>
                             </div>
                             <div className="item">
-                                <img src={meter2} alt="Image" />
+                                <img className="the_img" src={meter2} alt="Image" />
                                 <h5 style={{color:'white'}}>Khách hàng tiềm năng</h5>
                             </div>
                             <div className="item">
-                                <img src={meter3} alt="Image" />
+                                <img className="the_img" src={meter3} alt="Image" />
                                 <h5 style={{color:'white'}}>Máy móc hiện đại</h5>
                             </div>
                             {/* <div className="item">
-                                <img src={meter1} alt="Image" />
+                                <img className="the_img" src={meter1} alt="Image" />
                                 <h5 style={{color:'white'}}>Khách hàng lớn</h5>
                             </div> */}
                         </Carousel>

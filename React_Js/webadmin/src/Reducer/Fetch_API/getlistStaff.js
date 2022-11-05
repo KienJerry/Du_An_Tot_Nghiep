@@ -2,13 +2,14 @@ import axios from "axios";
 import {
     API_GET_LIST_ACCOUNT, API_SET_SEARCH_STAFF, API_SET_ACCOUNT_STAFF, API_GET_ACCOUNT_NEW, API_SET_ACCOUNT_NEW_AGR,
     API_SET_ACCOUNT_NEW_CANCEL, API_BAN_ACCOUNT, API_UN_BAN_ACCOUNT, API_SET_POSITION_ACCOUNT_USER, API_GET_LIST_ACCOUNT_BAN,
-    API_HET_LIST_ACCOUNT_USER_FORGOT_PASS
+    API_HET_LIST_ACCOUNT_USER_FORGOT_PASS, API_SET_USER_ACCOUNT_PW, API_SET_DEL_USER_ACCOUNT_PW
 } from '../../api/index';
 import {
     getListAccountSuc, getListAccountErr, setAccountError, setAccountFalse, setAccountSuccess, getAccountNewStaffFalse,
     getAccountNewStaffSucc, getAccountNewStaffErr, setAccountNewStaffSucc, setAccountNewStaffErr, setAccountNewStaffCancel,
     setAccountBanErr, setAccountBanSuc, setAccountDefaulbanSuc, setPositionAccountSuc, getListAccountBanError, getListAccountBanFalse,
-    getListAccountBanSuccess, setUnAccountUser, setUnAccountUsererr, getListAccountUserForgotPw, getListAccountUserForgotPwErr
+    getListAccountBanSuccess, setUnAccountUser, setUnAccountUsererr, getListAccountUserForgotPw, getListAccountUserForgotPwErr, setAccountPasswordFalse,
+    setAccountPasswordSucc,
 } from '../Actions/ListStaff/ListAccount';
 
 export const getStaff = (dispatch, value) => {
@@ -207,5 +208,33 @@ export const getListAccountForgotPassword = (dispatch) => {
         })
         .catch(error => {
             dispatch(getListAccountUserForgotPwErr(error))
+        })
+}
+
+export const setDataPassword = ({dispatchResetPw, value}) => {
+
+    axios.post(API_SET_USER_ACCOUNT_PW, {email: value})
+        .then(response => {
+            {
+                dispatchResetPw(setAccountPasswordSucc(response.data))
+            }
+            return response.data;
+        })
+        .catch(error => {
+            dispatchResetPw(setAccountPasswordFalse(error))
+        })
+}
+
+export const setDelDataPassword = ({dispatchResetPw, value}) => {
+
+    axios.post(API_SET_DEL_USER_ACCOUNT_PW, {email: value})
+        .then(response => {
+            {
+                dispatchResetPw(setAccountPasswordSucc(response.data))
+            }
+            return response.data;
+        })
+        .catch(error => {
+            dispatchResetPw(setAccountPasswordFalse(error))
         })
 }

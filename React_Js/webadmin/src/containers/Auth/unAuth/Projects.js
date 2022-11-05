@@ -51,7 +51,7 @@ export const Projects = () => {
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                   <h2 style={{ color: "white" }}>DỊCH VỤ</h2>
-                  <p>Khi chúng tôi nhận được yêu cầu hỗ trợ từ Quý công ty, đội ngũ giàu kinh nghiệm và chuyên nghiệp của chúng tôi sẽ nhanh chóng phân tích, đánh giá và cung cấp giải pháp phù hợp nhất. Chúng tôi sẽ tiếp nhận thông tin tại mọi thời điểm và phản hồi nhanh chóng.</p>
+                  <p className="the_p"> Khi chúng tôi nhận được yêu cầu hỗ trợ từ Quý công ty, đội ngũ giàu kinh nghiệm và chuyên nghiệp của chúng tôi sẽ nhanh chóng phân tích, đánh giá và cung cấp giải pháp phù hợp nhất. Chúng tôi sẽ tiếp nhận thông tin tại mọi thời điểm và phản hồi nhanh chóng.</p>
                   <Tab.Container id="projects-tabs" defaultActiveKey="first">
                     <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
                       <Nav.Item>
@@ -80,7 +80,7 @@ export const Projects = () => {
                         </Row>
                       </Tab.Pane>
                       <Tab.Pane eventKey="second">
-                        <p>
+                        <p className="the_p"> 
                           Cân cà phê, tiêu, cân nông sản 1tạ tới 5tạ tại ĐăkR’Lấp, ĐăkNông
                           Cân được thiết kế và sản xuất bởi Công ty Cân điện tử Quốc Hưng
                           Là loại cân chuyên dùng để cân cà phê, tiêu, nông sản…
@@ -91,7 +91,7 @@ export const Projects = () => {
                         </p>
                       </Tab.Pane>
                       <Tab.Pane eventKey="third">
-                        <p>Loadcell cân ô tô là một loại cảm biến lực ứng dụng trong các cầu cân ô tô điện tử. Cảm biến hiện đang được sử dụng trong các loại cân ô tô từ 20 tấn đến 150 tấn. Phổ biến hiện nay cảm biến cân ô tô thường có trọng tải công suất 20 tấn, 30, 40, 50 tấn / 1 loadcell.
+                        <p className="the_p"> Loadcell cân ô tô là một loại cảm biến lực ứng dụng trong các cầu cân ô tô điện tử. Cảm biến hiện đang được sử dụng trong các loại cân ô tô từ 20 tấn đến 150 tấn. Phổ biến hiện nay cảm biến cân ô tô thường có trọng tải công suất 20 tấn, 30, 40, 50 tấn / 1 loadcell.
 
                           Hiện nay trên thế giới có rất nhiều hãng sản xuất loại cảm biến cân ô tô này. Tại Việt Nam ta hiện phổ biến nhập khẩu một số hãng thiết bị cân hàng đầu. Được sử dụng hàng đầu đó là các mã sản phẩm Keli, Mettler toledo, Cas, Zemic, Ohaus.. Cụ thể chi tiết các model của từng hãng sẽ được chúng tôi giới thiệu dưới đây.
 

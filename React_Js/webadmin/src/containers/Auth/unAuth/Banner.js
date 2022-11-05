@@ -58,8 +58,8 @@ export const Banner = () => {
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <span className="tagline">Phần mềm quản lý Quốc Hưng QHS</span>
                 <h1 style={{color:'white'}}>{`Hi! I'm Quoc Hung`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Website Management", "Website Management", "Quality Reputation" ]'><span className="wrap">{text}</span></span></h1>
-                  <p>Cân điện tử Quốc Hưng là một trong những công ty cân điện tử có nhiều năm kinh nghiệm trong lĩnh vực cung cấp và sửa chữa bảo trì các loại cân điện tử tại khu vực các tỉnh Tây Nguyên và lân cận : Đắk Lắk, Đắk Nông, Lâm Đồng, Gia Lai, Kon Tum.</p>
-                  <a href="/dang-nhap"> Đăng nhập ngay <ArrowRightCircle size={25} /> </a>
+                  <p className="the_p"> Cân điện tử Quốc Hưng là một trong những công ty cân điện tử có nhiều năm kinh nghiệm trong lĩnh vực cung cấp và sửa chữa bảo trì các loại cân điện tử tại khu vực các tỉnh Tây Nguyên và lân cận : Đắk Lắk, Đắk Nông, Lâm Đồng, Gia Lai, Kon Tum.</p>
+                  <a className="the_a" href="/dang-nhap"> Đăng nhập ngay <ArrowRightCircle size={25} /> </a>
               </div>}
             </TrackVisibility>
           </Col>
@@ -67,7 +67,7 @@ export const Banner = () => {
             <TrackVisibility>
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                  <img src={headerImg} alt="Header Img"/>
+                  <img className="the_img" src={headerImg} alt="Header Img"/>
                 </div>}
             </TrackVisibility>
           </Col>

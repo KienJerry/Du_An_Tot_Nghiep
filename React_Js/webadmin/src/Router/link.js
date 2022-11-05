@@ -9,6 +9,7 @@ import UpdateProfile from "../containers/Admin/DropdownShow/UpdateProfile";
 import ChangePassword from "../containers/Admin/DropdownShow/ChangePassword";
 import UserNew from '../containers/Admin/Account/UserNew/userNew';
 import ManageAccount from "../containers/Admin/Account/ManageAccount/ManageAccount";
+import ListProject from "../containers/Admin/Project/ListProject/listProject";
 import {NaviLayout} from '../containers/Admin';
 
 const publicRouter = [
@@ -70,6 +71,10 @@ const AdminRoute = [
     {
         path: "/quan-ly-tai-khoan",
         component: ManageAccount,
+    },
+    {
+        path: "/danh-sach-du-an",
+        component: ListProject,
     },
 ]
 

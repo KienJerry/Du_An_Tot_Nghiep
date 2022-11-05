@@ -483,6 +483,62 @@ app.get('/getListAccountUserForgotPw', function (req, res) {
     }
   })
 });
+//lấy lại mật khẩu
+app.post('/setPassAccount', function (req, res) {
+  const getReq = req.body;
+  var sql = "SELECT * FROM quenmatkhau WHERE email LIKE '" + getReq.email + "' ";
+  function makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() *
+        charactersLength));
+    }
+    return result;
+  }
+  const ChangeNewPass = makeid(15) + '1@az';
+
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      var sql = "UPDATE quenmatkhau SET done = '" + '2' + "' , Passnew = '" + ChangeNewPass + "' where email = '" + getReq.email + "'";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        var sql = "UPDATE account SET pass = '" + ChangeNewPass + "' where email = '" + getReq.email + "'";
+        con.query(sql, function (err, result, fields) {
+          if (err) throw err;
+          if (result.affectedRows == 1) {
+            res.send({ success: true, message: "Thanh_Cong!" });
+          }
+        });
+      });
+    } else {
+      res.send({ success: false, message: "Khong_ton_tai_tai_khoan!" });
+    }
+  })
+});
+//xoá thông tin account
+app.post('/setDelPassAccount', function (req, res) {
+  const getReq = req.body;
+  var sql = "SELECT * FROM quenmatkhau WHERE email LIKE '" + getReq.email + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      var sql = "UPDATE quenmatkhau SET done = '" + '0' + "' , duyet = '" + '0' + "' where email = '" + getReq.email + "'";
+        con.query(sql, function (err, result, fields) {
+          if (err) throw err;
+          if (result.affectedRows == 1) {
+            res.send({ success: true, message: "Thanh_Cong!" });
+          }
+        });
+    } else {
+      res.send({ success: false, message: "Khong_ton_tai_tai_khoan!" });
+    }
+  })
+});
 
 //Phần báo cáo
 //Show báo cáo

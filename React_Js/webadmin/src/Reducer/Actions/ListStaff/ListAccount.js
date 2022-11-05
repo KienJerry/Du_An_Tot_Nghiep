@@ -2,7 +2,7 @@ import { GET_LIST_ACCOUNT_STAFF, GET_LIST_ACCOUNT_STAFF_ERR, SET_ACCOUNT_STAFF_U
     GET_NEW_ACCOUNT_STAFF_USER_SUCC, GET_NEW_ACCOUNT_STAFF_USER_FALSE, GET_NEW_ACCOUNT_STAFF_USER_ERROR, SET_NEW_ACCOUNT_STAFF_USER_SUCCESS , SET_NEW_ACCOUNT_STAFF_USER_ERROR,
     SET_NEW_ACCOUNT_STAFF_USER_CANCEL, SET_BAN_ACCOUNT_SUCCESS, SET_BAN_ACCOUNT_ERROR, SET_DEF_BAN_ACCOUNT_SUCCESS, SET_POSITION_ACCOUNT_SUCCESS, 
     GET_LIST_ACCOUNT_BAN_API_ERR, GET_LIST_ACCOUNT_BAN_API_FALSE, GET_LIST_ACCOUNT_BAN_API_SUCC, SET_UN_ACCOUNT_USER_ERR,SET_UN_ACCOUNT_USER,GET_LIST_ACCOUNT_FORGOT_SUC,
-    GET_LIST_ACCOUNT_FORGOT_ERR
+    GET_LIST_ACCOUNT_FORGOT_ERR, SET_PASS_ACCOUNT_FALSE, SET_PASS_ACCOUNT_SUCC
 } from "../../Constants/listConstants";
 
 export const getListAccountSuc = (payload) => {
@@ -149,6 +149,20 @@ export const getListAccountUserForgotPw = (payload) => {
 export const getListAccountUserForgotPwErr = (payload) => {
     return {
         type: GET_LIST_ACCOUNT_FORGOT_ERR,
+        payload: payload
+    }
+}
+
+export const setAccountPasswordSucc = (payload) => {
+    return {
+        type: SET_PASS_ACCOUNT_SUCC,
+        payload: payload
+    }
+}
+
+export const setAccountPasswordFalse = (payload) => {
+    return {
+        type: SET_PASS_ACCOUNT_FALSE,
         payload: payload
     }
 }

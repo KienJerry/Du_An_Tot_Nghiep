@@ -1,36 +1,33 @@
 import { Avatar, List, Breadcrumb, Button } from 'antd';
 import React, { useEffect, useState, useReducer } from 'react';
-import { getlistForgotPw, } from '../../../../../Reducer/InitReducer/Staff/ListStaff';
-import { ForgetAccountListGet, } from '../../../../../Reducer/Reducers/Staff/listStaff';
-import { getListAccountForgotPassword } from '../../../../../Reducer/Fetch_API/getlistStaff';
+import { getlistForgotPw, setDataPass } from '../../../../../Reducer/InitReducer/Staff/ListStaff';
+import { ForgetAccountListGet, setResetPass } from '../../../../../Reducer/Reducers/Staff/listStaff';
+import { getListAccountForgotPassword, setDataPassword, setDelDataPassword } from '../../../../../Reducer/Fetch_API/getlistStaff';
 import { API_GET_URL_IMAGE_USER_OUTLINE } from '../../../../../api/index';
 import moment from 'moment';
 import './ForgetAccount.scss';
+import { SuccessForgotPW } from '../../../../../components/Notification/Success';
+import { ErrForgotPW } from '../../../../../components/Notification/Error';
 export default function ManageAccountBan() {
-    const [copySuccess, setCopySuccess] = useState('');
     const [state, dispatch] = useReducer(ForgetAccountListGet, getlistForgotPw);
-    const [data, setData] = useState([]);
-    const loadMoreData = () => {
-        fetch('https://randomuser.me/api/?results=10&inc=name,gender,email,nat,picture&noinfo')
-            .then((res) => res.json())
-            .then((body) => {
-                setData([...data, ...body.results]);
-            })
-            .catch(() => {
-            });
-    };
+    const [stateResetPw, dispatchResetPw] = useReducer(setResetPass, setDataPass);
     useEffect(() => {
-        loadMoreData();
         getListAccountForgotPassword(dispatch)
-    }, []);
+    }, [stateResetPw]);
 
+    const ResetPw = (value) => {
+        setDataPassword({ dispatchResetPw, value });
+    }
+    const DelRsPass = (value) => {
+        setDelDataPassword({ dispatchResetPw, value });
+    }
 
     const copyToClipBoard = async copyMe => {
         try {
             await navigator.clipboard.writeText(copyMe);
-            setCopySuccess('Copied!');
+            SuccessForgotPW();
         } catch (err) {
-            setCopySuccess('Failed to copy!');
+            ErrForgotPW();
         }
     };
 
@@ -52,13 +49,13 @@ export default function ManageAccountBan() {
                                 title={<p>{item.email}</p>}
                                 description={item.thoigian && moment(item.thoigian).format("YYYY-MM-DD HH:mm:ss")}
                             />
-                            <div className='ForgetAccount'>Cấp lại mật khẩu</div>
+                            <div className='ForgetAccount' onClick={() => ResetPw(item.email)}>Cấp lại mật khẩu</div>
                             {item.done === "2" &&
                                 <>
-                                    <Button className='copyToClipBoardPw' onClick={() => copyToClipBoard('Nguyễn Thế Kiên')}>
+                                    <Button className='copyToClipBoardPw' onClick={() => copyToClipBoard(item.Passnew != "" && item.Passnew)}>
                                         Sao chép mật khẩu
                                     </Button>
-                                    <div className='ForgetAccountDel'>Xoá</div>
+                                    <div className='ForgetAccountDel' onClick={() => DelRsPass(item.email)} >Xoá</div>
                                 </>
                             }
                         </List.Item>
