@@ -1,16 +1,29 @@
-import { Button, Form, Input, Select, Breadcrumb, Row, Col } from 'antd';
-import React from 'react';
+import { Button, Form, Input, Select, Breadcrumb, Row, Col, DatePicker, Space, message, Upload, Switch } from 'antd';
 import './FormAddProject.scss';
-import * as type from '../../../../../components/Validate/CheckValidate'
+import * as type from '../../../../../components/Validate/CheckValidate';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import React, { useState, useRef } from 'react';
+let index = 0;
 const { Option } = Select;
+const { RangePicker } = DatePicker;
 const tailLayout = {
     wrapperCol: {
         offset: 8,
         span: 16,
     },
 };
-const App = () => {
+const FormAddProject = () => {
     const [form] = Form.useForm();
+    const [items, setItems] = useState([
+        {
+            items: 'jack',
+        },
+        {
+            items: 'home',
+        },
+    ]);
+    const [name, setName] = useState('');
+    const inputRef = useRef(null);
     const onGenderChange = (value) => {
         switch (value) {
             case 'male':
@@ -41,6 +54,55 @@ const App = () => {
             gender: 'male',
         });
     };
+
+
+    const onNameChange = (event) => {
+        setName(event.target.value);
+    };
+    const addItem = (e) => {
+        e.preventDefault();
+        setItems([...items, name || `New item ${index++}`]);
+        setName('');
+        setTimeout(() => {
+            inputRef.current?.focus();
+        }, 0);
+    };
+
+    const onChange = (value) => {
+        console.log(`selected ${value}`);
+    };
+    const onSearch = (value) => {
+        console.log('search:', value);
+    };
+
+    const options = [];
+    for (let i = 10; i < 36; i++) {
+        options.push({
+            label: i.toString(36) + i,
+            value: i.toString(36) + i,
+        });
+    }
+    const handleChange = (value) => {
+        console.log(`selected ${value}`);
+    };
+
+    const props = {
+        name: 'file',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        headers: {
+            authorization: 'authorization-text',
+        },
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+            } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
     return (
         <>
             <Breadcrumb className='label-breadcrumb'>
@@ -68,79 +130,158 @@ const App = () => {
                                     placeholder="Chọn loại dự án"
                                     onChange={onGenderChange}
                                     allowClear
-                                >
-                                    <Option value="male">male</Option>
-                                    <Option value="female">female</Option>
-                                    <Option value="other">other</Option>
-                                </Select>
+                                    options={items.map((item) => ({
+                                        label: item.items,
+                                        value: item.items,
+                                    }))}
+                                    dropdownRender={(menu) => (
+                                        <>
+                                            {menu}
+                                            <Space
+                                                style={{
+                                                    padding: '8px 0 8px 4px',
+                                                }}
+                                            >
+                                                <Input
+                                                    placeholder="Thêm loại dự án"
+                                                    ref={inputRef}
+                                                    value={name}
+                                                    onChange={onNameChange}
+                                                />
+                                                <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
+                                                    Thêm Items
+                                                </Button>
+                                            </Space>
+                                        </>
+                                    )}
+                                />
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Form.Item
-                        name="note"
-                        label="Tên Dự Án"
-                        rules={[
-                            {
-                                required: true,
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="gender"
-                        label="Gender"
-                        rules={[
-                            {
-                                required: true,
-                            },
-                        ]}
-                    >
-                        <Select
-                            placeholder="Select a option and change input text above"
-                            onChange={onGenderChange}
-                            allowClear
-                        >
-                            <Option value="male">male</Option>
-                            <Option value="female">female</Option>
-                            <Option value="other">other</Option>
-                        </Select>
-                    </Form.Item>
-                    <Form.Item
-                        noStyle
-                        shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
-                    >
-                        {({ getFieldValue }) =>
-                            getFieldValue('gender') === 'other' ? (
-                                <Form.Item
-                                    name="customizeGender"
-                                    label="Customize Gender"
-                                    rules={[
+                    <Row className='form-col' style={{ paddingTop: '20px' }}>
+                        <Col lg={11} md={24} sm={24} xs={24}>
+                            <Form.Item
+                                label="Tên Nhóm (Phòng Ban)"
+                                name="nameGroup"
+                                rules={type.Validate_required}
+                            >
+                                <Select
+                                    mode="multiple"
+                                    allowClear
+                                    style={{
+                                        width: '100%',
+                                    }}
+                                    placeholder="Please select"
+                                    defaultValue={['a10', 'c12']}
+                                    onChange={handleChange}
+                                    options={options}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col lg={11} md={24} sm={24} xs={24}>
+                            <Form.Item
+                                label="Người Quản Lý Dự Án"
+                                name="Leader"
+                                rules={type.Validate_required}
+                            >
+                                <Select
+                                    showSearch
+                                    placeholder="Chọn để tìm kiếm"
+                                    optionFilterProp="children"
+                                    onChange={onChange}
+                                    onSearch={onSearch}
+                                    allowClear
+                                    filterOption={(input, option) =>
+                                        (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                    }
+                                    options={[
                                         {
-                                            required: true,
+                                            value: 'jack',
+                                            label: 'Jack',
+                                        },
+                                        {
+                                            value: 'lucy',
+                                            label: 'Lucy',
+                                        },
+                                        {
+                                            value: 'tom',
+                                            label: 'Tom',
                                         },
                                     ]}
-                                >
-                                    <Input />
-                                </Form.Item>
-                            ) : null
-                        }
-                    </Form.Item>
-                    <Form.Item {...tailLayout}>
-                        <Button type="primary" htmlType="submit">
-                            Submit
-                        </Button>
-                        <Button htmlType="button" onClick={onReset}>
-                            Reset
-                        </Button>
-                        <Button type="link" htmlType="button" onClick={onFill}>
-                            Fill form
-                        </Button>
-                    </Form.Item>
+                                />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row className='form-col' style={{ paddingTop: '20px' }}>
+                        <Col lg={11} md={24} sm={24} xs={24}>
+                            <Form.Item
+                                label="Dự Kiến Ngày Bắt Đầu & Kết Thúc"
+                                name="datedob"
+                                rules={type.Validate_required}
+                            >
+                                <RangePicker style={{ width: '100%', }}
+                                    dateRender={(current) => {
+                                        return (
+                                            <div className="ant-picker-cell-inner">
+                                                {current.date()}
+                                            </div>
+                                        );
+                                    }}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col lg={11} md={24} sm={24} xs={24}>
+                            <Row className='form-coll'>
+                                <Col span={11}>
+                                    <Form.Item
+                                        label="Ảnh Đại Diện Dự Án"
+                                        name="UpdateImg"
+                                        rules={type.Validate_required}
+                                    >
+                                        <Space
+                                            direction="vertical"
+                                            style={{
+                                                width: '100%',
+                                            }}
+                                            size="large"
+                                        >
+                                            <Upload
+                                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                                listType="picture"
+                                                maxCount={1}
+                                            >
+                                                <Button icon={<UploadOutlined />}>Chọn để tải ảnh</Button>
+                                            </Upload>
+                                        </Space>
+                                    </Form.Item>
+                                </Col>
+                                <Col span={11}>
+                                    <Form.Item
+                                        label="Khởi Chạy Dự Án"
+                                        name="StartProject"
+                                        rules={type.Validate_required}
+                                    >
+                                        <Switch defaultChecked onChange={onChange} />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    <Row className='form-col' style={{ paddingTop: '20px' }}>
+                        <Col lg={23} md={24} sm={24} xs={24}>
+                            <Form.Item >
+                                <button type="primary" htmlType="submit" className='custom-btn btn-12'>
+                                    <span>LƯU</span><span>LÀM MỚI</span>
+                                </button>
+                                <button htmlType="button" onClick={onReset} style={{ marginLeft: '40px' }} className='custom-btn btn-11'>
+                                    <span>LÀM MỚI</span><span>LƯU</span>
+                                </button>
+                            </Form.Item>
+                        </Col>
+                    </Row>
                 </Form>
             </div>
         </>
     );
 };
-export default App;
+export default FormAddProject;

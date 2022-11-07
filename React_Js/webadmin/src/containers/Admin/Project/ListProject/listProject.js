@@ -18,6 +18,18 @@ const initialItems = [
     key: '1',
   },
   {
+    label: 'Đang chờ',
+    children:
+      (
+        <>
+          <p>Content of Tab Pane 1.5</p>
+          <p>Content of Tab Pane 1</p>
+          <p>Content of Tab Pane 12</p>
+        </>
+      ),
+    key: '2',
+  },
+  {
     label: 'Đã đóng',
     children:
       (
@@ -27,7 +39,7 @@ const initialItems = [
           <p>Content of Tab Pane 2</p>
         </>
       ),
-    key: '2',
+    key: '3',
   },
   {
     label: 'Tất cả',
@@ -39,7 +51,7 @@ const initialItems = [
           <p>Content of Tab Pane 3</p>
         </>
       ),
-    key: '3',
+    key: '4',
     closable: false,
   },
 ];

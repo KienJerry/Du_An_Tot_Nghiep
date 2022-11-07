@@ -15,6 +15,20 @@ export const ErrorRegister = () => {
   }, 1000);
 };
 
+export const ErrorAdd = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Thất bại ! Tên dự án đã được sử dụng',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
 export const ErrorLogin = () => {
   message.loading({
     content: 'Loading...',

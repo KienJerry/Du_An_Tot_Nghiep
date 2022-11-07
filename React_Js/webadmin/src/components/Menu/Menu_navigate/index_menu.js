@@ -37,6 +37,7 @@ export const items_admin = [
     getItem(<Link style={{ textDecoration: "none" }} to={"/quan-ly-loai-du-an"}>Quản Lý Loại Dự Án</Link>, '11'),
   ]),
   getItem('Cài Đặt', '12', <SettingOutlined />),
+  getItem('', '999'),
 
 ]
 

@@ -16,6 +16,20 @@ export const SuccessRegister = () => {
   }, 1000);
 };
 
+export const SuccessAdd = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Thêm Thành Công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
 export const SuccessSetpass = () => {
   message.loading({
     content: 'Loading...',
