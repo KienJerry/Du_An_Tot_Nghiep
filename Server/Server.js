@@ -531,12 +531,12 @@ app.post('/setDelPassAccount', function (req, res) {
       res.send({ success: false, message: "Database không có kết nối!" });
     } if (result.length > 0) {
       var sql = "UPDATE quenmatkhau SET done = '" + '0' + "' , duyet = '" + '0' + "' where email = '" + getReq.email + "'";
-        con.query(sql, function (err, result, fields) {
-          if (err) throw err;
-          if (result.affectedRows == 1) {
-            res.send({ success: true, message: "Thanh_Cong!" });
-          }
-        });
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        if (result.affectedRows == 1) {
+          res.send({ success: true, message: "Thanh_Cong!" });
+        }
+      });
     } else {
       res.send({ success: false, message: "Khong_ton_tai_tai_khoan!" });
     }
@@ -544,7 +544,7 @@ app.post('/setDelPassAccount', function (req, res) {
 });
 
 //Quản lý dự án
-//Thêm dự án
+//Thêm loại dự án
 app.post("/quanly/them-quan-ly-loai-du-an", (req, res) => {
   const bodys = req.body;
   var sql = "SELECT * FROM loaiduan WHERE tenduan= '" + bodys.nameTypeProject + "' ";
@@ -553,13 +553,33 @@ app.post("/quanly/them-quan-ly-loai-du-an", (req, res) => {
       res.send({ success: false, message: "Database không có kết nối!" });
     }
     if (result.length > 0) {
-      res.send({ success: false, message : "trung_ten" });
+      res.send({ success: false, message: "trung_ten" });
     } else {
       res.send({ success: true });
-      var sql = "INSERT INTO loaiduan ( tenduan, 	motaduan, date) values('" + bodys.nameTypeProject + "' ,  '" + bodys.describeTypeProject + "' ,'" + bodys.timeRegister + "');"
-      con.query(sql, function (err, result, fields) {
-        if (err) throw err;
-      });
+      if (bodys.describeTypeProject == "" || bodys.describeTypeProject == null && bodys.describeTypeProject == undefined) {
+        var sql = "INSERT INTO loaiduan ( tenduan, date) values('" + bodys.nameTypeProject + "' ,'" + bodys.timeRegister + "');"
+        con.query(sql, function (err, result, fields) {
+          if (err) throw err;
+        });
+      } else {
+        var sql = "INSERT INTO loaiduan ( tenduan, 	motaduan, date) values('" + bodys.nameTypeProject + "' ,  '" + bodys.describeTypeProject + "' ,'" + bodys.timeRegister + "');"
+        con.query(sql, function (err, result, fields) {
+          if (err) throw err;
+        });
+      }
+    }
+  });
+});
+//Xoá loại dự án
+app.post("/quanly/xoa-quan-ly-loai-du-an", (req, res) => {
+  const bodys = req.body;
+  var sql = "delete from loaiduan where id = (" + bodys.id + ")";
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    if (result.affectedRows == 1) {
+      res.send({ success: true, message: "Ok!" });
+    } else {
+      res.send({ success: false, message: "Khong_co_du_lieu!" });
     }
   });
 });
@@ -575,6 +595,27 @@ app.get('/quanly/danh-sach-quan-ly-loai-du-an', function (req, res) {
       res.send({ success: false, message: "False!" });
     }
   })
+});
+//Sửa loại dự án
+app.post("/quanly/sua-quan-ly-loai-du-an", (req, res) => {
+  const bodys = req.body;
+  if (bodys.describeTypeProject == undefined) {
+    var sql = "UPDATE loaiduan SET tenduan = ('" + bodys.nameTypeProject + "'), date =('" + bodys.timeRegister + "') where id = (" + bodys.id + ")";
+    con.query(sql, function (err, result, fields) {
+      if (err) throw err;
+      if (result.affectedRows == 1) {
+        res.send({ success: true, message: "Ok!" });
+      }
+    });
+  } else {
+    var sql = "UPDATE loaiduan SET tenduan = ('" + bodys.nameTypeProject + "'), motaduan =('" + bodys.describeTypeProject + "'), date =('" + bodys.timeRegister + "') where id = (" + bodys.id + ")";
+    con.query(sql, function (err, result, fields) {
+      if (err) throw err;
+      if (result.affectedRows == 1) {
+        res.send({ success: true, message: "Ok!" });
+      }
+    });
+  }
 });
 
 //Phần báo cáo

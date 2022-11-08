@@ -155,3 +155,17 @@ export const SuccessUpdateAccount = () => {
     });
   }, 1000);
 };
+
+export const SuccessDel = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Xoá thành công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};

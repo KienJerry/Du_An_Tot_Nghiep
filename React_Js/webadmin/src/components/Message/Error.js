@@ -112,3 +112,17 @@ export const ErrorFALSE = () => {
     });
   }, 1000);
 };
+
+export const ErrorFALSEHeThong = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Xoá thất bại ! Không có dữ liệu trên hệ thống ',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};

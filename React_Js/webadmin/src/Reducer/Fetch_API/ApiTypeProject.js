@@ -7,14 +7,41 @@ export function setAddTypeProject({ dispatch, values }) {
         .then(response => {
             {
                 response.data.success === true ?
-                dispatch(actions.setAddProjectTypeManagementSucc(response.data))
-                :
-                dispatch(actions.setAddProjectTypeManagementFalse(response.data))
+                    dispatch(actions.setAddProjectTypeManagementSucc(response.data))
+                    :
+                    dispatch(actions.setAddProjectTypeManagementFalse(response.data))
             }
             return response.data;
         })
         .catch(error => {
             dispatch(actions.setAddProjectTypeManagementErr(error))
+        });
+}
+
+export function setUpdateTypeProject({ dispatch, values }) {
+    axios.post(types.API_UPDATE_PROJECT_MANAGEMENT, values)
+        .then(response => {
+            dispatch(actions.setUpdateProjectTypeManagementSucc(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            dispatch(actions.setAddProjectTypeManagementErr(error))
+        });
+}
+
+export function setDelTypeProject({ dispatchDel, e }) {
+    axios.post(types.API_DEL_PROJECT_MANAGEMENT, { id: e })
+        .then(response => {
+            {
+                response.data.success === true ?
+                    dispatchDel(actions.setDelProjectTypeManagementSucc(response.data))
+                    :
+                    dispatchDel(actions.setDelProjectTypeManagementFalse(response.data))
+            }
+            return response.data;
+        })
+        .catch(error => {
+            dispatchDel(actions.setAddProjectTypeManagementErr(error))
         });
 }
 

@@ -7,27 +7,27 @@ import * as typeAPI from '../../../../Reducer/Fetch_API/ApiTypeProject';
 import { DATE_TIME } from '../../../../components/DateTime/DateTime';
 
 const { TextArea } = Input;
-export default function AddManageTypeProject({ setModalAdd, modalAdd }) {
+export default function AddManageTypeProject({ setModalDel, modalDel, data }) {
     const [form] = Form.useForm();
     const [state, dispatch] = useReducer(Reducer.setAddTypeProjectMana, FullStateManagament);
 
     const onsubmitSuccess = (values) => {
         values.timeRegister = DATE_TIME;
-        console.log(values)
-        typeAPI.setAddTypeProject({ dispatch, values });
+        values.id = data.id;
+        typeAPI.setUpdateTypeProject({ dispatch, values });
     };
 
     {
         state.message === true && setTimeout(() => {
-            setModalAdd(false)
+            setModalDel(false)
         }, 1500)
     }
     return (
         <>
-            <Modal title="Thêm Loại Dự Án"
-                open={modalAdd}
+            <Modal title="Cập Nhật Loại Loại Dự Án"
+                open={modalDel}
                 onOk={form.submit}
-                onCancel={() => setModalAdd(false)}>
+                onCancel={() => setModalDel(false)}>
                 <Form
                     layout="vertical"
                     form={form}
@@ -37,12 +37,14 @@ export default function AddManageTypeProject({ setModalAdd, modalAdd }) {
                         label="Tên Loại Dự Án"
                         name="nameTypeProject"
                         rules={Validate_required}
+                        initialValue={data.tenduan}
                     >
                         <Input placeholder="Nhập Tên Loại Dự Án" />
                     </Form.Item>
                     <Form.Item
                         label="Mô Tả Loại Dự Án"
                         name="describeTypeProject"
+                        initialValue={data.motaduan}
                     >
                         <TextArea rows={4} placeholder="Nhập Mô Tả" />
                     </Form.Item>

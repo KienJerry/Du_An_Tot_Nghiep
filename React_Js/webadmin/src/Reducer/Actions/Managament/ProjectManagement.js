@@ -27,3 +27,24 @@ export const getListProjectTypeManagementErr = (payload) => {
         payload: payload
     }
 }
+
+export const setDelProjectTypeManagementSucc = (payload) => {
+    return {
+        type: constants.SET_DEL_PROJECT_TYPE_MANAGEMENT_SUCC,
+        payload: payload
+    }
+}
+
+export const setDelProjectTypeManagementFalse = (payload) => {
+    return {
+        type: constants.SET_DEL_PROJECT_TYPE_MANAGEMENT_FALSE,
+        payload: payload
+    }
+}
+
+export const setUpdateProjectTypeManagementSucc = (payload) => {
+    return {
+        type: constants.SET_UPDATE_PROJECT_TYPE_MANAGEMENT_SUCC,
+        payload: payload
+    }
+}

@@ -2,6 +2,7 @@ import { Card, List, Breadcrumb, Space, Input, Popconfirm } from 'antd';
 import { suffix } from '../../../../components/Pagination/pagination';
 import React, { useState, useEffect, useReducer } from 'react';
 import AddManageTypeProject from './AddManageTypeProject';
+import DelManageTypeProject from './DelManageTypeProject';
 import { FullStateManagament } from '../../../../Reducer/InitReducer/Managament/indexManagament';
 import * as Reducer from '../../../../Reducer/Reducers/Managament/ProjectManagement';
 import * as typeAPI from '../../../../Reducer/Fetch_API/ApiTypeProject';
@@ -12,15 +13,23 @@ import './ManageTypeProject.scss';
 const { Search } = Input;
 function ManageTypeProject() {
   const [state, dispatch] = useReducer(Reducer.setAddTypeProjectMana, FullStateManagament);
+  const [stateDel, dispatchDel] = useReducer(Reducer.setAddTypeProjectMana, FullStateManagament);
   const [modalAdd, setModalAdd] = useState(false);
+  const [modalDel, setModalDel] = useState(false);
+  const [data, getData] = useState([]);
 
   useEffect(() => {
     typeAPI.getListTypeProject(dispatch)
-  }, []);
+  }, [stateDel]);
 
   const confirm = (e) => {
-    console.log(e);
+    typeAPI.setDelTypeProject({ dispatchDel, e })
   };
+
+  const update = (item) => {
+    setModalDel(true);
+    getData(item)
+  }
 
   return (
     <>
@@ -55,7 +64,7 @@ function ManageTypeProject() {
             <Card title={item.tenduan} headStyle={{ backgroundColor: '#5c6cfa', color: '#ffffff' }}
               bodyStyle={{ height: '150px', maxHeight: '150px' }}
               extra={<>
-                <EditOutlined className='icon-edit-ManageTypeProject' />
+                <EditOutlined className='icon-edit-ManageTypeProject' onClick={() => update(item)} />
                 <Popconfirm
                   title="Bạn chắc chắn muốn xoá loại dự án này ?"
                   onConfirm={() => confirm(item.id)}
@@ -65,13 +74,14 @@ function ManageTypeProject() {
                   <DeleteOutlined className='icon-del-ManageTypeProject' />
                 </Popconfirm>
               </>}>
-              <div>{item.motaduan ? item.motaduan : "Chưa cập nhật"}</div>
+              <div>{item.motaduan === "" || item.motaduan === null || item.motaduan === undefined || item.motaduan === "undefined" ? "Chưa cập nhật" : item.motaduan}</div>
               <div style={{ marginTop: '10px' }}>Cập nhật : {moment(item.date).format(MOMENT_DATE_TIME)}</div>
             </Card>
           </List.Item>
         )}
       />
       {modalAdd && <AddManageTypeProject setModalAdd={setModalAdd} modalAdd={modalAdd} />}
+      {modalDel && <DelManageTypeProject setModalDel={setModalDel} modalDel={modalDel} data={data} />}
     </>
   )
 }

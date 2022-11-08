@@ -25,4 +25,6 @@ export const API_HET_LIST_ACCOUNT_USER_FORGOT_PASS = api + 'getListAccountUserFo
 export const API_SET_USER_ACCOUNT_PW = api + 'setPassAccount';
 export const API_SET_DEL_USER_ACCOUNT_PW = api + 'setDelPassAccount';
 export const API_ADD_PROJECT_MANAGEMENT = api + getManagement + 'them-quan-ly-loai-du-an';
+export const API_DEL_PROJECT_MANAGEMENT = api + getManagement + 'xoa-quan-ly-loai-du-an';
+export const API_UPDATE_PROJECT_MANAGEMENT = api + getManagement + 'sua-quan-ly-loai-du-an';
 export const API_LIST_PROJECT_MANAGEMENT = api + getManagement + 'danh-sach-quan-ly-loai-du-an';
