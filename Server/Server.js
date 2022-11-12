@@ -585,7 +585,7 @@ app.post("/quanly/xoa-quan-ly-loai-du-an", (req, res) => {
 });
 //Lấy danh sách loại dự án
 app.get('/quanly/danh-sach-quan-ly-loai-du-an', function (req, res) {
-  var sql = "SELECT * FROM loaiduan ";
+  var sql = "SELECT * FROM loaiduan order by id desc ";
   con.query(sql, function (err, result, fields) {
     if (err) {
       res.send({ success: false, message: "Database không có kết nối!" });

@@ -2,28 +2,37 @@ import { Button, Form, Input, Select, Breadcrumb, Row, Col, DatePicker, Space, m
 import './FormAddProject.scss';
 import * as type from '../../../../../components/Validate/CheckValidate';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useReducer, useEffect } from 'react';
+import { FullStateManagament } from '../../../../../Reducer/InitReducer/Managament/indexManagament';
+import * as Reducer from '../../../../../Reducer/Reducers/Managament/ProjectManagement';
+import * as typeAPI from '../../../../../Reducer/Fetch_API/ApiTypeProject';
 let index = 0;
-const { Option } = Select;
 const { RangePicker } = DatePicker;
-const tailLayout = {
-    wrapperCol: {
-        offset: 8,
-        span: 16,
-    },
-};
 const FormAddProject = () => {
     const [form] = Form.useForm();
-    const [items, setItems] = useState([
-        {
-            items: 'jack',
-        },
-        {
-            items: 'home',
-        },
-    ]);
+    const [stateItem, dispatchitem] = useReducer(Reducer.setAddTypeProjectMana, FullStateManagament)
+    const [stateAddItem, dispatchAdditem] = useReducer(Reducer.setAddTypeProjectMana, FullStateManagament)
     const [name, setName] = useState('');
     const inputRef = useRef(null);
+
+    //Form Add Items
+    useEffect(() => {
+        typeAPI.getListTypeProject(dispatchitem)
+    }, [stateAddItem]);
+    const addItem = (e) => {
+        e.preventDefault();
+        {
+            name == '' || name == null ? <></> :
+                typeAPI.setAddTypeProjectForm({ dispatchAdditem, name });
+        }
+        setName('');
+        setTimeout(() => {
+            inputRef.current?.focus();
+        }, 0);
+
+    };
+
+
     const onGenderChange = (value) => {
         switch (value) {
             case 'male':
@@ -47,25 +56,6 @@ const FormAddProject = () => {
     };
     const onReset = () => {
         form.resetFields();
-    };
-    const onFill = () => {
-        form.setFieldsValue({
-            note: 'Hello world!',
-            gender: 'male',
-        });
-    };
-
-
-    const onNameChange = (event) => {
-        setName(event.target.value);
-    };
-    const addItem = (e) => {
-        e.preventDefault();
-        setItems([...items, name || `New item ${index++}`]);
-        setName('');
-        setTimeout(() => {
-            inputRef.current?.focus();
-        }, 0);
     };
 
     const onChange = (value) => {
@@ -130,10 +120,12 @@ const FormAddProject = () => {
                                     placeholder="Chọn loại dự án"
                                     onChange={onGenderChange}
                                     allowClear
-                                    options={items.map((item) => ({
-                                        label: item.items,
-                                        value: item.items,
+                                    showSearch
+                                    options={stateItem.data.map((item) => ({
+                                        label: item.tenduan,
+                                        value: item.id,
                                     }))}
+                                    filterOption={(input, option) => (option?.label ?? '').includes(input)}
                                     dropdownRender={(menu) => (
                                         <>
                                             {menu}
@@ -146,7 +138,7 @@ const FormAddProject = () => {
                                                     placeholder="Thêm loại dự án"
                                                     ref={inputRef}
                                                     value={name}
-                                                    onChange={onNameChange}
+                                                    onChange={(event) => setName(event.target.value)}
                                                 />
                                                 <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
                                                     Thêm Items

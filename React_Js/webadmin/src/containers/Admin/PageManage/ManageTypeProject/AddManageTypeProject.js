@@ -13,7 +13,6 @@ export default function AddManageTypeProject({ setModalAdd, modalAdd }) {
 
     const onsubmitSuccess = (values) => {
         values.timeRegister = DATE_TIME;
-        console.log(values)
         typeAPI.setAddTypeProject({ dispatch, values });
     };
 

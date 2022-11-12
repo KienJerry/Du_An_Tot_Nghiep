@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as types from '../../api/index';
 import * as actions from '../Actions/Managament/ProjectManagement';
+import { DATE_TIME } from '../../components/DateTime/DateTime';
 
 export function setAddTypeProject({ dispatch, values }) {
     axios.post(types.API_ADD_PROJECT_MANAGEMENT, values)
@@ -54,5 +55,24 @@ export function getListTypeProject(dispatch) {
         })
         .catch(error => {
             dispatch(actions.setAddProjectTypeManagementErr(error))
+        });
+}
+
+export function setAddTypeProjectForm({ dispatchAdditem, name }) {
+    axios.post(types.API_ADD_PROJECT_MANAGEMENT, {
+        nameTypeProject : name,
+        timeRegister : DATE_TIME
+    })
+        .then(response => {
+            {
+                response.data.success === true ?
+                    dispatchAdditem(actions.setAddProjectTypeManagementSucc(response.data))
+                    :
+                    dispatchAdditem(actions.setAddProjectTypeManagementFalse(response.data))
+            }
+            return response.data;
+        })
+        .catch(error => {
+            dispatchAdditem(actions.setAddProjectTypeManagementErr(error))
         });
 }

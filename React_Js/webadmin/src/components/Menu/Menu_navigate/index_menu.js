@@ -33,7 +33,7 @@ export const items_admin = [
     getItem('Quản Lý Chấm Công', '7'),
     getItem('Quản Lý Nhân Viên', '8'),
     getItem('Quản Lý Thời Gian', '9'),
-    getItem('Quản Lý Cuộc Họp', '10'),
+    getItem(<Link style={{ textDecoration: "none" }} to={"/quan-ly-nhom"}>Quản Lý Nhóm</Link>, '10'),
     getItem(<Link style={{ textDecoration: "none" }} to={"/quan-ly-loai-du-an"}>Quản Lý Loại Dự Án</Link>, '11'),
   ]),
   getItem('Cài Đặt', '12', <SettingOutlined />),
@@ -58,6 +58,10 @@ export const highlight = () => {
       return ['5']
     case '/quan-ly-loai-du-an':
       return ['11']
+    case '/quan-ly-nhom':
+      return ['10']
+    case '/quan-ly-nhom/them-nhom-moi':
+      return ['10']
     default:
       return ['1']
   }

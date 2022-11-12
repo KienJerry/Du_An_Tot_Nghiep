@@ -12,6 +12,8 @@ import ManageAccount from "../containers/Admin/Account/ManageAccount/ManageAccou
 import ListProject from "../containers/Admin/Project/ListProject/listProject";
 import FormAddProject from "../containers/Admin/Project/ListProject/AddProjectNew/FormAddProject";
 import ManageTypeProject from '../containers/Admin/PageManage/ManageTypeProject/ManageTypeProject';
+import ListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/ListTypeManageListGrMember";
+import AddListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/AddListTypeManageListGrMember/AddListTypeManageListGrMember";
 import {NaviLayout} from '../containers/Admin';
 
 const publicRouter = [
@@ -86,6 +88,14 @@ const AdminRoute = [
     {
         path: "/quan-ly-loai-du-an",
         component: ManageTypeProject,
+    },
+    {
+        path: "/quan-ly-nhom",
+        component: ListTypeManageListGrMember,
+    },
+    {
+        path: "/quan-ly-nhom/them-nhom-moi",
+        component: AddListTypeManageListGrMember,
     },
 ]
 
