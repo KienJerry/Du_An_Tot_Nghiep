@@ -156,7 +156,6 @@ app.post("/dangnhap", (req, res) => {
 //Hiển thị thông tin tài khoản
 app.get('/showaccount', function (req, res) {
   con.query("SELECT * FROM `account` order by id desc", function (err, result, fields) {
-    // console.log(result);
     if (err) throw err;
     res.send(result);
   });
@@ -622,7 +621,6 @@ app.post("/quanly/sua-quan-ly-loai-du-an", (req, res) => {
 //Show báo cáo
 app.get('/showwork', function (req, res) {
   con.query("SELECT * FROM `baocao` order by id desc", function (err, result, fields) {
-    // console.log(result);
     if (err) throw err;
     res.send(result);
   });
@@ -658,12 +656,45 @@ app.post('/deleteword', function (req, res) {
   });
 })
 
+//Quản Lý Nhóm
+app.get('/getListManagerGr', function (req, res) {
+  con.query("SELECT * FROM `account` WHERE chucvu = '" + "Giám đốc" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Trưởng phòng" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Phó giám đốc" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Quản lý" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Phó phòng" + "' AND lockacc = '" + "0" + "' order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+//Hiển thị thông tin tài khoản đã mở
+app.get('/getListManagerGrAccountUnlock', function (req, res) {
+  con.query("SELECT * FROM `account` Where lockacc = '" + " 0 " + "' order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+//Thêm Nhóm Mới
+app.post("/getListManagerGr/them-nhom-moi", (req, res, next) => {
+  const bodys = req.body;
+  var sql = "SELECT * FROM danhsachnhom WHERE tennhom= '" + bodys.namGroup + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    }
+    if (result.length > 0) {
+      res.send({ success: false, message: "trung_ten" });
+    } else {
+        var sql = "INSERT INTO danhsachnhom ( tennhom, nguoiquanlyduan, image, nhanviennhom, mota, ngaytao, newupdate) values('" + bodys.namGroup + "' ,'" + bodys.LeaderGroup + "','" + bodys.avtatar + "','" + bodys.userGroup + "','" + bodys.commentGroup + "','" + bodys.date + "','" + bodys.date + "');"
+        con.query(sql, function (err, result, fields) {
+          if (err) throw err;
+          res.send({ success: true });
+        });
+    }
+  });
+});
+
 
 //Phần Công việc & Chấm Công
 //Show C.việc
 app.get('/showtaskmission', function (req, res) {
   con.query("SELECT * FROM `congviec` order by id desc", function (err, result, fields) {
-    // console.log(result);
     if (err) throw err;
     res.send(result);
   });
