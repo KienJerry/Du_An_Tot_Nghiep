@@ -4,4 +4,5 @@ export const FullStateManagament = {
     dataleader: [],
     datastaff: [],
     dataImg:[],
+    dataGr:[],
 }

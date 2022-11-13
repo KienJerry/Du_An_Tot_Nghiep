@@ -46,6 +46,11 @@ export const setAddTypeProjectMana = (state, action) => {
                 ...state,
                 data: action.payload
             }
+        case constants.GET_LIST_GR_SUCC:
+            return {
+                ...state,
+                dataGr: action.payload
+            }
         case constants.SET_ADD_PROJECT_TYPE_MANAGEMENT_ERROR:
             WarningRegister();
             return {

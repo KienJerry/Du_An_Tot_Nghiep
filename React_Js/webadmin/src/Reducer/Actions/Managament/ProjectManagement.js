@@ -73,3 +73,10 @@ export const UploadSucc = (payload) => {
         payload: payload
     }
 }
+
+export const getListGrSucc = (payload) => {
+    return {
+        type: constants.GET_LIST_GR_SUCC,
+        payload: payload
+    }
+}

@@ -58,6 +58,17 @@ export function getListTypeProject(dispatch) {
         });
 }
 
+export function getListDataGr(dispatch) {
+    axios.get(types.API_GET_LIST_GR_TYPE)
+        .then(response => {
+            dispatch(actions.getListGrSucc(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            dispatch(actions.setAddProjectTypeManagementErr(error))
+        });
+}
+
 export function setAddTypeProjectForm({ dispatchAdditem, name }) {
     axios.post(types.API_ADD_PROJECT_MANAGEMENT, {
         nameTypeProject: name,

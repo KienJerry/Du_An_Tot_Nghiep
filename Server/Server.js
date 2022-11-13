@@ -681,12 +681,19 @@ app.post("/getListManagerGr/them-nhom-moi", (req, res, next) => {
     if (result.length > 0) {
       res.send({ success: false, message: "trung_ten" });
     } else {
-        var sql = "INSERT INTO danhsachnhom ( tennhom, nguoiquanlyduan, image, nhanviennhom, mota, ngaytao, newupdate) values('" + bodys.namGroup + "' ,'" + bodys.LeaderGroup + "','" + bodys.avtatar + "','" + bodys.userGroup + "','" + bodys.commentGroup + "','" + bodys.date + "','" + bodys.date + "');"
+        var sql = "INSERT INTO danhsachnhom ( tennhom, nguoiquanlyduan, image, nhanviennhom, mota, ngaytao, newupdate) values('" + bodys.namGroup + "' ,'" + bodys.LeaderGroup + "','" + bodys.avtatar + "','" + "[" + bodys.userGroup + "]" + "','" + bodys.commentGroup + "','" + bodys.date + "','" + bodys.date + "');"
         con.query(sql, function (err, result, fields) {
           if (err) throw err;
           res.send({ success: true });
         });
     }
+  });
+});
+//Danh sách nhóm
+app.get('/getListGrType', function (req, res) {
+  con.query("SELECT * FROM `danhsachnhom` order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
   });
 });
 
