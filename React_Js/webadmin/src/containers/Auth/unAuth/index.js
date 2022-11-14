@@ -19,14 +19,14 @@ function UnAuth() {
 
 
     return (
-        <>
+        <div className='UnAuth_dev'>
             <NavBar />
             <Banner />
             <Skills />
             <Projects />
             <Contact />
             <Footer />
-        </>
+        </div>
     );
 }
 

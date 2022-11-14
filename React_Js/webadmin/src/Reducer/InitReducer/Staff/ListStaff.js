@@ -16,3 +16,4 @@ export const setUnAccount = {
     all: [],
 }
 export const getlistForgotPw = {}
+export const setDataPass = {}

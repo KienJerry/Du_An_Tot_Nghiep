@@ -1,9 +1,11 @@
 import { notification } from 'antd';
 
 export const SuccessForgotPW = () => {
-  notification.success({
-    message: 'Notification Title',
-    description:
-      'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-  });
+  setTimeout(() => {
+    notification.success({
+      message: 'Sao chép thành công',
+      description:
+        'Bấm tổ hợp Ctrl + V (Trên PC) hoặc bấm giữ (Trên Mobile) để dán.',
+    });
+  }, 3000);
 };

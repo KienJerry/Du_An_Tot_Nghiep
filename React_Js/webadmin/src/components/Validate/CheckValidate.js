@@ -14,6 +14,18 @@ export const Validate_Name =[
 
 ]
 
+export const Validate_Name_Project =[
+    {
+        required: true,
+        message: 'Tên dự án không được bỏ trống !'
+    },
+    {
+        min : 9,
+        message: 'Tên dự án phải lớn hơn 8 ký tự !'
+    },
+
+]
+
 export const Validate_Email =[
     {
         required: true,
@@ -113,5 +125,12 @@ export const Validate_Date =[
     {
         required: true,
         message: 'Ngày sinh không được bỏ trống !'
+    },
+]
+
+export const Validate_required =[
+    {
+        required: true,
+        message: 'Trường này không được bỏ trống !'
     },
 ]

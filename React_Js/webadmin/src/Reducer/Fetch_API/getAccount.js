@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_GET_ACCOUNT } from '../../api/index';
 import {fetchAccountMeError, fetchAccountMeSuccess, getAvtMeSuccess, getAvtMeError } from '../Actions/Auth/getAccountMe';
+// import * as types from '../actionTypes';
 
 
 export default function fetchProducts(dispatch) {

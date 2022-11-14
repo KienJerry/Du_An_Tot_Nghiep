@@ -6,6 +6,9 @@ var cors = require('cors');
 const multer = require('multer');
 const bodyParser = require('body-parser')
 
+// Export the Express API
+module.exports = app;
+
 //Socket.io
 const http = require('http');
 const { log } = require('console');
@@ -153,7 +156,6 @@ app.post("/dangnhap", (req, res) => {
 //Hiển thị thông tin tài khoản
 app.get('/showaccount', function (req, res) {
   con.query("SELECT * FROM `account` order by id desc", function (err, result, fields) {
-    // console.log(result);
     if (err) throw err;
     res.send(result);
   });
@@ -483,12 +485,142 @@ app.get('/getListAccountUserForgotPw', function (req, res) {
     }
   })
 });
+//lấy lại mật khẩu
+app.post('/setPassAccount', function (req, res) {
+  const getReq = req.body;
+  var sql = "SELECT * FROM quenmatkhau WHERE email LIKE '" + getReq.email + "' ";
+  function makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() *
+        charactersLength));
+    }
+    return result;
+  }
+  const ChangeNewPass = makeid(15) + '1@az';
+
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      var sql = "UPDATE quenmatkhau SET done = '" + '2' + "' , Passnew = '" + ChangeNewPass + "' where email = '" + getReq.email + "'";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        var sql = "UPDATE account SET pass = '" + ChangeNewPass + "' where email = '" + getReq.email + "'";
+        con.query(sql, function (err, result, fields) {
+          if (err) throw err;
+          if (result.affectedRows == 1) {
+            res.send({ success: true, message: "Thanh_Cong!" });
+          }
+        });
+      });
+    } else {
+      res.send({ success: false, message: "Khong_ton_tai_tai_khoan!" });
+    }
+  })
+});
+//xoá thông tin account
+app.post('/setDelPassAccount', function (req, res) {
+  const getReq = req.body;
+  var sql = "SELECT * FROM quenmatkhau WHERE email LIKE '" + getReq.email + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      var sql = "UPDATE quenmatkhau SET done = '" + '0' + "' , duyet = '" + '0' + "' where email = '" + getReq.email + "'";
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        if (result.affectedRows == 1) {
+          res.send({ success: true, message: "Thanh_Cong!" });
+        }
+      });
+    } else {
+      res.send({ success: false, message: "Khong_ton_tai_tai_khoan!" });
+    }
+  })
+});
+
+//Quản lý dự án
+//Thêm loại dự án
+app.post("/quanly/them-quan-ly-loai-du-an", (req, res) => {
+  const bodys = req.body;
+  var sql = "SELECT * FROM loaiduan WHERE tenduan= '" + bodys.nameTypeProject + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    }
+    if (result.length > 0) {
+      res.send({ success: false, message: "trung_ten" });
+    } else {
+      res.send({ success: true });
+      if (bodys.describeTypeProject == "" || bodys.describeTypeProject == null && bodys.describeTypeProject == undefined) {
+        var sql = "INSERT INTO loaiduan ( tenduan, date) values('" + bodys.nameTypeProject + "' ,'" + bodys.timeRegister + "');"
+        con.query(sql, function (err, result, fields) {
+          if (err) throw err;
+        });
+      } else {
+        var sql = "INSERT INTO loaiduan ( tenduan, 	motaduan, date) values('" + bodys.nameTypeProject + "' ,  '" + bodys.describeTypeProject + "' ,'" + bodys.timeRegister + "');"
+        con.query(sql, function (err, result, fields) {
+          if (err) throw err;
+        });
+      }
+    }
+  });
+});
+//Xoá loại dự án
+app.post("/quanly/xoa-quan-ly-loai-du-an", (req, res) => {
+  const bodys = req.body;
+  var sql = "delete from loaiduan where id = (" + bodys.id + ")";
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    if (result.affectedRows == 1) {
+      res.send({ success: true, message: "Ok!" });
+    } else {
+      res.send({ success: false, message: "Khong_co_du_lieu!" });
+    }
+  });
+});
+//Lấy danh sách loại dự án
+app.get('/quanly/danh-sach-quan-ly-loai-du-an', function (req, res) {
+  var sql = "SELECT * FROM loaiduan order by id desc ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
+    }
+  })
+});
+//Sửa loại dự án
+app.post("/quanly/sua-quan-ly-loai-du-an", (req, res) => {
+  const bodys = req.body;
+  if (bodys.describeTypeProject == undefined) {
+    var sql = "UPDATE loaiduan SET tenduan = ('" + bodys.nameTypeProject + "'), date =('" + bodys.timeRegister + "') where id = (" + bodys.id + ")";
+    con.query(sql, function (err, result, fields) {
+      if (err) throw err;
+      if (result.affectedRows == 1) {
+        res.send({ success: true, message: "Ok!" });
+      }
+    });
+  } else {
+    var sql = "UPDATE loaiduan SET tenduan = ('" + bodys.nameTypeProject + "'), motaduan =('" + bodys.describeTypeProject + "'), date =('" + bodys.timeRegister + "') where id = (" + bodys.id + ")";
+    con.query(sql, function (err, result, fields) {
+      if (err) throw err;
+      if (result.affectedRows == 1) {
+        res.send({ success: true, message: "Ok!" });
+      }
+    });
+  }
+});
 
 //Phần báo cáo
 //Show báo cáo
 app.get('/showwork', function (req, res) {
   con.query("SELECT * FROM `baocao` order by id desc", function (err, result, fields) {
-    // console.log(result);
     if (err) throw err;
     res.send(result);
   });
@@ -524,12 +656,52 @@ app.post('/deleteword', function (req, res) {
   });
 })
 
+//Quản Lý Nhóm
+app.get('/getListManagerGr', function (req, res) {
+  con.query("SELECT * FROM `account` WHERE chucvu = '" + "Giám đốc" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Trưởng phòng" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Phó giám đốc" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Quản lý" + "' AND lockacc = '" + "0" + "' or chucvu = '" + "Phó phòng" + "' AND lockacc = '" + "0" + "' order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+//Hiển thị thông tin tài khoản đã mở
+app.get('/getListManagerGrAccountUnlock', function (req, res) {
+  con.query("SELECT * FROM `account` Where lockacc = '" + " 0 " + "' order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+//Thêm Nhóm Mới
+app.post("/getListManagerGr/them-nhom-moi", (req, res, next) => {
+  const bodys = req.body;
+  var sql = "SELECT * FROM danhsachnhom WHERE tennhom= '" + bodys.namGroup + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    }
+    if (result.length > 0) {
+      res.send({ success: false, message: "trung_ten" });
+    } else {
+        var sql = "INSERT INTO danhsachnhom ( tennhom, nguoiquanlyduan, image, nhanviennhom, mota, ngaytao, newupdate) values('" + bodys.namGroup + "' ,'" + bodys.LeaderGroup + "','" + bodys.avtatar + "','" + "[" + bodys.userGroup + "]" + "','" + bodys.commentGroup + "','" + bodys.date + "','" + bodys.date + "');"
+        con.query(sql, function (err, result, fields) {
+          if (err) throw err;
+          res.send({ success: true });
+        });
+    }
+  });
+});
+//Danh sách nhóm
+app.get('/getListGrType', function (req, res) {
+  con.query("SELECT * FROM `danhsachnhom` order by id desc", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 
 //Phần Công việc & Chấm Công
 //Show C.việc
 app.get('/showtaskmission', function (req, res) {
   con.query("SELECT * FROM `congviec` order by id desc", function (err, result, fields) {
-    // console.log(result);
     if (err) throw err;
     res.send(result);
   });
