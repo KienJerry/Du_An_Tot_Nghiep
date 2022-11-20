@@ -5,4 +5,5 @@ export const FullStateManagament = {
     datastaff: [],
     dataImg:[],
     dataGr:[],
+    deltailID:[],
 }

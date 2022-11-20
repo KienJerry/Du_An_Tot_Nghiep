@@ -102,3 +102,25 @@ export const getUploadIMG = (state, action) => {
             return { ...state };
     }
 }
+
+export const getListDetailGr = (state, action) => {
+    switch (action.type) {
+        case constants.GET_LIST_DETAIL_GR_LIST_SUCC:
+            return {
+                ...state,
+                deltailID: action.payload
+            }
+        case constants.GET_LIST_DETAIL_GR_LIST_FALSE:
+            fal.Fasle_gr_listDetail();
+            return {
+                ...state,
+            }
+        case constants.GET_LIST_DETAIL_GR_LIST_ERR:
+            WarningRegister();
+            return {
+                ...state,
+            }
+        default:
+            return { ...state };
+    }
+}

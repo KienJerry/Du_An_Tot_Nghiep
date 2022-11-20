@@ -8,7 +8,7 @@ import * as Reducer from '../../../../Reducer/Reducers/Managament/ProjectManagem
 import * as typeAPI from '../../../../Reducer/Fetch_API/ApiTypeProject';
 import moment from 'moment';
 import * as date from '../../../../components/DateTime/DateTime';
-import {API_GET_URL_IMAGE} from '../../../../api/index';
+import { API_GET_URL_IMAGE } from '../../../../api/index';
 
 function ListTypeGrMem() {
     const [state, dispatch] = useReducer(Reducer.setAddTypeProjectMana, FullStateManagament)
@@ -16,7 +16,6 @@ function ListTypeGrMem() {
         typeAPI.getListDataGr(dispatch)
     }, []);
 
-    console.log(state)
     return (
         <>
             <Breadcrumb className='label-breadcrumb'>
@@ -59,15 +58,18 @@ function ListTypeGrMem() {
                                 <p className="mt-2 text-sm leading-relaxed text-gray-700 line-clamp-3">
                                     {value.mota}
                                 </p>
+                                <p className="mt-2 text-sm leading-relaxed text-gray-700 line-clamp-3">
+                                    Thời gian cập nhật gần nhất: {moment(value.newupdate).format(date.MOMENT_DATE_TIME_SURE)}
+                                </p>
                             </div>
 
                             <div className="sm:flex sm:items-end sm:justify-end">
-                                <a
-                                    href="#"
+                                <Link
+                                    to={`/quan-ly-nhom/${value.slugs}`}
                                     className="no-underline block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400"
                                 >
                                     XEM CHI TIẾT
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </article>

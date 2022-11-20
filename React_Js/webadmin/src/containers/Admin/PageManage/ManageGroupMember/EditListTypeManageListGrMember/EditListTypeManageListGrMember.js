@@ -5,8 +5,8 @@ import { FullStateManagament } from '../../../../../Reducer/InitReducer/Managame
 import * as Reducer from '../../../../../Reducer/Reducers/Managament/ProjectManagement';
 import * as typeAPI from '../../../../../Reducer/Fetch_API/ApiTypeProject';
 import {DATE_TIME} from '../../../../../components/DateTime/DateTime'
-import './AddListTypeManageListGrMember.scss';
-import { Link } from 'react-router-dom';
+import './EditListTypeManageListGrMember.scss';
+import { Link, useParams } from 'react-router-dom';
 
 const { TextArea } = Input;
 function AddListTypeManageListGrMember() {
@@ -39,6 +39,7 @@ function AddListTypeManageListGrMember() {
         typeAPI.setAddGroupUser({ dispatch, values })
     };
 
+    // console.log(useParams().id)
     return (
         <>
             <Breadcrumb className='label-breadcrumb'>
