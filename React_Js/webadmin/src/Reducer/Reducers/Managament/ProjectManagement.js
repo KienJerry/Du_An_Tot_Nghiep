@@ -105,7 +105,7 @@ export const getUploadIMG = (state, action) => {
 
 export const getListDetailGr = (state, action) => {
     switch (action.type) {
-        case constants.GET_LIST_DETAIL_GR_LIST_SUCC:
+        case constants.GET_LIST_DETAIL_GR_LIST_SUCC: 
             return {
                 ...state,
                 deltailID: action.payload
