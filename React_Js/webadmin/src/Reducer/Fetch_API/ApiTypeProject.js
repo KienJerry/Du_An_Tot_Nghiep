@@ -135,3 +135,19 @@ export function upload({dispatchUpload, file}) {
         })
         .catch();
 }
+
+export function getDataDetailListGRMember({dispatch, slug}) {
+    axios.post(types.API_GET_DETAIL_GR , {slugs : slug})
+        .then(response => {
+            {
+                response.data?.success === false ?
+                    dispatch(actions.getListDetailsFalse(response.data))
+                    :
+                    dispatch(actions.getListDetailsSucc(response.data))
+            }
+            return response.data;
+        })
+        .catch(error => {
+            dispatch(actions.getListDetailsErr(error))
+        });
+}

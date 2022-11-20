@@ -15,6 +15,21 @@ export const ErrorRegister = () => {
   }, 1000);
 };
 
+
+export const Fasle_gr_listDetail = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Thất bại ! Thông tin nhóm không tồn tại trên hệ thống',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
 export const ErrorAdd = () => {
   message.loading({
     content: 'Loading...',

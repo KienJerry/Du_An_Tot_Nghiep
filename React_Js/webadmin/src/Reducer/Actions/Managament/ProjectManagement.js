@@ -80,3 +80,23 @@ export const getListGrSucc = (payload) => {
         payload: payload
     }
 }
+
+export const getListDetailsSucc = (payload) => {
+    return {
+        type: constants.GET_LIST_DETAIL_GR_LIST_SUCC,
+        payload: payload
+    }
+}
+export const getListDetailsFalse = (payload) => {
+    return {
+        type: constants.GET_LIST_DETAIL_GR_LIST_FALSE,
+        payload: payload
+    }
+}
+
+export const getListDetailsErr = (payload) => {
+    return {
+        type: constants.GET_LIST_DETAIL_GR_LIST_ERR,
+        payload: payload
+    }
+}

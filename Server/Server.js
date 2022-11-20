@@ -681,13 +681,27 @@ app.post("/getListManagerGr/them-nhom-moi", (req, res, next) => {
     if (result.length > 0) {
       res.send({ success: false, message: "trung_ten" });
     } else {
-        var sql = "INSERT INTO danhsachnhom ( tennhom, nguoiquanlyduan, image, nhanviennhom, mota, ngaytao, newupdate) values('" + bodys.namGroup + "' ,'" + bodys.LeaderGroup + "','" + bodys.avtatar + "','" + "[" + bodys.userGroup + "]" + "','" + bodys.commentGroup + "','" + bodys.date + "','" + bodys.date + "');"
-        con.query(sql, function (err, result, fields) {
-          if (err) throw err;
-          res.send({ success: true });
-        });
+      var sql = "INSERT INTO danhsachnhom ( slugs, tennhom, nguoiquanlyduan, image, nhanviennhom, mota, ngaytao, newupdate) values('" + bodys.slug + "' ,'" + bodys.namGroup + "' ,'" + bodys.LeaderGroup + "','" + bodys.avtatar + "','" + "[" + bodys.userGroup + "]" + "','" + bodys.commentGroup + "','" + bodys.date + "','" + bodys.date + "');"
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        res.send({ success: true });
+      });
     }
   });
+});
+//Chi tiết nhóm
+app.post("/getListManagerGr/chi-tiet-nhom", (req, res, next) => {
+  var sql = "SELECT * FROM danhsachnhom WHERE slugs= '" + req.body.slugs + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
+    }
+
+  })
 });
 //Danh sách nhóm
 app.get('/getListGrType', function (req, res) {
