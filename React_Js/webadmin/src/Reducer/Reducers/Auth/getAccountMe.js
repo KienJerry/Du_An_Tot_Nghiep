@@ -36,7 +36,6 @@ export const setProductAccountAvatar = (state , action) => {
 }
 
 export const getAccountAvatar = (state , action) => {
-    // console.log([action.payload]);
     switch(action.type) {
         case GET_AVATAR_ACCOUNT_SUCC:
             return {

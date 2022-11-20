@@ -1,44 +1,9 @@
-import { message } from 'antd';
+import { notification } from 'antd';
 
-const key = 'updatable';
-export const ErrorRegister = () => {
-  message.loading({
-    content: 'Loading...',
-    key,
+export const ErrForgotPW = () => {
+  notification.error({
+    message: 'Sao chép thất bại',
+    description:
+      'Bạn thử yêu cầu mật khẩu lần nữa xong thực hiện lại .',
   });
-  setTimeout(() => {
-    message.error({
-      content: 'Thất bại ! email đã được sử dụng',
-      key,
-      duration: 2,
-    });
-  }, 1000);
-};
-
-export const ErrorLogin = () => {
-  message.loading({
-    content: 'Loading...',
-    key,
-  });
-  setTimeout(() => {
-    message.error({
-      content: 'Thất bại ! Sai tài khoản hoặc mật khẩu',
-      key,
-      duration: 2,
-    });
-  }, 1000);
-};
-
-export const ErrorForgotPW = () => {
-  message.loading({
-    content: 'Loading...',
-    key,
-  });
-  setTimeout(() => {
-    message.error({
-      content: 'Thất bại ! Không có email trùng khớp trên hệ thống',
-      key,
-      duration: 2,
-    });
-  }, 1000);
 };

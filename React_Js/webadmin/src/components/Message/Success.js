@@ -16,6 +16,20 @@ export const SuccessRegister = () => {
   }, 1000);
 };
 
+export const SuccessAdd = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Thêm Thành Công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
 export const SuccessSetpass = () => {
   message.loading({
     content: 'Loading...',
@@ -58,4 +72,100 @@ export const SuccessLogin = () => {
     content: 'Loading...',
     key,
   });
+};
+
+export const SuccessRegisterStaff = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Tạo Tài Khoản Thành Công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
+export const SuccessNewAccountCancel = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Huỷ yêu cầu thành công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
+export const SuccessSetUnLockAccount = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Đã mở khoá tài khoản!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+export const SuccessSetLockAccount = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Đã khoá tài khoản!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+export const SuccessPositionAccount = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Đổi quyền thành công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
+export const SuccessUpdateAccount = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Cập nhật thành công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
+
+export const SuccessDel = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.success({
+      content: 'Xoá thành công!',
+      key,
+      duration: 2,
+    });
+  }, 1000);
 };

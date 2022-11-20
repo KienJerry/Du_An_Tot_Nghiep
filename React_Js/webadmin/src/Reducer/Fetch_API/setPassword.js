@@ -1,6 +1,7 @@
 import axios from "axios";
 import { API_SET_PASSWORD } from '../../api/index';
 import { setPasswordSucc, setPasswordFalse, setPasswordErr } from '../Actions/Auth/setPassWord';
+// import * as types from '../actionTypes';
 
 export const setPassword = (dispatch, formData) => {
     const Check_Login = localStorage.getItem('Save_Login');

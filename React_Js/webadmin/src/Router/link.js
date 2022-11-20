@@ -8,9 +8,17 @@ import ListAccount from '../containers/Admin/Account/fullListAccount/list_accoun
 import UpdateProfile from "../containers/Admin/DropdownShow/UpdateProfile";
 import ChangePassword from "../containers/Admin/DropdownShow/ChangePassword";
 import UserNew from '../containers/Admin/Account/UserNew/userNew';
-import DanhSachCongViec from '../containers/Admin/PagesAll/BangChamCong/List_DuAn'
+import ManageAccount from "../containers/Admin/Account/ManageAccount/ManageAccount";
+import ListProject from "../containers/Admin/Project/ListProject/listProject";
+import FormAddProject from "../containers/Admin/Project/ListProject/AddProjectNew/FormAddProject";
+import ManageTypeProject from '../containers/Admin/PageManage/ManageTypeProject/ManageTypeProject';
+import ListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/ListTypeManageListGrMember";
+import AddListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/AddListTypeManageListGrMember/AddListTypeManageListGrMember";
+import {NaviLayout} from '../containers/Admin';
 
-
+import PageDiemDanh from '../containers/User/PageDiemDanh/PageDiemDanh';
+import PageCongViec from '../containers/User/PageCongViec/PageCongViec';
+import PageBaoCaoCongViec from '../containers/User/PageBaoCaoCongViec/PageBaoCaoCongViec';
 const publicRouter = [
     {
         path: "/",
@@ -30,8 +38,18 @@ const publicRouter = [
         component: Register,
     },
     {
-        path: "/Danh-sach-cong-viec",
-        component: DanhSachCongViec,
+        path: "/Diem-danh",
+        component: PageDiemDanh,
+        // layout : NaviLayout
+    },
+    {
+        path: "/Cong-viec",
+        component: PageCongViec,
+        // layout : NaviLayout
+    },
+    {
+        path: "/Cong-viec/Bao-cao-cong-viec",
+        component: PageBaoCaoCongViec,
         // layout : NaviLayout
     },
 ]
@@ -45,6 +63,9 @@ const AdminRoute = [
     {
         path: "/*",
         component: NotFound,
+        // layout : NaviLayout,
+        layout : null ,
+
     },
     {
         path: "/dang-nhap",
@@ -65,14 +86,35 @@ const AdminRoute = [
     {
         path: "/thong-tin-ca-nhan",
         component: UpdateProfile,
-        // layout : null ,
     },
     {
         path: "/doi-mat-khau",
         component: ChangePassword,
-        // layout : NaviLayout
     },
-   
+    {
+        path: "/quan-ly-tai-khoan",
+        component: ManageAccount,
+    },
+    {
+        path: "/danh-sach-du-an",
+        component: ListProject,
+    },
+    {
+        path: "/danh-sach-du-an/them-du-an",
+        component: FormAddProject,
+    },
+    {
+        path: "/quan-ly-loai-du-an",
+        component: ManageTypeProject,
+    },
+    {
+        path: "/quan-ly-nhom",
+        component: ListTypeManageListGrMember,
+    },
+    {
+        path: "/quan-ly-nhom/them-nhom-moi",
+        component: AddListTypeManageListGrMember,
+    },
 ]
 
 const AuthRoute = [
@@ -92,7 +134,6 @@ const AuthRoute = [
         path: "/dang-ky",
         component: Register
     },
-    
 ]
 
 export {
