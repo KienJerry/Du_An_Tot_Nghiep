@@ -14,9 +14,11 @@ import FormAddProject from "../containers/Admin/Project/ListProject/AddProjectNe
 import ManageTypeProject from '../containers/Admin/PageManage/ManageTypeProject/ManageTypeProject';
 import ListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/ListTypeManageListGrMember";
 import AddListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/AddListTypeManageListGrMember/AddListTypeManageListGrMember";
-import DetailListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/DetailListTypeManageListGrMember/DetailListTypeManageListGrMember";
 import {NaviLayout} from '../containers/Admin';
 
+import PageDiemDanh from '../containers/User/PageDiemDanh/PageDiemDanh';
+import PageCongViec from '../containers/User/PageCongViec/PageCongViec';
+import PageBaoCaoCongViec from '../containers/User/PageBaoCaoCongViec/PageBaoCaoCongViec';
 const publicRouter = [
     {
         path: "/",
@@ -34,6 +36,21 @@ const publicRouter = [
     {
         path: "/dang-ky",
         component: Register,
+    },
+    {
+        path: "/Diem-danh",
+        component: PageDiemDanh,
+        // layout : NaviLayout
+    },
+    {
+        path: "/Cong-viec",
+        component: PageCongViec,
+        // layout : NaviLayout
+    },
+    {
+        path: "/Cong-viec/Bao-cao-cong-viec",
+        component: PageBaoCaoCongViec,
+        // layout : NaviLayout
     },
 ]
 
@@ -97,10 +114,6 @@ const AdminRoute = [
     {
         path: "/quan-ly-nhom/them-nhom-moi",
         component: AddListTypeManageListGrMember,
-    },
-    {
-        path: "/quan-ly-nhom/:id",
-        component: DetailListTypeManageListGrMember,
     },
 ]
 

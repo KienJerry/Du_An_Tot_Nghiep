@@ -12,6 +12,10 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import React, { useState } from 'react';
+import HearderUser from "../../Admin/PageAdmin/Header/indexHeaderUser"
+import {
+  Link,
+} from "react-router-dom";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -21,40 +25,14 @@ function getItem(label, key, icon, children) {
     label,
   };
 }
-// const items = [
-//   UserOutlined,
-//   VideoCameraOutlined,
-//   UploadOutlined,
-//   BarChartOutlined,
-//   CloudOutlined,
-//   AppstoreOutlined,
-//   TeamOutlined,
-//   ShopOutlined,
-// ].map((icon, index) => ({
-//   key: String(index + 1),
-//   icon: React.createElement(icon),
-//   label: `nav ${index + 1}`,
-// }));
+ 
 const items = [
-  getItem('Option 1', '1', <AppstoreOutlined />),
-  getItem('Option 2', '2', <BarChartOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <VideoCameraOutlined />),
-
-  getItem('Option 1', '1', <AppstoreOutlined />),
-  getItem('Option 2', '2', <BarChartOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <VideoCameraOutlined />),
+  getItem('Thống Kê', '1', <AppstoreOutlined />),
+  getItem('Nhân Viên', 'sub1', <UserOutlined />, [
+    getItem(<Link style={{textDecoration: "none" }} to={"/Diem-danh"}>Điểm Danh</Link>, '3'),
+    getItem(<Link style={{textDecoration: "none" }} to={"/Cong-viec"}>Công Việc</Link>, '4'),
+    getItem(<Link style={{textDecoration: "none" }} to={"/Cong-viec/Bao-cao-cong-viec"}>Báo Cáo Công Việc</Link>, '5'),
+  ])
 ];
 
 export default function HOME() {
@@ -63,7 +41,6 @@ export default function HOME() {
     <Layout hasSider>
       <div>
         <Sider
-
           style={{
             overflow: 'auto',
             height: '100vh',
@@ -73,10 +50,13 @@ export default function HOME() {
             bottom: 0,
             paddingTop: '62px',
           }}
+
+        
           // collapsible 
         >
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items} onClick={e => console.log(e)} />
+
         </Sider>
       </div>
       <div>
@@ -91,21 +71,11 @@ export default function HOME() {
             paddingLeft: 200,
           }}
         >
-          {/* {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-            className: 'trigger',
-            onClick: () => setCollapsed(!collapsed),
-          })} */}
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['0']}
-            items={new Array(3).fill(null).map((_, index) => ({
-              key: String(index + 1),
-              label: `menu-item ${index + 1}`,
-            }))}
-          />
+<HearderUser/>
+
         </Header>
+
+        
         <Content
           style={{
             margin: '70px 16px 10px 30vh',
@@ -114,21 +84,8 @@ export default function HOME() {
           <div
             className="site-layout-background"
           >
-            <p>long content</p>
-            {
-              // indicates very long content
-              Array.from(
-                {
-                  length: 100,
-                },
-                (_, index) => (
-                  <React.Fragment key={index}>
-                    {index % 20 === 0 && index ? 'more' : '...'}
-                    <br />
-                  </React.Fragment>
-                ),
-              )
-            }
+  
+ 
           </div>
         </Content>
         <Footer
@@ -136,7 +93,7 @@ export default function HOME() {
             textAlign: 'center',
           }}
         >
-          Ant Design ©2018 Created by Ant UED
+ 
         </Footer>
       </Layout>
       </div>
