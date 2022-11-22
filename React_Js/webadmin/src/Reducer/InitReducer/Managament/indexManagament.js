@@ -6,4 +6,8 @@ export const FullStateManagament = {
     dataImg:[],
     dataGr:[],
     deltailID:[],
+    user: {
+        manager :[],
+        user : [],
+    }
 }

@@ -126,7 +126,7 @@ export function setAddGroupUser({ dispatch, values }) {
         });
 }
 
-export function upload({dispatchUpload, file}) {
+export function upload({ dispatchUpload, file }) {
     const formData = new FormData();
     formData.append('file', file);
     axios.post(types.API_SET_DEL_AVATAR_ACCOUNT, formData)
@@ -136,8 +136,8 @@ export function upload({dispatchUpload, file}) {
         .catch();
 }
 
-export function getDataDetailListGRMember({dispatch, slug}) {
-    axios.post(types.API_GET_DETAIL_GR , {slugs : slug})
+export function getDataDetailListGRMember({ dispatch, slug }) {
+    axios.post(types.API_GET_DETAIL_GR, { slugs: slug })
         .then(response => {
             {
                 response.data?.success === false ?
@@ -149,5 +149,27 @@ export function getDataDetailListGRMember({dispatch, slug}) {
         })
         .catch(error => {
             dispatch(actions.getListDetailsErr(error))
+        });
+}
+
+export function getManager({ dispatchManage, id }) {
+    axios.post(types.API_GET_DETAIL_ACCOUNT, { id: id })
+        .then(response => {
+            dispatchManage(actions.getManage(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            dispatchManage(actions.getListDetailsErr(error))
+        });
+}
+
+export function getManagerUser ({ dispatchUser, heads }) {
+    axios.post(types.API_GET_USER_PROJ, { id: heads })
+        .then(response => {
+            dispatchUser(actions.getManageUser(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            dispatchUser(actions.getListDetailsErr(error))
         });
 }

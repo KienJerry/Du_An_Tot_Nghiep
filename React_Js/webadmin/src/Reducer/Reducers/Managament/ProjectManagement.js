@@ -120,6 +120,22 @@ export const getListDetailGr = (state, action) => {
             return {
                 ...state,
             }
+        case constants.GET_MANAGER:
+            return {
+                ...state,
+                user:{
+                    ...state.user,
+                    manager: action.payload
+                }
+            }
+        case constants.GET_MANAGER_USER:
+            return {
+                ...state,
+                user:{
+                    ...state.user,
+                    user: action.payload
+                }
+            }
         default:
             return { ...state };
     }

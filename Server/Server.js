@@ -380,6 +380,20 @@ app.post("/update-quyen-account", (req, res) => {
     }
   })
 });
+//Chi tiết tài khoản 
+app.post("/detail-account", (req, res) => {
+  const body = req.body;
+  var sql = "SELECT * FROM account WHERE id= '" + body?.id + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "Khong_tim_thay_tai_khoan!" });
+    }
+  })
+});
 
 //Newaccount
 app.post('/new-account-staff', function (req, res) {
@@ -709,6 +723,21 @@ app.get('/getListGrType', function (req, res) {
     if (err) throw err;
     res.send(result);
   });
+});
+
+//Danh sách nhân viên trong nhóm
+app.post("/getListManagerGr/detail-user-account", (req, res) => {
+  const body = req.body;
+  var sql = "SELECT * FROM account WHERE id IN (" + body.id + ") ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "Khong_tim_thay_tai_khoan!" });
+    }
+  })
 });
 
 

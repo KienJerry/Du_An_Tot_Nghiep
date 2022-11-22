@@ -100,3 +100,17 @@ export const getListDetailsErr = (payload) => {
         payload: payload
     }
 }
+
+export const getManage = (payload) => {
+    return {
+        type: constants.GET_MANAGER,
+        payload: payload
+    }
+}
+
+export const getManageUser = (payload) => {
+    return {
+        type: constants.GET_MANAGER_USER,
+        payload: payload
+    }
+}

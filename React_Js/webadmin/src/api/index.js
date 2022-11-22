@@ -33,4 +33,6 @@ export const API_GET_LIST_USER_LEADER = api + 'getListManagerGr';
 export const API_GET_LIST_USER_USER = api + 'getListManagerGrAccountUnlock';
 export const API_SET_ADD_GR = api + getGroupUser + 'them-nhom-moi';
 export const API_GET_DETAIL_GR = api + getGroupUser + 'chi-tiet-nhom';
+export const API_GET_USER_PROJ = api + getGroupUser + 'detail-user-account';
 export const API_GET_LIST_GR_TYPE = api + 'getListGrType';
+export const API_GET_DETAIL_ACCOUNT = api + 'detail-account';
