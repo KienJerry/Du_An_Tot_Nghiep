@@ -29,8 +29,6 @@ function DetailListTypeManageListGrMember() {
         }
     }, [state])
 
-    console.log(User)
-
     return (
         <>
             <section>
