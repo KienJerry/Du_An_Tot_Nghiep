@@ -173,3 +173,14 @@ export function getManagerUser ({ dispatchUser, heads }) {
             dispatchUser(actions.getListDetailsErr(error))
         });
 }
+
+export function getListGrUser(dispatchGr) {
+    axios.get(types.API_GET_LIST_GR_TYPE)
+    .then(response => {
+        dispatchGr(actions.getListGrSuccs(response.data))
+        return response.data;
+    })
+    .catch(error => {
+        dispatchGr(actions.setAddProjectTypeManagementErr(error))
+    });
+}

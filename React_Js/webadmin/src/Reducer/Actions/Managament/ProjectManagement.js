@@ -81,6 +81,13 @@ export const getListGrSucc = (payload) => {
     }
 }
 
+export const getListGrSuccs = (payload) => {
+    return {
+        type: constants.GET_LIST_GR_SUCCS,
+        payload: payload
+    }
+}
+
 export const getListDetailsSucc = (payload) => {
     return {
         type: constants.GET_LIST_DETAIL_GR_LIST_SUCC,
