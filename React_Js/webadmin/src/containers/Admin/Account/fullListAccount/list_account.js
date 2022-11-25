@@ -38,8 +38,6 @@ function App() {
     state.all && setPag({ show: pag.all.slice(start, end), all: state.all, total: state.total });
   }
 
-  console.log(state)
-
   const onChangeSeen = (value) => {
     setList(value)
     setSeenModal(true)

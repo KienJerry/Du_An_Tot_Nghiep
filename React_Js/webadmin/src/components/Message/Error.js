@@ -43,6 +43,19 @@ export const ErrorAdd = () => {
     });
   }, 1000);
 };
+export const ErrorAddProject = () => {
+  message.loading({
+    content: 'Loading...',
+    key,
+  });
+  setTimeout(() => {
+    message.error({
+      content: 'Thất bại ! Tên dự án đã tồn tại',
+      key,
+      duration: 2,
+    });
+  }, 1000);
+};
 export const ErrorAdds = () => {
   message.loading({
     content: 'Loading...',

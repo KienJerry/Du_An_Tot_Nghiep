@@ -2,62 +2,38 @@ import { Tabs } from 'antd';
 import './listProject.scss';
 import AddProJect from './AddProjectNew/AddProject';
 import React from 'react';
+import TabAll from '../TabAll/tabAll';
+import TabClose from '../TabClose/tabClose';
+import TabOpen from '../TabOpen/tabOpen';
+import TabWaitting from '../TabWaitting/tabWaitting';
 
 
 const initialItems = [
   {
     label: 'Đang mở',
-    children:
-      (
-        <>
-          <p>Content of Tab Pane 1</p>
-          <p>Content of Tab Pane 1</p>
-          <p>Content of Tab Pane 1</p>
-        </>
-      ),
+    children: TabOpen(),
     key: '1',
   },
   {
     label: 'Đang chờ',
-    children:
-      (
-        <>
-          <p>Content of Tab Pane 1.5</p>
-          <p>Content of Tab Pane 1</p>
-          <p>Content of Tab Pane 12</p>
-        </>
-      ),
+    children: TabWaitting(),
     key: '2',
   },
   {
     label: 'Đã đóng',
-    children:
-      (
-        <>
-          <p>Content of Tab Pane 2</p>
-          <p>Content of Tab Pane 2</p>
-          <p>Content of Tab Pane 2</p>
-        </>
-      ),
+    children: TabClose(),
     key: '3',
   },
   {
     label: 'Tất cả',
-    children:
-      (
-        <>
-          <p>Content of Tab Pane 3</p>
-          <p>Content of Tab Pane 3</p>
-          <p>Content of Tab Pane 3</p>
-        </>
-      ),
+    children: TabAll(),
     key: '4',
     closable: false,
   },
 ];
-const App = () => (
+const listProj = () => (
   <div className="card-container">
     <Tabs type="card" items={initialItems} tabBarExtraContent={AddProJect()} />
   </div>
 );
-export default App;
+export default listProj;

@@ -5,9 +5,12 @@ import { PlusOutlined } from '@ant-design/icons';
 import React, { useState, useRef, useReducer, useEffect } from 'react';
 import { FullStateManagament } from '../../../../../Reducer/InitReducer/Managament/indexManagament';
 import { ActionTypeProject } from '../../../../../Reducer/InitReducer/InitProject/indexPrj';
+import { List } from '../../../../../Reducer/InitReducer/Staff/ListStaff';
 import * as Reducer from '../../../../../Reducer/Reducers/Managament/ProjectManagement';
 import * as Reducers from '../../../../../Reducer/Reducers/Projects/useProject';
+import * as Reducered from '../../../../../Reducer/Reducers/Staff/listStaff';
 import * as typeAPI from '../../../../../Reducer/Fetch_API/ApiTypeProject';
+import { getStaff } from '../../../../../Reducer/Fetch_API/getlistStaff';
 const { RangePicker } = DatePicker;
 const FormAddProject = () => {
     const [form] = Form.useForm();
@@ -17,6 +20,7 @@ const FormAddProject = () => {
     const [stateLeader, dispatchLeader] = useReducer(Reducer.getListUserLeader, FullStateManagament)
     const [stateUpload, dispatchUpload] = useReducer(Reducer.getUploadIMG, FullStateManagament)
     const [stateAddPrj, dispatchAddPrj] = useReducer(Reducers.ActionPrj, ActionTypeProject)
+    const [state, dispatch] = useReducer(Reducered.getListStaffs, List);
     const [avtatar, setAvatar] = useState()
     const [name, setName] = useState('');
     const inputRef = useRef(null);
@@ -25,6 +29,7 @@ const FormAddProject = () => {
         typeAPI.getListTypeProject(dispatchitem)
         typeAPI.getListGrUser(dispatchGr)
         typeAPI.getListDataUserLeader(dispatchLeader)
+        getStaff(dispatch);
     }, [stateAddItem]);
     useEffect(() => {
         return () => {
@@ -180,7 +185,6 @@ const FormAddProject = () => {
                             <Form.Item
                                 label="Thêm nhân viên"
                                 name="addnewuser"
-                                rules={type.Validate_required}
                             >
                                 <Select
                                     mode="multiple"
@@ -190,8 +194,8 @@ const FormAddProject = () => {
                                     }}
                                     placeholder="Chọn để tìm kiếm nhân viên"
                                     filterOption={(input, option) => (option?.label ?? '').includes(input)}
-                                    options={stateGr.dataGr?.map((item) => ({
-                                        label: item.tennhom,
+                                    options={state?.all.map((item) => ({
+                                        label: item.ten,
                                         value: item.id,
                                     }))}
                                 />
