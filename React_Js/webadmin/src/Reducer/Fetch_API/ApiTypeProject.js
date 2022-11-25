@@ -163,7 +163,7 @@ export function getManager({ dispatchManage, id }) {
         });
 }
 
-export function getManagerUser ({ dispatchUser, heads }) {
+export function getManagerUser({ dispatchUser, heads }) {
     axios.post(types.API_GET_USER_PROJ, { id: heads })
         .then(response => {
             dispatchUser(actions.getManageUser(response.data))
@@ -176,11 +176,35 @@ export function getManagerUser ({ dispatchUser, heads }) {
 
 export function getListGrUser(dispatchGr) {
     axios.get(types.API_GET_LIST_GR_TYPE)
-    .then(response => {
-        dispatchGr(actions.getListGrSuccs(response.data))
-        return response.data;
-    })
-    .catch(error => {
-        dispatchGr(actions.setAddProjectTypeManagementErr(error))
-    });
+        .then(response => {
+            dispatchGr(actions.getListGrSuccs(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            dispatchGr(actions.setAddProjectTypeManagementErr(error))
+        });
+}
+
+export function setAddFormPj({ values, dispatchAddPrj }) {
+    console.log(values)
+    // axios.get(types.API_GET_LIST_GR_TYPE)
+    // .then(response => {
+    //     dispatchGr(actions.getListGrSuccs(response.data))
+    //     return response.data;
+    // })
+    // .catch(error => {
+    //     dispatchGr(actions.setAddProjectTypeManagementErr(error))
+    // });
+}
+
+export function setAddFormPjs({ values, dispatchAddPrj }) {
+    console.log(values)
+    // axios.get(types.API_GET_LIST_GR_TYPE)
+    // .then(response => {
+    //     dispatchGr(actions.getListGrSuccs(response.data))
+    //     return response.data;
+    // })
+    // .catch(error => {
+    //     dispatchGr(actions.setAddProjectTypeManagementErr(error))
+    // });
 }

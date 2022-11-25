@@ -4,7 +4,9 @@ import * as type from '../../../../../components/Validate/CheckValidate';
 import { PlusOutlined } from '@ant-design/icons';
 import React, { useState, useRef, useReducer, useEffect } from 'react';
 import { FullStateManagament } from '../../../../../Reducer/InitReducer/Managament/indexManagament';
+import { ActionTypeProject } from '../../../../../Reducer/InitReducer/InitProject/indexPrj';
 import * as Reducer from '../../../../../Reducer/Reducers/Managament/ProjectManagement';
+import * as Reducers from '../../../../../Reducer/Reducers/Projects/useProject';
 import * as typeAPI from '../../../../../Reducer/Fetch_API/ApiTypeProject';
 const { RangePicker } = DatePicker;
 const FormAddProject = () => {
@@ -14,6 +16,7 @@ const FormAddProject = () => {
     const [stateGr, dispatchGr] = useReducer(Reducer.setAddTypeProjectMana, FullStateManagament)
     const [stateLeader, dispatchLeader] = useReducer(Reducer.getListUserLeader, FullStateManagament)
     const [stateUpload, dispatchUpload] = useReducer(Reducer.getUploadIMG, FullStateManagament)
+    const [stateAddPrj, dispatchAddPrj] = useReducer(Reducers.ActionPrj, ActionTypeProject)
     const [avtatar, setAvatar] = useState()
     const [name, setName] = useState('');
     const inputRef = useRef(null);
@@ -42,7 +45,12 @@ const FormAddProject = () => {
     };
 
     const onFinish = (values) => {
-        console.log(values);
+        {
+            values.StartProject === undefined || values.StartProject === true ?
+            typeAPI.setAddFormPj({values, dispatchAddPrj})
+            :
+            typeAPI.setAddFormPjs({values, dispatchAddPrj})
+        }
     };
 
     const handlePreviewImage = (e) => {
