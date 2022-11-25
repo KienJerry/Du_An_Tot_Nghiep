@@ -6,7 +6,7 @@ import * as Reducer from '../../../../../Reducer/Reducers/Managament/ProjectMana
 import * as typeAPI from '../../../../../Reducer/Fetch_API/ApiTypeProject';
 import {DATE_TIME} from '../../../../../components/DateTime/DateTime'
 import './EditListTypeManageListGrMember.scss';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const { TextArea } = Input;
 function AddListTypeManageListGrMember() {
@@ -38,8 +38,6 @@ function AddListTypeManageListGrMember() {
         values.slug = values.namGroup.toLowerCase().replace(/[^\w-]+/g, '-');
         typeAPI.setAddGroupUser({ dispatch, values })
     };
-
-    // console.log(useParams().id)
     return (
         <>
             <Breadcrumb className='label-breadcrumb'>

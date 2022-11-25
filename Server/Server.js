@@ -380,6 +380,20 @@ app.post("/update-quyen-account", (req, res) => {
     }
   })
 });
+//Chi tiết tài khoản 
+app.post("/detail-account", (req, res) => {
+  const body = req.body;
+  var sql = "SELECT * FROM account WHERE id= '" + body?.id + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "Khong_tim_thay_tai_khoan!" });
+    }
+  })
+});
 
 //Newaccount
 app.post('/new-account-staff', function (req, res) {
@@ -709,6 +723,42 @@ app.get('/getListGrType', function (req, res) {
     if (err) throw err;
     res.send(result);
   });
+});
+
+//Danh sách nhân viên trong nhóm
+app.post("/getListManagerGr/detail-user-account", (req, res) => {
+  const body = req.body;
+  var sql = "SELECT * FROM account WHERE id IN (" + body.id + ") ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "Khong_tim_thay_tai_khoan!" });
+    }
+  })
+});
+
+
+//Quản Lý Dự Án
+//Thêm Dự Án mới
+app.post("/add-new-prj", (req, res) => {
+  const bodys = req.body;
+  var sql = "SELECT * FROM danhsachduan WHERE slug = '" + bodys.slugs + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send({ success: false, message: "Ten_Du_An_Da_Ton_Tai!" });
+    } else {
+      var sql = "INSERT INTO danhsachduan ( slug, tenduan, loaiduan, tennhom, nguoiquanly, ngaybatdau, ngayketthuc, img, khoichayduan, dateupdate, nhanvien) values('" + bodys.slugs + "' ,'" + bodys.nameProject + "' ,'" + bodys.projectType + "','" + bodys.nameGroup + "','" + bodys.Leader + "','" + bodys.datedob[0] + "','" + bodys.datedob[1] + "','" + bodys.UpdateImg + "','" + bodys.StartProject + "','" + bodys.dateUpdate + "','" + bodys.addnewuser + "');"
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        res.send({ success: true });
+      });
+    }
+  })
 });
 
 

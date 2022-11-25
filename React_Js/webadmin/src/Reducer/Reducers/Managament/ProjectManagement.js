@@ -51,6 +51,11 @@ export const setAddTypeProjectMana = (state, action) => {
                 ...state,
                 dataGr: action.payload
             }
+        case constants.GET_LIST_GR_SUCCS:
+            return {
+                ...state,
+                dataGr: action.payload
+            }
         case constants.SET_ADD_PROJECT_TYPE_MANAGEMENT_ERROR:
             WarningRegister();
             return {
@@ -65,8 +70,8 @@ export const getListUserLeader = (state, action) => {
     switch (action.type) {
         case constants.GET_LIST_DATA_USER_LEADER:
             const op = action.payload.map(value => {
-                const {id, ten} = value;
-                return {value: id , label: ten}
+                const { id, ten } = value;
+                return { value: id, label: ten }
             })
             return {
                 ...state,
@@ -74,8 +79,8 @@ export const getListUserLeader = (state, action) => {
             }
         case constants.GET_LIST_DATA_USER_STAFFS:
             const opstaff = action.payload.map(value => {
-                const {id, ten} = value;
-                return {value: id , label: ten}
+                const { id, ten } = value;
+                return { value: id, label: ten }
             })
             return {
                 ...state,
@@ -105,7 +110,7 @@ export const getUploadIMG = (state, action) => {
 
 export const getListDetailGr = (state, action) => {
     switch (action.type) {
-        case constants.GET_LIST_DETAIL_GR_LIST_SUCC: 
+        case constants.GET_LIST_DETAIL_GR_LIST_SUCC:
             return {
                 ...state,
                 deltailID: action.payload
@@ -119,6 +124,22 @@ export const getListDetailGr = (state, action) => {
             WarningRegister();
             return {
                 ...state,
+            }
+        case constants.GET_MANAGER:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    manager: action.payload
+                }
+            }
+        case constants.GET_MANAGER_USER:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    user: action.payload
+                }
             }
         default:
             return { ...state };

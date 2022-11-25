@@ -100,7 +100,7 @@ function App() {
                   <td>
                     <span className="status--process">{value.gioitinh && value.gioitinh === "1" ? <p style={{ color: 'blue' }}>Nam</p> : value.gioitinh === "2" ? <p style={{ color: '#fd00c6' }}>Nữ</p> : "Khác"}</span>
                   </td>
-                  <td >{value.chucvu === "Giám đốc" ? <span className="giam-doc">Giám đốc</span> : value.chucvu === "" || value.chucvu === null || value.chucvu === undefined ?  <span>Nhân Viên</span> : <span>{value.chucvu}</span>}</td>
+                  <td >{value.chucvu === "Giám đốc" ? <span className="giam-doc">Giám đốc</span> : value.chucvu === "" || value.chucvu === null || value.chucvu === undefined ? <span>Nhân Viên</span> : <span>{value.chucvu}</span>}</td>
                   <td>
                     <div className="table-data-feature">
                       <button className="item" data-toggle="tooltip" data-placement="top" title="Xem chi tiết" onClick={() => onChangeSeen(value)}>
