@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as types from '../../api/index';
 import * as actions from '../Actions/Managament/ProjectManagement';
 import { DATE_TIME } from '../../components/DateTime/DateTime';
+import { Type_Slug } from '../../components/slug/index_slug';
 
 export function setAddTypeProject({ dispatch, values }) {
     axios.post(types.API_ADD_PROJECT_MANAGEMENT, values)
@@ -185,26 +186,33 @@ export function getListGrUser(dispatchGr) {
         });
 }
 
-export function setAddFormPj({ values, dispatchAddPrj }) {
-    console.log(values)
-    // axios.get(types.API_GET_LIST_GR_TYPE)
-    // .then(response => {
-    //     dispatchGr(actions.getListGrSuccs(response.data))
-    //     return response.data;
-    // })
-    // .catch(error => {
-    //     dispatchGr(actions.setAddProjectTypeManagementErr(error))
-    // });
+export function setAddFormPj({ values, dispatchAddPrj, img }) {
+    values.StartProject = true;
+    values.UpdateImg = img;
+    values.slugs = Type_Slug(values.nameProject)
+    values.dateUpdate = new Date().toISOString();
+    axios.post(types.API_SET_ADD_NEW_PROJECTS, values)
+        .then(response => {
+            console.log(response.data);
+            // dispatchGr(actions.getListGrSuccs(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            // dispatchGr(actions.setAddProjectTypeManagementErr(error))
+        });
 }
 
-export function setAddFormPjs({ values, dispatchAddPrj }) {
-    console.log(values)
-    // axios.get(types.API_GET_LIST_GR_TYPE)
-    // .then(response => {
-    //     dispatchGr(actions.getListGrSuccs(response.data))
-    //     return response.data;
-    // })
-    // .catch(error => {
-    //     dispatchGr(actions.setAddProjectTypeManagementErr(error))
-    // });
+export function setAddFormPjs({ values, dispatchAddPrj, img }) {
+    values.StartProject = false;
+    values.UpdateImg = img;
+    values.slugs = Type_Slug(values.nameProject)
+    values.dateUpdate = new Date().toISOString();
+    axios.post(types.API_SET_ADD_NEW_PROJECTS, values)
+        .then(response => {
+            // dispatchGr(actions.getListGrSuccs(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            // dispatchGr(actions.setAddProjectTypeManagementErr(error))
+        });
 }

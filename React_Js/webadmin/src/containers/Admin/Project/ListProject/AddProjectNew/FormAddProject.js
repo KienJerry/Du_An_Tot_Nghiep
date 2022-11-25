@@ -45,11 +45,12 @@ const FormAddProject = () => {
     };
 
     const onFinish = (values) => {
+        const img = stateUpload?.dataImg?.filename
         {
             values.StartProject === undefined || values.StartProject === true ?
-            typeAPI.setAddFormPj({values, dispatchAddPrj})
-            :
-            typeAPI.setAddFormPjs({values, dispatchAddPrj})
+                typeAPI.setAddFormPj({ values, dispatchAddPrj, img })
+                :
+                typeAPI.setAddFormPjs({ values, dispatchAddPrj, img })
         }
     };
 
@@ -176,6 +177,29 @@ const FormAddProject = () => {
                             </Form.Item>
                         </Col>
                         <Col lg={11} md={24} sm={24} xs={24}>
+                            <Form.Item
+                                label="Thêm nhân viên"
+                                name="addnewuser"
+                                rules={type.Validate_required}
+                            >
+                                <Select
+                                    mode="multiple"
+                                    allowClear
+                                    style={{
+                                        width: '100%',
+                                    }}
+                                    placeholder="Chọn để tìm kiếm nhân viên"
+                                    filterOption={(input, option) => (option?.label ?? '').includes(input)}
+                                    options={stateGr.dataGr?.map((item) => ({
+                                        label: item.tennhom,
+                                        value: item.id,
+                                    }))}
+                                />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row className='form-col' style={{ paddingTop: '20px' }}>
+                        <Col lg={24} md={24} sm={24} xs={24}>
                             <Row className='form-coll'>
                                 <Col span={11}>
                                     <Form.Item

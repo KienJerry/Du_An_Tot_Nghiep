@@ -743,18 +743,22 @@ app.post("/getListManagerGr/detail-user-account", (req, res) => {
 
 //Quản Lý Dự Án
 //Thêm Dự Án mới
-app.post("/themduanmoi", (req, res) => {
-  const body = req.body;
-  // var sql = "SELECT * FROM account WHERE id IN (" + body.id + ") ";
-  // con.query(sql, function (err, result, fields) {
-  //   if (err) {
-  //     res.send({ success: false, message: "Database không có kết nối!" });
-  //   } if (result.length > 0) {
-  //     res.send(result);
-  //   } else {
-  //     res.send({ success: false, message: "Khong_tim_thay_tai_khoan!" });
-  //   }
-  // })
+app.post("/add-new-prj", (req, res) => {
+  const bodys = req.body;
+  var sql = "SELECT * FROM danhsachduan WHERE slug = '" + bodys.slugs + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send({ success: false, message: "Ten_Du_An_Da_Ton_Tai!" });
+    } else {
+      var sql = "INSERT INTO danhsachduan ( slug, tenduan, loaiduan, tennhom, nguoiquanly, ngaybatdau, ngayketthuc, img, khoichayduan, dateupdate, nhanvien) values('" + bodys.slugs + "' ,'" + bodys.nameProject + "' ,'" + bodys.projectType + "','" + bodys.nameGroup + "','" + bodys.Leader + "','" + bodys.datedob[0] + "','" + bodys.datedob[1] + "','" + bodys.UpdateImg + "','" + bodys.StartProject + "','" + bodys.dateUpdate + "','" + bodys.addnewuser + "');"
+      con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        res.send({ success: true });
+      });
+    }
+  })
 });
 
 
