@@ -752,7 +752,7 @@ app.post("/add-new-prj", (req, res) => {
     } if (result.length > 0) {
       res.send({ success: false, message: "Ten_Du_An_Da_Ton_Tai!" });
     } else {
-      var sql = "INSERT INTO danhsachduan ( slug, tenduan, loaiduan, tennhom, nguoiquanly, ngaybatdau, ngayketthuc, img, khoichayduan, dateupdate, nhanvien) values('" + bodys.slugs + "' ,'" + bodys.nameProject + "' ,'" + bodys.projectType + "','" + bodys.nameGroup + "','" + bodys.Leader + "','" + bodys.datedob[0] + "','" + bodys.datedob[1] + "','" + bodys.UpdateImg + "','" + bodys.StartProject + "','" + bodys.dateUpdate + "','" + bodys.addnewuser + "');"
+      var sql = "INSERT INTO danhsachduan (mota ,slug, tenduan, loaiduan, tennhom, nguoiquanly, ngaybatdau, ngayketthuc, img, khoichayduan, dateupdate, nhanvien) values('" + bodys.describeTypeProject + "' , '" + bodys.slugs + "' ,'" + bodys.nameProject + "' ,'" + bodys.projectType + "','" + bodys.nameGroup + "','" + bodys.Leader + "','" + bodys.datedob[0] + "','" + bodys.datedob[1] + "','" + bodys.UpdateImg + "','" + bodys.StartProject + "','" + bodys.dateUpdate + "','" + bodys.addnewuser + "');"
       con.query(sql, function (err, result, fields) {
         if (err) throw err;
         res.send({ success: true });

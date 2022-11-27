@@ -12,6 +12,7 @@ import * as Reducered from '../../../../../Reducer/Reducers/Staff/listStaff';
 import * as typeAPI from '../../../../../Reducer/Fetch_API/ApiTypeProject';
 import { getStaff } from '../../../../../Reducer/Fetch_API/getlistStaff';
 const { RangePicker } = DatePicker;
+const { TextArea } = Input;
 const FormAddProject = () => {
     const [form] = Form.useForm();
     const [stateItem, dispatchitem] = useReducer(Reducer.setAddTypeProjectMana, FullStateManagament)
@@ -223,6 +224,21 @@ const FormAddProject = () => {
                                         name="StartProject"
                                     >
                                         <Switch defaultChecked />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    <Row className='form-col' style={{ paddingTop: '20px' }}>
+                        <Col lg={24} md={24} sm={24} xs={24}>
+                            <Row className='form-coll'>
+                                <Col span={23}>
+                                    <Form.Item
+                                        label="Mô Tả Loại Dự Án"
+                                        name="describeTypeProject"
+                                        rules={type.Validate_required}
+                                    >
+                                        <TextArea rows={4} placeholder="Nhập Mô Tả" />
                                     </Form.Item>
                                 </Col>
                             </Row>
