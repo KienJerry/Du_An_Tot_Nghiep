@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './tabAll.scss';
 
-function TabAll() {
+const TabAll = () => {
     return ( 
         <div className="bg-white dark:bg-gray-900">
                 <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -15,8 +15,8 @@ function TabAll() {
                                 <span className="text-sm">Đã mở 14 ngày trước</span>
                             </div>
                             <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white "><p style={{ color: "rgb(61, 61, 239)" }}>How to quickly deploy a static website</p></h2>
-                            {/* <img class="object-cover h-48 w-96 ..." src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"></img> */}
-                            <img class="object-cover h-48 w-180 ..." src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"></img>
+                            {/* <img className="object-cover h-48 w-96 ..." src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"></img> */}
+                            <img className="object-cover h-48 w-180 ..." src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"></img>
                             <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
                                 Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers influence both web designers and developers.</p>
                             <div className="flex justify-between items-center">

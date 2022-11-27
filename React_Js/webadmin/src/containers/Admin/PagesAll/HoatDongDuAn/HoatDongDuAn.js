@@ -30,7 +30,6 @@ function HoatDongDuAn() {
 
     // xóa bài đăng
     const deletePost = (id) => {
-      console.log(id);
       axios.post( 'http://' + post + '/deleteMission', { id: id })
         .then(response => {
           if (response.data == 'ok') {

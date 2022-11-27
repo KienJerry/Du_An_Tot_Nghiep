@@ -57,7 +57,7 @@ function Modal() {
                     popup ?
                         <div className="formMain">
                             <div className="popup">
-                                <div class="testbox">
+                                <div className="testbox">
                                     <div className="boderpopup">
                                         <form action="/" onSubmit={handleSubmit(onSubmit)}>
                                             <div>
@@ -84,7 +84,7 @@ function Modal() {
 
 
                                               {/* )} */}
-                                                <div class="btn-block">
+                                                <div className="btn-block">
                                                     <button className="btn-close" style={{ background: "red", width: "20px", height: "20px", top: "8px", marginLeft: "326px" }} onClick={closePopup} href="/"> X </button>
                                                 </div>
                                             </div>
@@ -109,7 +109,7 @@ function Modal() {
                                                     <h4>Vai Trò</h4>
                                                 </div>
                                                 <select  {...register("vaitro")} >
-                                                    <option class="disabled" value="location" disabled selected>*Please Select*</option>
+                                                    <option className="disabled" value="location" disabled selected>*Please Select*</option>
                                                     <option  >Quản Trị</option>
                                                     <option  >Nhà Phát Triển</option>
                                                     <option  >Thiết Kế </option>
@@ -136,9 +136,9 @@ function Modal() {
                                                 <div className='textFrmAdd5'>
                                                     <h4>Thời Gian</h4>
                                                 </div>
-                                                <div class="time-visited">
+                                                <div className="time-visited">
                                                     <input type="time" name="timevisited" required {...register("gio")} />
-                                                    <i class="fas fa-clock"></i>
+                                                    <i className="fas fa-clock"></i>
                                                 </div>
                                             </div>
                                             {/* Ghi Chú */}

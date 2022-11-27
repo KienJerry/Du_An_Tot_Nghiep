@@ -174,6 +174,21 @@ app.post('/getaccountme', function (req, res) {
 
   })
 });
+
+//thông tin tài khoản cá nhân theo ID
+app.post('/getaccountmeID', function (req, res) {
+  var sql = "SELECT * FROM account WHERE id= '" + req.body.data + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
+    }
+
+  })
+});
 //Thời gian đăng nhập
 app.post('/new-login', function (req, res) {
   var sql = "UPDATE account SET timelogin = '" + req.body.datetime + "' where email = '" + req.body.email + "'";
@@ -714,7 +729,6 @@ app.post("/getListManagerGr/chi-tiet-nhom", (req, res, next) => {
     } else {
       res.send({ success: false, message: "False!" });
     }
-
   })
 });
 //Danh sách nhóm
@@ -757,6 +771,20 @@ app.post("/add-new-prj", (req, res) => {
         if (err) throw err;
         res.send({ success: true });
       });
+    }
+  })
+});
+//Lấy danh sách dự án đang mở
+app.post('/get-list-project-open', function (req, res) {
+  const bodys = req.body;
+  var sql = "SELECT * FROM danhsachduan WHERE	khoichayduan= '" + bodys.data + "' ";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
     }
   })
 });
