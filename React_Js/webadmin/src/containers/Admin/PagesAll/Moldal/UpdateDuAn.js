@@ -100,14 +100,14 @@ function UpdateDuAn() {
                     popup ?
                         <div className="formMain">
                             <div className="popup">
-                                <div class="testbox">
+                                <div className="testbox">
                                     <div className="boderpopup">
                                         <form >
                                             <div>
                                                 <div>
                                                     <h1>Tạo Dự Án & Phân Công</h1>
                                                 </div>
-                                                <div class="btn-block">
+                                                <div className="btn-block">
                                                     <button className="btn-close" style={{ background: "red", width: "20px", height: "20px", top: "8px", marginLeft: "326px" }} onClick={closePopup} href="/"> X </button>
                                                 </div>
                                             </div>
@@ -129,7 +129,7 @@ function UpdateDuAn() {
                                                     <h4>Chọn Nhân Viên </h4>
                                                 </div>
                                                 <select    >
-                                                    <option class="disabled" value="location" disabled selected>*Please Select*</option>
+                                                    <option className="disabled" value="location" disabled selected>*Please Select*</option>
                                                     <option  >Văn</option>
                                                     <option  >t Anh</option>
                                                     <option  >hướng</option>
@@ -156,9 +156,9 @@ function UpdateDuAn() {
                                                 <div className='textFrmAdd5'>
                                                     <h4>Thời Gian</h4>
                                                 </div>
-                                                <div class="time-visited">
+                                                <div className="time-visited">
                                                     <input type="time" name="timevisited" />
-                                                    <i class="fas fa-clock"></i>
+                                                    <i className="fas fa-clock"></i>
                                                 </div>
                                             </div>
                                             {/* Ghi Chú */}

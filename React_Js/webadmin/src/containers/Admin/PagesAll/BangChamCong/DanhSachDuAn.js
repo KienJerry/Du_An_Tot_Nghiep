@@ -31,7 +31,6 @@ function DanhSachDuAn() {
 
   // xóa bài đăng
   const deletePost = (id) => {
-    console.log(id);
     axios.post('http://' + post + '/deletebangchamcong', { id: id })
       .then(response => {
         if (response.data == 'ok') {
@@ -124,7 +123,7 @@ function DanhSachDuAn() {
             </ul>
           </div> */}
 
-<table class="table table-bordered table-customize table-responsive">
+<table className="table table-bordered table-customize table-responsive">
 
 
     <thead>
@@ -181,7 +180,7 @@ function DanhSachDuAn() {
 
 <div className="chiTietBangChamCong">
 <h4>Chi Tiết Bảng Chấm Công</h4>
-<table class="table table-bordered table-customize table-responsive">
+<table className="table table-bordered table-customize table-responsive">
 
     <thead>
         <tr>

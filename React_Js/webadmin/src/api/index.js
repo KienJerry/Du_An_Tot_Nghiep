@@ -37,3 +37,5 @@ export const API_GET_USER_PROJ = api + getGroupUser + 'detail-user-account';
 export const API_GET_LIST_GR_TYPE = api + 'getListGrType';
 export const API_GET_DETAIL_ACCOUNT = api + 'detail-account';
 export const API_SET_ADD_NEW_PROJECTS = api + 'add-new-prj';
+export const API_GET_LIST_PROJECT_OPEN = api + 'get-list-project-open';
+export const API_GET_USER_LEADER_PROJ = api + 'getaccountmeID';

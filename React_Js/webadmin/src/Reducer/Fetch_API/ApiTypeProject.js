@@ -196,9 +196,9 @@ export function setAddFormPj({ values, dispatchAddPrj, img }) {
         .then(response => {
             {
                 response.data.success === false ?
-                dispatchAddPrj(action.setAddFalseProject(response.data))
-                :
-                dispatchAddPrj(action.setAddSuccsetProject(response.data))
+                    dispatchAddPrj(action.setAddFalseProject(response.data))
+                    :
+                    dispatchAddPrj(action.setAddSuccsetProject(response.data))
             }
             return response.data;
         })
@@ -216,13 +216,35 @@ export function setAddFormPjs({ values, dispatchAddPrj, img }) {
         .then(response => {
             {
                 response.data.success === false ?
-                dispatchAddPrj(action.setAddFalseProject(response.data))
-                :
-                dispatchAddPrj(action.setAddSuccsetProject(response.data))
+                    dispatchAddPrj(action.setAddFalseProject(response.data))
+                    :
+                    dispatchAddPrj(action.setAddSuccsetProject(response.data))
             }
             return response.data;
         })
         .catch(error => {
             dispatchAddPrj(action.setAddErrorProject(error))
+        });
+}
+
+export function getListProjOpen({ dispatch, data }) {
+    axios.post(types.API_GET_LIST_PROJECT_OPEN, { data: data })
+        .then(response => {
+            dispatch(action.getListProjOpen(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            dispatch(action.getListProjFalse(error))
+        });
+}
+
+export function getUserID({ dispatch, data }) {
+    axios.post(types.API_GET_USER_LEADER_PROJ, data)
+        .then(response => {
+            dispatch(action.getUserLeader(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            dispatch(action.getListProjFalse(error))
         });
 }

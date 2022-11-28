@@ -2,10 +2,10 @@ import { Tabs } from 'antd';
 import './listProject.scss';
 import AddProJect from './AddProjectNew/AddProject';
 import React from 'react';
-import TabAll from '../TabAll/tabAll';
-import TabClose from '../TabClose/tabClose';
-import TabOpen from '../TabOpen/tabOpen';
-import TabWaitting from '../TabWaitting/tabWaitting';
+import TabAll from '../TabAll/index';
+import TabClose from '../TabClose/index';
+import TabOpen from '../TabOpen/index';
+import TabWaitting from '../TabWaitting/index';
 
 
 const initialItems = [

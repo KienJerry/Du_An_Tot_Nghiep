@@ -18,3 +18,23 @@ export const setAddErrorProject = (payload) => {
         payload: payload
     }
 }
+
+export const getListProjOpen = (payload) => {
+    return {
+        type: constants.GET_LIST_PROJECT_OPEN,
+        payload: payload
+    }
+}
+export const getListProjFalse = (payload) => {
+    return {
+        type: constants.GET_LIST_PROJECT_FALSE,
+        payload: payload
+    }
+}
+
+export const getUserLeader = (payload) => {
+    return {
+        type: constants.GET_USER_LEADER,
+        payload: payload
+    }
+}
