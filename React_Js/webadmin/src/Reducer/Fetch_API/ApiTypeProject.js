@@ -248,3 +248,14 @@ export function getUserID({ dispatch, data }) {
             dispatch(action.getListProjFalse(error))
         });
 }
+
+export function getListAllProj(dispatch) {
+    axios.get(types.API_GET_ALL_PROJ)
+        .then(response => {
+            dispatch(action.getListAllProj(response.data))
+            return response.data;
+        })
+        .catch(error => {
+            dispatch(action.getListProjFalse(error))
+        });
+}

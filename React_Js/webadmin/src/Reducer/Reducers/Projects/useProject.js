@@ -43,6 +43,14 @@ export const GetListProj = (state, action) => {
                     open: action.payload
                 }
             }
+        case constants.GET_LIST_PROJECT_FULL:
+            return {
+                ...state,
+                project:{
+                    ...state.project,
+                    full: action.payload
+                }
+            }
         case constants.GET_USER_LEADER:
             return {
                 ...state,

@@ -788,6 +788,19 @@ app.post('/get-list-project-open', function (req, res) {
     }
   })
 });
+//Lấy tất cả danh sách
+app.get('/get-all-list-proj', function (req, res) {
+  var sql = "SELECT * FROM danhsachduan order by id desc";
+  con.query(sql, function (err, result, fields) {
+    if (err) {
+      res.send({ success: false, message: "Database không có kết nối!" });
+    } if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ success: false, message: "False!" });
+    }
+  })
+});
 
 
 //Phần Công việc & Chấm Công

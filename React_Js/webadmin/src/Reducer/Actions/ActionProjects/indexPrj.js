@@ -25,6 +25,12 @@ export const getListProjOpen = (payload) => {
         payload: payload
     }
 }
+export const getListAllProj = (payload) => {
+    return {
+        type: constants.GET_LIST_PROJECT_FULL,
+        payload: payload
+    }
+}
 export const getListProjFalse = (payload) => {
     return {
         type: constants.GET_LIST_PROJECT_FALSE,

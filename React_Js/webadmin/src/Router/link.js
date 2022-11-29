@@ -15,6 +15,8 @@ import ManageTypeProject from '../containers/Admin/PageManage/ManageTypeProject/
 import ListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/ListTypeManageListGrMember";
 import AddListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/AddListTypeManageListGrMember/AddListTypeManageListGrMember";
 import DetailListTypeManageListGrMember from "../containers/Admin/PageManage/ManageGroupMember/DetailListTypeManageListGrMember/DetailListTypeManageListGrMember";
+import DetailProject from "../containers/Admin/Project/ListProject/DetailProject/DetailProject";
+import UpdateProject from "../containers/Admin/Project/ListProject/UpdateProject/UpdateProject";
 import {NaviLayout} from '../containers/Admin';
 
 import PageDiemDanh from '../containers/User/PageDiemDanh/PageDiemDanh';
@@ -103,6 +105,14 @@ const AdminRoute = [
     {
         path: "/danh-sach-du-an/them-du-an",
         component: FormAddProject,
+    },
+    {
+        path: "/danh-sach-du-an/cap-nhat-du-an/:id",
+        component: UpdateProject,
+    },
+    {
+        path: "/danh-sach-du-an/thong-tin-chi-tiet/:id",
+        component: DetailProject,
     },
     {
         path: "/quan-ly-loai-du-an",
